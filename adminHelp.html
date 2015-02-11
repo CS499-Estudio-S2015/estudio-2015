@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+
+<!-- This is the HTML interface page strictly containing Administrator instructions for what each button does and how it works.
+It informs where exactly the admin must go to perform the functions to add make the program operational, add a tutor, tutor's work schedule, 
+view upcoming appointments, or disable. -->
+
+<head>
+	<title>eStudio - Admin</title>
+<link rel="stylesheet" type="text/css" href="estudiostyle.css">
+</head>
+
+<body>
+
+	<!-- HEADER / LOGO -->
+    <div id="headerbox"> 
+		<div id="headerbuttonholderleft">
+			<font size="5" face="Tahoma" style="position:relative; top:-4px;"> eStudio </font>
+			<a href="adminUpcoming.php" class="headerbutton" style="position:relative; top:-4px;"> Upcoming </a>
+			<a href="addTutorInfo.html" class="headerbutton" style="position:relative; top:-4px;"> Tutors </a>
+			<a href="scheduleTutor.html" class="headerbutton" style="position:relative; top:-4px;"> Schedule </a>
+			<a href="Reports.php" class="headerbutton" style="position:relative; top:-4px;"> Reports </a>
+			<a href="#" class="headerbutton" style="position:relative; top:-4px; opacity:0.3;"> Disable </a>
+			<a href="adminHelp.html" class="headerbutton" style="position:relative; top:-4px;"> Help </a>
+		</div>
+		<div id="headerbuttonholderright">
+			<a href="index.php" class="headerbutton">Log Out</a>
+		</div>
+		 
+
+	</div>
+	
+	<!-- CONTENT BOX, holds all of the actual instructions that are displayed up front in just basic html format. -->
+	<div id="contentholder" align="Center">
+			   
+		<FONT style="font-size:32pt" face="arial" align="center" color="#003470">Welcome back Emily.</FONT> <!-- use php to get tutor's name and display after welcome back -->
+		
+		<br>
+		<br>
+		<br>
+		<FONT style="font-size:18pt" face="Tahoma" color="#003470">   
+			                  
+			Click on the <u><b><a href="adminUpcoming.php" style="color: #017338">Upcoming</u></a></b> button to view upcoming appointments for this week. This will automatically display all of the upcoming appointments that are in the database. 
+
+			<br>
+			<br>                    
+			Click on the <u><b><a href="addTutorInfo.html" style="color: #017338">Tutors</u></a></b> button to add a new tutor or remove a tutor from the roster. This is just basic tutor information. 
+
+			<br>
+			<br>                    
+			Click on the <u><b><a href="scheduleTutor.html" style="color: #017338">Schedule</u></a></b> button to set or modify tutor hours. This is where you set each tutor's hours for the day of the week that they are working. First input the tutor's first and last name up top, then click on the day of the week that you would like to input time for. A start and end time box will display for that day, simply add the times (either by clicking in the box and using the arrow, or by clicking in the box and then just typing the time). The time format is Hour:Minute: AM/PM
+			Then press submit to schedule a tutor.
+			To reschedule and and change a tutor's time, simply follow the above process and add a new time for a specified day. The program will automatically remove the tutor's formerly scheduled time for that day and replace it with the updated information. 
+			
+			<br>
+			<br>                    
+			Click on the <u><b><a href="Reports.php" style="color: #017338">Reports</u></a></b> button to get scheduling data and logistics. Currently when you click on this, a report will be generated that will include the students' major, year, if they speak english or not, appointment time, appointment duration, and appointment date. It will be a .csv file, which you can open with excel, that will save automatically to your downloads folder. 
+
+			<br>
+			<br>                    
+
+			Click on the <u><b><a href="#" style="color: #017338">Disable</u></a></b> button to disable the client side interface. Currently this is planned to work very simply, by deleting all scheduled tutor worked times from the table. Without tutor times the application cannot pull data from which to create appointments.
+			But as soon as you re-enter at least 1 tutor's schedule into the database the system will be fully operational again. This can be easily changed to work a different way in the future.  
+
+			<br>
+			<br>
+			
+			
+		</FONT>
+		<P align="center" style="margin-top: 50px;">
+			<FONT size = "3" face ="Tahoma" color="#003470">
+				<br> The eStudio is located in room 108 <a href="http://maps.uky.edu/campusmap/" style="color: #017338">RGAN</a>. 
+				<br> eStudio hours are Monday-Thursday, 10:00 A.M. - 6:00 P.M.
+				<br> For more information go to:<a href="https://www.engr.uky.edu/students/estudio/" style="color: #017338"> https://www.engr.uky.edu/students/estudio/</a>
+			</FONT>
+		</P>
+	 </div>
+
+
+
+</body>
+
+</html>
