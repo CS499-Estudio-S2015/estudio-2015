@@ -15,7 +15,8 @@
                 function( e ) {
                     e.preventDefault();
                     $.get(
-                        'https://scheduling.engr.uky.edu/~beta/public_html/Calendar.php',
+                    	'https://localhost/estudio-2015/Calendar.php'
+//                        'https://scheduling.engr.uky.edu/~beta/public_html/Calendar.php',
                         {
                             calendarday: $(this).val()
                         },

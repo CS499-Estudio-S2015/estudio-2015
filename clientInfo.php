@@ -47,17 +47,16 @@ As well as a button linked to making the appointment. -->
             			<br><br>
            				<FONT style="font-size:16pt; color: #003470;" face="Tahoma">
                             <?php
-                    			$result = $mysqli->query("SELECT * FROM Client WHERE StudentID='".$_SESSION['user']."'");
+                    			$result = $mysqli->query("SELECT * FROM Client WHERE id='".$_SESSION['user']."'");
                     			if( $result->num_rows > 0 )
                     			{
                         			while($obj = $result->fetch_object() )
                         			{
 										echo '<div style="line-height: 150%;">';
-                            			echo 'Name: '.$obj->FirstName.' '.$obj->LastName;
-                            			echo '<br>Student ID: '.$obj->StudentID;
-                            			echo '<br>Major: '.$obj->Major;
-                            			echo '<br>Academic Year: '.$obj->Year;
-                            			echo '<br>Email Address: '.$obj->EmailAddress;
+                            			echo 'Name: '.$obj->firstName.' '.$obj->lastName;
+                            			echo '<br>Major: '.$obj->major;
+                            			echo '<br>Academic Year: '.$obj->year;
+                            			echo '<br>Email Address: '.$obj->email;
 										echo '</div>';
                         			}
                     			}
@@ -68,7 +67,7 @@ As well as a button linked to making the appointment. -->
             <div id=tab2> <a href="#tab2"> Upcoming Appointments </a>
                     <div>
 						<?php
-							$result = $mysqli->query("SELECT * FROM Appointment WHERE StudentID='".$_SESSION['user']."' AND StartTime >= CURDATE()");
+							$result = $mysqli->query("SELECT * FROM Appointment WHERE clientID='".$_SESSION['user']."' AND startTime >= CURDATE()");
 							if( $result->num_rows > 0 )
 							{
 								// print out their appointments
@@ -78,12 +77,11 @@ As well as a button linked to making the appointment. -->
 								while( $obj = $result->fetch_object() )
 								{
 									echo '<tr>';
-									echo '<td> '.date("m-d-Y", strtotime($obj->StartTime)).'</td>';
-
-									echo '<td> '.date("h:i A", strtotime($obj->StartTime)).'</td>';
-									echo '<td> '.$obj->Email.'</td>';
-									echo '<td> '.$obj->GroupSize.'</td>';
-									echo '<td> '.$obj->Duration.' minutes </td>';
+									echo '<td> '.date("m-d-Y", strtotime($obj->startTime)).'</td>';
+									echo '<td> '.date("h:i A", strtotime($obj->startTime)).'</td>';
+									echo '<td> '.$obj->tutorID.'</td>';
+									echo '<td> '.$obj->groupSize.'</td>';
+									echo '<td> '.$obj->duration.' minutes </td>';
 									echo '</tr>';
 								}
 								echo '</table>';

@@ -19,8 +19,9 @@ if( !isset( $_SESSION[ 'user' ] ) ) {
 $current_url = base64_encode("http://".$SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
 
 		//var_dump($_POST);
-
+		
         $appointmentDateTimeAndEmail = $_POST['time'];
+
 		// split up the date, time and email
 		$date = strtok( $appointmentDateTimeAndEmail, ' ' );
 		$time = strtok( ' ' );
@@ -56,7 +57,7 @@ $current_url = base64_encode("http://".$SERVER['HTTP_HOST'].$_SERVER['REQUEST_UR
 
 		// check if time + duration conflicts with another appointment.
 		 // select all of the appointments already scheduled for the selected day
-        $appResult = $mysqli->query( "SELECT * FROM Appointment WHERE DATE(StartTime) = STR_TO_DATE('".$aptDateTime."', '%Y-%m-%d');" );
+        $appResult = $mysqli->query( "SELECT * FROM Appointment WHERE DATE(startTime) = STR_TO_DATE('".$aptDateTime."', '%Y-%m-%d');" );
 		if( $appResult )
 		{
 			echo 'app query successful';
@@ -83,13 +84,13 @@ $current_url = base64_encode("http://".$SERVER['HTTP_HOST'].$_SERVER['REQUEST_UR
 		while( $obj = $appResult->fetch_object() )
 		{
 			// initialize variables to store start and end times for the current appointment.
-			$existing_startTimePlusDuration = new DateTime($obj->StartTime);
-			$existing_startTimePlusDuration->add( new DateInterval( 'PT'.$obj->Duration.'M') );
-			$existing_startTime = new DateTime($obj->StartTime);
+			$existing_startTimePlusDuration = new DateTime($obj->startTime);
+			$existing_startTimePlusDuration->add( new DateInterval( 'PT'.$obj->duration.'M') );
+			$existing_startTime = new DateTime($obj->startTime);
 
 			// first check to see if this slot chosen has an email matching the currently checked appointment($obj)
 			// if the emails don't match, then this appointment($obj) will not collide with the selected time.
-			if( $email == $obj->Email )
+			if( $email == $obj->tutorID )
 			{
 
 				// if the requested end time is > existing start time AND requested startTime < existing start time
@@ -112,13 +113,15 @@ $current_url = base64_encode("http://".$SERVER['HTTP_HOST'].$_SERVER['REQUEST_UR
 		if( !$scheduleConflict )
 		{
 			echo '<br>'.$aptDateTime.'<br>';
-			$result = $mysqli->query( "INSERT INTO Appointment Values ('".$email."','".$studentID."','".$aptDateTime."',".$duration.",".$groupSize.",".$firstVisit.",'".$comment."','".$service."' )" );
+			$result = $mysqli->query( "INSERT INTO Appointment (tutorID, clientID, startTime, duration, groupSize, firstVisit, comment, helpService)
+				Values ('".$email."','".$studentID."','".$aptDateTime."',".$duration.",".$groupSize.",".$firstVisit.",'".$comment."','".$service."' )" );
 			if( $result )
 			{
 				header( 'Location: '.$pathPrefix.'clientInfo.php#tab2' ); exit;
 			}
 			else
 			{
+				echo $appointmentDateTimeAndEmail;
 				echo 'Something went wrong with the insert into the Appointment table.  A developer needs to look at the ClientBooking.php file';
 			}
 		}

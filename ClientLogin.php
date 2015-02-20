@@ -19,7 +19,7 @@ if( isset( $_SESSION[ 'user' ] ) ) {
 $current_url = base64_encode("http://".$SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
 
 		// get the studentID and password from the POST array
-		$studentID = $_POST['studentID'];
+		$email = $_POST['studentID'];
 		$password = $_POST['password'];
 
 		// check that the database connection was successful
@@ -31,17 +31,17 @@ $current_url = base64_encode("http://".$SERVER['HTTP_HOST'].$_SERVER['REQUEST_UR
 
 		// retrieve the row of the client table (all columns) for the provided
 		// student ID.
-		$queryResult = $mysqli->query("SELECT * FROM Client WHERE StudentID='".$studentID."'");
+		$queryResult = $mysqli->query("SELECT * FROM Client WHERE email='".$email."'");
 		// if the query was successful
 		if( $queryResult )
 		{
 			// check if an entry was found for this studentID (if this ID is registered)
 			if( $queryResult->num_rows > 0 ) {
 				$thisClient = $queryResult->fetch_object();
-				if( $thisClient->Password == $password )
+				if( $thisClient->password == $password )
 				{
 					// if the password matches, set the session variable and log them in.
-					$_SESSION['user'] = $studentID;
+					$_SESSION['user'] = $thisClient->id;
 					header( 'Location: '.$pathPrefix.'clientInfo.php#tab1' ); exit;
 				}
 				else

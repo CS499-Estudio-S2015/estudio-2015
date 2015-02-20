@@ -24,38 +24,96 @@ include_once("Config.php");
 ?>
 
 <?php
-$current_url = base64_encode("http://".$SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+//$current_url = base64_encode("http://".$SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
 
+if ($mysqli->connect_error) {
+	die("Connection failed: " . $mysqli->connect_error);
+}
 
-		// get all of the info from the post array
-		$lastName = $_POST['lastName'];
-		$firstName = $_POST['firstName'];
-		$studentID = $_POST['studentID'];
-		$major = $_POST['major'];
-		$year = $_POST['year'];
-		$english = $_POST['english'];
-		$email = $_POST['email'];
-		$password = $_POST['password'];
-        $englishSecondLanguage = 0;
-		if( $english == "yes" ) { $englishSecondLanguage = 1; }
+// get all of the info from the post array
+$lastName = $_POST['lastName'];
+$firstName = $_POST['firstName'];
+$major = $_POST['major'];
+$year = $_POST['year'];
+$english = $_POST['english'];
+$email = $_POST['email'];
+$password = $_POST['password'];
+$englishSecondLanguage = 0;
+if( $english == "yes" ) { $englishSecondLanguage = 1; }
 
-		// Set the session variable for user
-		$_SESSION['user'] = $studentID;
+// Prepared Statements for Registration
+//
+// First, validate that email address isn't registered
+if (!($select = $mysqli->prepare("SELECT EXISTS(SELECT * FROM Client WHERE email = ?)"))) {
+	echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
+	header( 'Location: '.$pathPrefix.'index.php?error='.$mysqli->errno ); exit;
+}
 
-		// put the client info into the Client table
-    	$results = $mysqli->query("INSERT INTO Client Values ('".$lastName."','".$firstName."','".$studentID."','".$major."','".$year."',".$englishSecondLanguage.",'".$email."','".$password."')");
+if (!$select->bind_param("s", $email)) {
+	echo "Binding parameters failed: (" . $select->errno . ") " . $select->error;
+	header( 'Location: '.$pathPrefix.'index.php?error='.$mysqli->errno ); exit;
+}
 
-		// if the user wasn't found in the database, direct them to their
-		// profile page after insertion
-		if( $results )
-		{
+if (!$select->execute()) {
+	echo "Binding parameters failed: (" . $select->errno . ") " . $select->error;
+	header( 'Location: '.$pathPrefix.'index.php?error='.$mysqli->errno ); exit;
+} else {
+	$select->bind_result($res);
+	$select->fetch();
+	$select->close();
+	
+	if ($res) { 	// if email has been registered, redirect with error uri
+		header( 'Location: '.$pathPrefix.'index.php?error=id_taken' ); exit;
+	} else {		// else create new client 
+		if (!($insert = $mysqli->prepare("INSERT INTO Client (lastName,firstName,major,year,english,email,password) VALUES (?,?,?,?,?,?,?)"))) {
+			echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
+			header( 'Location: '.$pathPrefix.'index.php?error=prepare' ); exit;
+		}
+
+		if (!$insert->bind_param("ssssiss", $lastName,$firstName,$major,$year,$englishSecondLanguage,$email,$password)) {
+			echo "Binding parameters failed: (" . $insert->errno . ") " . $insert->error;
+			header( 'Location: '.$pathPrefix.'index.php?error=bind' ); exit;
+		}
+
+		if (!$insert->execute()) {
+			echo "Execute failed: (" . $insert->errno . ") " . $insert->error;
+			header( 'Location: '.$pathPrefix.'index.php?error=execute' ); exit;
+		} else {
+			$_SESSION['user'] = mysqli_insert_id($mysqli);
 			header( 'Location: '.$pathPrefix.'estudioMakeAppointment.php' ); exit;
 		}
-		// if the user was already registered (that studentID was taken)
-		// then redirect back to the index page with error message
-		else
-		{
-			header( 'Location: '.$pathPrefix.'index.php?idtaken=' ); exit;
-		}
+
+		$insert->close();
+	}
+}
+
+// put the client info into the Client table
+
+
+
+
+// try {
+// //$results = $mysqli->query("INSERT INTO Client (lastName,firstName,major,year,english,email,password)
+// //	Values ('".$lastName."','".$firstName."','".$major."','".$year."',".$englishSecondLanguage.",'".$email."','".$password."')");
+
+// }
+// catch (Exception $ex) {
+// 	echo $ex;
+// }
+
+// if the user wasn't found in the database, direct them to their
+// profile page after insertion
+// if( $results )
+// {
+// 	// Set the session variable for user
+// 	$_SESSION['user'] = mysqli_insert_id($mysqli);
+// 	header( 'Location: '.$pathPrefix.'estudioMakeAppointment.php' ); exit;
+// }
+// if the user was already registered (that studentID was taken)
+// then redirect back to the index page with error message
+// else
+// {
+// 	header( 'Location: '.$pathPrefix.'index.php?idtaken=' ); exit;
+// }
 ?>
 

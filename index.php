@@ -52,23 +52,23 @@
 		}
 		else { document.getElementById("lnerror").innerHTML = ""; }
 
-		x = document.forms["registerForm"]["studentID"].value;
-		var isNumber =  /^\d+$/.test(x);
-		if( x.length != 9 ) { isNumber = false; }
-		if( x == null || x == "" )
-		{
-            document.getElementById("siderror").innerHTML = "*";
-			valid = false;
-		}
-		else {
-			if( isNumber )
-				document.getElementById("siderror").innerHTML = "";
-			else
-			{
-				document.getElementById("siderror").innerHTML = "*";
-				valid = false;
-			}
-		}
+		// x = document.forms["registerForm"]["studentID"].value;
+		// var isNumber =  /^\d+$/.test(x);
+		// if( x.length != 9 ) { isNumber = false; }
+		// if( x == null || x == "" )
+		// {
+		// 	document.getElementById("siderror").innerHTML = "*";
+		// 	valid = false;
+		// }
+		// else {
+		// 	if( isNumber )
+		// 		document.getElementById("siderror").innerHTML = "";
+		// 	else
+		// 	{
+		// 		document.getElementById("siderror").innerHTML = "*";
+		// 		valid = false;
+		// 	}
+		// }
 
 		x = document.forms["registerForm"]["major"].value;
 		if( x == "Select Your Major" )
@@ -156,7 +156,7 @@
 			<!-- This form is where the returning clients login -->
 			<form name="LoginForm" action="ClientLogin.php" onsubmit="return validateLogin()"  method="post">
 			<FONT size="4" face="Tahoma">
-				Student ID: <input type="text" name="studentID" id="studentID" color="#003470">
+				student email: <input type="text" name="studentID" id="studentID" color="#003470">
 				password: <input type="password" name="password" id="password" color="#003470">
 			</FONT>
 			<input class="headerbutton" type="submit" value="Login" />
@@ -185,7 +185,7 @@
 				<FONT style="font-size:16pt" face="Tahoma" color="#003470">
 					<font id="fnerror" color="#003470" class="validation"></font> First Name: <INPUT type ="text" placeholder="First Name" name="firstName" id="firstName" value="" color="#003470"><br><br>
 					<font id="lnerror" color="#003470" class="validation"></font> Last Name: <INPUT type ="text" placeholder="Last Name" name="lastName" id="lastName" value="" color="#003470"><br><br>
-					<font id="siderror" color="#003470" class="validation"></font> Student ID Number: <INPUT type="text" placeholder="studentID" name="studentID" id="studentID" value="" color="#003470" style="width:175px;"><br><br>
+					<!--font id="siderror" color="#003470" class="validation"></font> Student ID Number: <INPUT type="text" placeholder="studentID" name="studentID" id="studentID" value="" color="#003470" style="width:175px;"><br><br-->
 					<font id="merror" color="#003470" class="validation"></font> Major:  <select name="major" id="major"> 
 						<option style="color: #017338" value="Select Your Major">Select Your Major</option>
 						<option style="color: #017338" value="Biosystems and Agricultural Engineering">Biosystems and Agricultural Engineering</option>

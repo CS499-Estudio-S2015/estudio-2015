@@ -107,16 +107,16 @@ It is just basic php script to pull client data from the table, allow the client
            				 	<FORM name="editForm" action="ClientEditInfoBack.php" method="post" onsubmit="return validation()">
                             <?php
 								//query the database to get all of the information for this particular client based upon his/her studentID
-                    			$result = $mysqli->query("SELECT * FROM Client WHERE StudentID='".$_SESSION['user']."'");
+                    			$result = $mysqli->query("SELECT * FROM Client WHERE id='".$_SESSION['user']."'");
                     			if( $result->num_rows > 0 )
                     			{
                         			while($obj = $result->fetch_object() )
                         			{
 										//echoes fields to the screen with results from the database query
 										echo '<div style="line-height: 150%;">';
-                            			echo 'Name: '.$obj->FirstName.' '.$obj->LastName;
-                            			echo '<br>Student ID: '.$obj->StudentID;
-                            			echo '<br>Major: '.$obj->Major;
+                            			echo 'Name: '.$obj->firstName.' '.$obj->lastName;
+                            			echo '<br>Student ID: '.$obj->id;
+                            			echo '<br>Major: '.$obj->major;
                             			echo '<select name="major" id="major"> 
 											<option style="color: #017338" value="Select Your Major">Select Your Major</option>
 											<option style="color: #017338" value="Biosystems and Agricultural Engineering">Biosystems and Agricultural Engineering</option>
@@ -137,7 +137,7 @@ It is just basic php script to pull client data from the table, allow the client
 										// div for 'major' validation errors -- if found display red star
 										echo '<a id="majorerr" style="color:red; margin-left:10px;"></a>';
 										// select box for year
-                            			echo '<br>Academic Year: '.$obj->Year;
+                            			echo '<br>Academic Year: '.$obj->year;
                             			echo '<select name="year" id="year">
 											<option style="color: #017338" value="Select Your Year">Select Your Year</option>
 											<option style="color: #017338" value="Freshmen">Freshman</option>
@@ -152,7 +152,7 @@ It is just basic php script to pull client data from the table, allow the client
                                         echo '<a id="yearerr" style="color:red; margin-left:10px;"></a>';
 
 
-                            			echo '<br>Email Address: '.$obj->EmailAddress;
+                            			echo '<br>Email Address: '.$obj->email;
                             			echo '  <INPUT type ="textbox" name="email" id="email" placeholder="New Address" value="">';
 										// div for 'email' validation errors -- if found display red star
                                         echo '<a id="emailerr" style="color:red; margin-left:10px;"></a>';

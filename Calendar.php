@@ -21,7 +21,7 @@ if( !isset( $_SESSION['user'] ) )
 ?>
 
 <?php
-$current_url = base64_encode("http://".$SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+//$current_url = base64_encode("http://".$SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
 
 
 		// Class used to manage information of each (15 minute) interval between
@@ -47,10 +47,10 @@ $current_url = base64_encode("http://".$SERVER['HTTP_HOST'].$_SERVER['REQUEST_UR
 
 		// select all of the times (tutor time shifts)
 		// need to modify to only select those shifts on the selected week day
-		$timesResult = $mysqli->query( "SELECT * FROM Times WHERE WeekDay= DAYOFWEEK('".$day."');" );
+		$timesResult = $mysqli->query( "SELECT * FROM Times WHERE weekDay= DAYOFWEEK('".$day."');" );
 
 		// select all of the appointments already scheduled for the selected day
-		$appResult = $mysqli->query( "SELECT * FROM Appointment WHERE DATE(StartTime) = STR_TO_DATE('".$day."', '%Y-%m-%d');" );
+		$appResult = $mysqli->query( "SELECT * FROM Appointment WHERE DATE(startTime) = STR_TO_DATE('".$day."', '%Y-%m-%d');" );
 
 	if( $timesResult )
 	{
@@ -66,13 +66,12 @@ $current_url = base64_encode("http://".$SERVER['HTTP_HOST'].$_SERVER['REQUEST_UR
 			while( $timeObj = $timesResult->fetch_object() )
 			{
 				// get the this startTime for a shift and put it into a string
-				$dt = new DateTime($timeObj->StartTime);
+				$dt = new DateTime($timeObj->startTime);
 				$shiftStartTime = $dt->format('H:i:s');
 
 				// get the endTime for a shift and put it into a string
-				$dt = new DateTime($timeObj->EndTime);
+				$dt = new DateTime($timeObj->endTime);
 				$shiftEndTime = $dt->format('H:i:s');
-
 
 
 
@@ -88,7 +87,7 @@ $current_url = base64_encode("http://".$SERVER['HTTP_HOST'].$_SERVER['REQUEST_UR
 					$currentIntervalEnd = new DateTime($currentIntervalStart->format("H:i:s"));;
 
 					$currentIntervalEnd->add( new DateInterval('PT15M') );
-					$tutorEmailString = $timeObj->TutorEmail;
+					$tutorEmailString = $timeObj->tutorEmail;
 					echo $testvar;
 					$intervals[$index] = new Interval( $currentIntervalStart,$currentIntervalEnd, $tutorEmailString );
 
@@ -104,7 +103,7 @@ $current_url = base64_encode("http://".$SERVER['HTTP_HOST'].$_SERVER['REQUEST_UR
 				while( $appObj = $appResult->fetch_object() )
 				{
 					// get the start time of this appointment
-					$dt = new DateTime($appObj->StartTime);
+					$dt = new DateTime($appObj->startTime);
 					$appStartTime = $dt->format('H:i:s');
 
 					// for each 15 minute interval between shiftStart and shiftEnd,
@@ -127,7 +126,7 @@ $current_url = base64_encode("http://".$SERVER['HTTP_HOST'].$_SERVER['REQUEST_UR
 						$appointmentStartTime = new DateTime( $appStartTime );
 						$intStartTime = new DateTime( $intervalObj->intervalStart->format("H:i:s") );
 						$appDuration = new DateInterval( "PT".$appObj->Duration."M" );
-						$appTutorEmail = $appObj->Email;
+						$appTutorEmail = $appObj->tutorID;
 						$intervalTutorEmail = $intervalObj->tutorEmail;
 
 						if( $appTutorEmail == $intervalTutorEmail )
@@ -167,9 +166,9 @@ $current_url = base64_encode("http://".$SERVER['HTTP_HOST'].$_SERVER['REQUEST_UR
 						// ****NOTE: Can be done more efficiently using a join in the initial appointments query
 						// but done here for clarity for the sake of future programmers.  Changing this should probably
 						// be done in the future during the maintenance phase of development.
-					$thisTutorInformationResult = $mysqli->query( "SELECT * FROM Tutor WHERE Email = '".$obj->tutorEmail."';" );
+					$thisTutorInformationResult = $mysqli->query( "SELECT * FROM Tutor WHERE email = '".$obj->tutorEmail."';" );
 					$tutorInfoObj = $thisTutorInformationResult->fetch_object();
-                    echo '<td style="width: 500px; border:1px solid black">'.date( "g:i A", strtotime( $militaryTimeString) ).' -- '.$tutorInfoObj->tFirstName.' <br></td>';
+                    echo '<td style="width: 500px; border:1px solid black">'.date( "g:i A", strtotime( $militaryTimeString) ).' -- '.$tutorInfoObj->firstName.' <br></td>';
 					if( $obj->available == "false" ) {
 						echo '<td style="border:1px solid black; background: #562878"></td>';
 					}
