@@ -15,9 +15,9 @@
 	// query to get all of the fields required for reports via Admin(Emily Dotson) specifications.
 	// This includes the client's major, year, whether english is their first language, groupsize,
 	// first time visit or not, and the help service requested.
-	$rows = $mysqli->query( 'SELECT Client.Major, Client.Year, Client.English, Appointment.GroupSize, Appointment.FirstTimeVisit, Appointment.HelpService
+	$rows = $mysqli->query( 'SELECT Client.major, Client.year, Client.english, Appointment.groupSize, Appointment.firstVisit, Appointment.helpService
 				FROM Client, Appointment
-				WHERE Client.studentID = Appointment.studentID' );
+				WHERE Client.id = Appointment.clientID' );
 
 	// loop over the rows of data and output them
 	while($row = $rows->fetch_object())
@@ -25,12 +25,12 @@
 		$englishFirstLang;
 		$firstVisit;
 		// get all of the info from this row
-		if( $row->English == 0 ) { $englishFirstLang = "Yes"; }
+		if( $row->english == 0 ) { $englishFirstLang = "Yes"; }
 		else { $englishFirstLang = "No"; }
-		if( $row->FirstTimeVisit == 0 ) { $firstVisit = "No"; }
+		if( $row->firstVisit == 0 ) { $firstVisit = "No"; }
 		else { $firstVisit = "Yes"; }
 
-		$list = array( $row->Major, $row->Year, $englishFirstLang, $row->GroupSize, $firstVisit, $row->HelpService );
+		$list = array( $row->major, $row->year, $englishFirstLang, $row->groupSize, $firstVisit, $row->helpService );
 		// write it to the stream
 		fputcsv($outputStream, $list);
 	}

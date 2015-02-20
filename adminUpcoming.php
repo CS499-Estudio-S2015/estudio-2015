@@ -50,9 +50,9 @@
 								while( $obj = $result->fetch_object() )
 								{
 									echo '<tr>';
-									echo '<td> '.$obj->StartTime.'</td>';
-									echo '<td> '.$obj->StartTime.'</td>';
-									echo '<td> '.$obj->Email.'</td>';
+									echo '<td> '.$obj->startTime.'</td>';
+									echo '<td> '.$obj->startTime.'</td>';
+									echo '<td> '.$obj->tutorID.'</td>';
 									echo '</tr>';
 								}
 								echo '</table>';

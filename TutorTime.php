@@ -21,7 +21,7 @@ $current_url = base64_encode("http://".$SERVER['HTTP_HOST'].$_SERVER['REQUEST_UR
 
 
 	// check the Tutor table for the provided tutor name.  If it is not found, redirect back with an error message
-	$tutorFound = $mysqli->query("SELECT * FROM Tutor WHERE Email= '".$tutorEmail."'");
+	$tutorFound = $mysqli->query("SELECT * FROM Tutor WHERE email= '".$tutorEmail."'");
 
 	if( $tutorFound->num_rows == 0 )
 	{
@@ -32,7 +32,8 @@ $current_url = base64_encode("http://".$SERVER['HTTP_HOST'].$_SERVER['REQUEST_UR
 	// INVARIANT:  at this point, the tutor was definitely found in the Tutor table and is therefore registered.
 
 	// insert the tutor shift into the Times table
-	$results = $mysqli->query("INSERT INTO Times Values ('".$startTime."','".$endTime."','".$tutorEmail."','".$weekday."')");
+	$results = $mysqli->query("INSERT INTO Times (startTime, endTime, tutorID, weekDay)
+		VALUES ('".$startTime."','".$endTime."','".$tutorFound->fetch_object()->id."','".$weekday."')");
     if( !$results )
     {
         echo 'Failed Query';

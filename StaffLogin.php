@@ -28,7 +28,7 @@ $current_url = base64_encode("http://".$SERVER['HTTP_HOST'].$_SERVER['REQUEST_UR
 		}
 
         // Get the tutor or admin with the given email and password
-		$queryResult = $mysqli->query("SELECT * FROM Tutor WHERE Email='".$email."' AND Password='".$password."'");
+		$queryResult = $mysqli->query("SELECT * FROM Tutor WHERE email='".$email."' AND password='".$password."'");
 		if( $queryResult )
 		{
             // if the password matches, and the email is found...
@@ -36,7 +36,7 @@ $current_url = base64_encode("http://".$SERVER['HTTP_HOST'].$_SERVER['REQUEST_UR
 				$thisClient = $queryResult->fetch_object();
 				// set the session variable and log them in.
 				$_SESSION['staff'] = $email;
-				if( $thisClient->IsAdmin == 1 )
+				if( $thisClient->isAdmin == 1 )
 				{
 					header( 'Location: '.$pathPrefix.'adminHelp.html' ); exit;
 				} else {
@@ -45,7 +45,7 @@ $current_url = base64_encode("http://".$SERVER['HTTP_HOST'].$_SERVER['REQUEST_UR
 			}
 			else  // the password didn't match, or the email was not found.
 			{
-				header( 'Location: '.$pathPrefix.'staffPortal.php?loginerror=' ); exit;
+				header( 'Location: '.$pathPrefix.'staffPortal.php?loginerror='.$email.'&'.$password ); exit;
 			}
 		}
 

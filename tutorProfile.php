@@ -48,7 +48,7 @@
 						<!-- The following div stores the upcoming appointments and handles overflow of the table -->
 						<div style="max-width:510px;max-height: 350px; overflow: auto; box-shadow: 1px 1px 10px 1px #232323;">
                     	<?php
-							$result = $mysqli->query("SELECT * FROM Appointment WHERE email='".$_SESSION['staff']."' AND StartTime >= CURDATE()");
+							$result = $mysqli->query("SELECT * FROM Appointment INNER JOIN Tutor ON Appointment.tutorID = Tutor.id WHERE Tutor.email='".$_SESSION['staff']."' AND Appointment.startTime >= CURDATE()");
 							if( $result->num_rows > 0 )
 							{
 								// print out their appointments
@@ -56,9 +56,9 @@
 								while( $obj = $result->fetch_object() )
 								{
 									echo '<tr>';
-									echo '<td> '.$obj->StartTime.'</td>';
-									echo '<td> '.$obj->StartTime.'</td>';
-									echo '<td> '.$obj->Email.'</td>';
+									echo '<td> '.$obj->startTime.'</td>';
+									echo '<td> '.$obj->startTime.'</td>';
+									echo '<td> '.$obj->email.'</td>';
 									echo '</tr>';
 								}
 								echo '</table>';
