@@ -64,7 +64,7 @@ function printCurrentTable($table, $head) {
 /*******************************************************
  *                        Current                      *
  *******************************************************/
-function getOverall() {
+function getCurrentOverall() {
 	require('Config.php');
 
 	// Set up two-dimensional array to hold data for output

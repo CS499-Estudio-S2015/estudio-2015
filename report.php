@@ -1,6 +1,6 @@
 <?php
 include('Config.php');
-include('reportingQueries.php');
+include('reportQueries.php');
 ?>
 
 <html>
@@ -34,11 +34,35 @@ include('reportingQueries.php');
 	<!-- CONTENT BOX -->
 	<div id="contentholder">   
 		<div class="report-grid">
-			<?php getAllApptByYear(); ?>
+			<h2>Overall Performance</h2>
+			<?php getCurrentOverall(); ?>
 		</div>
 		<div class="report-grid">
-			<?php getApptFromMajorByMonth(); ?>
+			<h2>Service</h2>
+			<?php getCurrentService(); ?>
 		</div>
+		<div class="report-grid">
+			<h2>Academic Year</h2>
+			<?php getCurrentYear(); ?>
+		</div>
+		<div class="report-grid">
+			<h2>Major</h2>
+			<?php getCurrentMajor(); ?>
+		</div>
+		<div class="report-grid">
+			<h2>First Visit</h2>
+			<?php getCurrentFirstVisit(); ?>
+		</div>
+		<div class="report-grid">
+			<h2>English as Second Language</h2>
+			<?php getCurrentEnglish(); ?>
+		</div>
+		<!--div class="report-grid">
+			<?php 
+				// TODO:
+				// getCurrentRequired(); 
+			?>
+		</div-->
 	</div>
 
 </body>
