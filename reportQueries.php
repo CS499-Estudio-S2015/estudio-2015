@@ -29,12 +29,13 @@ function printCurrentTable($table, $head) {
 	// Print all data rows of the table
 	foreach($table as $arr) {
 		echo "\t\t<tr>\n";
+
 		// Print data for each child array
 		foreach($arr as $data) {
 			echo "\t\t\t<td>" . $data . "</td>\n";
 		}
 
-		// If previous data is equal to 0 (prevent divide by 0 error)
+		// If previous month data is equal to 0 (prevent divide by 0 error)
 		if ($arr[1] == 0)
 		{
 			// And current data is not 0
@@ -49,7 +50,7 @@ function printCurrentTable($table, $head) {
 		// Otherwise, can divide to find percent change
 		else
 		{
-			// TODO: CSS format red for neg change, green for pos change
+			// TO-DO: CSS format red for neg change, green for pos change
 			$change = (float)($arr[2] - $arr[1]) / $arr[1] * 100;
 			echo "\t\t\t<td>" . number_format($change, 2, '.', '') . "</td>";
 		}
@@ -58,6 +59,83 @@ function printCurrentTable($table, $head) {
 
 	echo "\t</table>\n";
 	echo "</div>\n";
+}
+
+// Stub for Historic Print
+function printHistoricTable($table, $header) {
+	echo "<div class='report-table'>\n";
+	echo "\t<table>\n";
+
+	// Print Header Row
+	echo "\t\t<tr>\n";
+	foreach($header as $head) {
+		echo "\t\t\t<td>" . $head . "</td>\n";
+	}
+	echo "\t\t</tr>\n";
+
+	foreach ($table as $row) {
+		echo "\t\t<tr>\n";
+		foreach ($row as $data) {
+			echo "\t\t\t<td>" . $data . "</td>\n";
+		}
+
+		echo "\t\t</tr>\n";
+	}
+
+	echo "\t</table>\n";
+	echo "</div>\n";
+}
+
+//
+function getDatesFromType($type) {
+	// Get current date
+	date_default_timezone_set('America/Louisville');
+	$currentDate = date('j n Y', mktime(0, 0, 0, date('m'), date('d'), date('Y')));
+	list($day, $month, $year) = explode(" ", $currentDate);
+
+	$dates = array();
+	switch ($type) {
+		case "month":
+			for ($i = 0; $i < 6; $i = $i + 1) {
+				$start;
+				$end;
+			}
+			break;
+		case "semester":
+			for ($i = 0; $i < 6; $i = $i + 1) {
+				$start;
+				$end;
+			}
+			break;
+		case "year":
+			for ($i = 0; $i < 3; $i = $i + 1) {
+				if ($month <= 12 && $month >= 9) {
+					//echo "Fall";
+					$start = date('Y-m-d H:i:s', mktime(0, 0, 0, 8, 1, $year - $i));
+					$end = date('Y-m-d H:i:s', mktime(0, 0, 0, 6, 1, ($year - $i) + 1));
+				}
+
+				if ($month <= 8 && $month >= 1) {
+					//echo "Spring";
+					$start = date('Y-m-d H:i:s', mktime(0, 0, 0, 8, 1, $year - ($i + 1)));
+					$end = date('Y-m-d H:i:s', mktime(0, 0, 0, 6, 1, $year - $i));
+				}
+				
+				$temp = array();
+				array_push($temp, $start);
+				array_push($temp, $end);
+
+				array_push($dates, $temp);
+			}
+			
+			break;
+		default:
+			break;
+	}
+
+	// Return array to use for processing
+	//var_dump($dates);
+	return $dates;
 }
 
 
@@ -142,7 +220,7 @@ function getCurrentService() {
 			$date = date('n Y', mktime(0, 0, 0, date('m') - $i, 1, date('Y')));
 			list($month, $year) = explode(" ", $date);
 
-			// Query String (TODO: still need to add client creation date)
+			// Query String
 			$query = "SELECT COUNT(A.apptID) AS Ctr
 					  FROM Appointment AS A
 					  WHERE MONTH(A.startTime) = " . $month . " AND
@@ -444,6 +522,76 @@ function getCurrentEnglish() {
 /************************************
  *             Historic             *
  ************************************/
+function getHistoricOverall($type) {
+	require('Config.php');
 
+	$table = array();
+	array_push($table, array('Num. of Appointments'));
+	array_push($table, array('Num. of Participants'));
+
+
+}
+
+function getHistoricService($type) {
+	require('Config.php');
+
+	// Set up two-dimensional array to hold data for output
+	// Makes secondary array for each category
+	$table = array();
+	array_push($table, array('Writing Help'));
+	array_push($table, array('Writing Help for ESL Student'));
+	array_push($table, array('Oral Presentation Help'));
+	array_push($table, array('Digital Media Help'));
+	array_push($table, array('Thesis or Dissertation Help'));
+	array_push($table, array('EGR201 Help'));
+	array_push($table, array('Other'));
+
+	$header = array();
+	array_push($header, '');
+
+	$dates = getDatesFromType($type);
+
+	// Header Generation
+	foreach ($dates as $date) {
+		list($startYear, $month, $day) = explode("-", $date[0]);
+		list($endYear, $month, $day) = explode("-", $date[1]);
+		$head = $startYear . " - " . $endYear;
+		array_push($header, $head);
+	}
+	
+	// Loop to get data for each category
+	for ($row = 0; $row < count($table); $row = $row + 1) {
+		// Loop to get category data across each date
+		foreach($dates as $date) {
+			//var_dump($table[$row][0]);
+			// Query String
+			$query = "SELECT COUNT(A.apptID) AS Ctr
+					  FROM Appointment AS A
+					  WHERE A.startTime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "' AND
+					        helpService = '" . $table[$row][0] . "'";
+
+			// Try to execute query in database; print exception if failure		        
+			try {
+				$stmt = $db->prepare($query);
+				$stmt->execute();
+			} catch (Exception $e) {
+				echo "Count not retrieve Historic - Service data\n";
+				echo $e;
+				exit;
+			}
+
+			// If valid query execution, return data and insert into table array
+			// in the proper location
+			if ($stmt) {
+				$thisData = $stmt->fetchAll();
+				//var_dump($thisData);
+				array_push($table[$row], $thisData[0][0]);
+			}
+		}
+	}
+
+	//var_dump($table);
+	printHistoricTable($table, $header);
+}
 
 ?>
