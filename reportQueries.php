@@ -97,14 +97,49 @@ function getDatesFromType($type) {
 	switch ($type) {
 		case "month":
 			for ($i = 0; $i < 6; $i = $i + 1) {
-				$start;
-				$end;
+				$start = date('Y-m-d H:i:s', mktime(0, 0, 0, $month - $i, 1, $year));
+				$end = date('Y-m-d H:i:s', mktime(0, 0, 0, ($month - $i) + 1, 1, $year));
+
+				$temp = array();
+				array_push($temp, $start);
+				array_push($temp, $end);
+
+				array_push($dates, $temp);
 			}
 			break;
 		case "semester":
+			$offset = 0;
 			for ($i = 0; $i < 6; $i = $i + 1) {
-				$start;
-				$end;
+				if ($month >= 1 && $month <= 6) {
+					//echo "Current date is Spring\n";
+					$offset += $i % 2;
+					if ($i % 2 == 0) {
+						//echo "Spring\n";
+						$start = date('Y-m-d H:i:s', mktime(0, 0, 0, 1, 1, $year - $offset));
+						$end = date('Y-m-d H:i:s', mktime(0, 0, 0, 7, 1, $year - $offset));
+					} else {
+						//echo "Fall\n";
+						$start = date('Y-m-d H:i:s', mktime(0, 0, 0, 7, 1, $year - $offset));
+						$end = date('Y-m-d H:i:s', mktime(0, 0, 0, 1, 1, $year - ($offset + 1)));
+					}
+				} else {
+					// echo "Current date is Fall\n";
+					if ($i % 2 == 0) {
+						// echo "Fall\n";
+						$start = date('Y-m-d H:i:s', mktime(0, 0, 0, 7, 1, $year));
+						$end = date('Y-m-d H:i:s', mktime(0, 0, 0, 1, 1, $year));
+					} else {
+						// echo "Spring\n";
+						$start = date('Y-m-d H:i:s', mktime(0, 0, 0, 1, 1, $year));
+						$end = date('Y-m-d H:i:s', mktime(0, 0, 0, 7, 1, $year));		
+					}
+				}
+
+				$temp = array();
+				array_push($temp, $start);
+				array_push($temp, $end);
+
+				array_push($dates, $temp);
 			}
 			break;
 		case "year":
@@ -138,6 +173,41 @@ function getDatesFromType($type) {
 	return $dates;
 }
 
+function getHistoricHeader($type, $dates) {
+	$header = array();
+	array_push($header, '');
+
+	foreach ($dates as $date) {
+		list($startYear, $startMonth, $startDay) = explode("-", $date[0]);
+		list($endYear, $endMonth, $endDay) = explode("-", $date[1]);
+		switch ($type) {
+			case "month":
+				// TO-DO: Format Month for abbreviation
+				$month = date('M', mktime(0, 0, 0, $startMonth, 1, $startYear));
+				$head = $month . " " . $startYear;
+				break;
+			case "semester":
+				$semester = "";
+				if ($startMonth >= 1 && $startMonth <= 6) {
+					$semester = "Spring ";
+				} else {
+					$semester = "Fall ";
+				}
+
+				$head = $semester . $startYear;
+				break;
+			case "year":
+				$head = $startYear . " - " . $endYear;
+				break;
+			default:
+				break;
+		}
+		
+		array_push($header, $head);
+	}
+
+	return $header;
+}
 
 /*******************************************************
  *                        Current                      *
@@ -546,18 +616,10 @@ function getHistoricService($type) {
 	array_push($table, array('EGR201 Help'));
 	array_push($table, array('Other'));
 
-	$header = array();
-	array_push($header, '');
-
 	$dates = getDatesFromType($type);
 
 	// Header Generation
-	foreach ($dates as $date) {
-		list($startYear, $month, $day) = explode("-", $date[0]);
-		list($endYear, $month, $day) = explode("-", $date[1]);
-		$head = $startYear . " - " . $endYear;
-		array_push($header, $head);
-	}
+	$header = getHistoricHeader($type, $dates);
 	
 	// Loop to get data for each category
 	for ($row = 0; $row < count($table); $row = $row + 1) {
