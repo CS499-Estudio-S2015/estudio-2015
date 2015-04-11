@@ -39,7 +39,7 @@ As well as a button linked to making the appointment. -->
 	<div id="contentholder">
 
         <div class=tabs>
-            <a href="estudioMakeAppointment.php" class="bodybutton" style=" position: absolute; top: 50px; right: 25px; height: 40px; line-height: 40px; vertical-align: middle;"> Make an Appointment </a>
+            <a href="./ea" class="bodybutton" style=" position: absolute; top: 50px; right: 25px; height: 40px; line-height: 40px; vertical-align: middle;"> Make an Appointment </a>
             <div id=tab1> <a href="#tab1"> About Me </a>
                     <div>
 						<br><br>

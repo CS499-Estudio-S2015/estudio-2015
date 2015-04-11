@@ -1,12 +1,12 @@
 <?php
 class SystemConfiguration {
     // General Settings
-    public static $base_url    = 'http://url-to-easyappointments-folder/';
+    public static $base_url    = 'http://localhost/estudio-2015/ea/';
     
     // Database Settings
     public static $db_host     = 'localhost';
-    public static $db_name     = '';
-    public static $db_username = '';
+    public static $db_name     = 'test_db';
+    public static $db_username = 'root';
     public static $db_password = '';
     
     // Google Calendar API Settings
