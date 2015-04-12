@@ -233,7 +233,7 @@
 		<img src="estudioLogo.JPG" style="width: 35%; margin-left: 8%; margin-top: 120px; position:absolute; left:450px;top:10%;">
 		
 		<div id="staffportalholder">
-			<br><a href="staffPortal.php" style="color: #017338; font-size:16pt;">Staff Portal</a>
+			<br><a href="./ea/backend" style="color: #017338; font-size:16pt;">Staff Portal</a>
 	 	</div>
 	
 		<div style="position: absolute; bottom: 10px; left: 50%; margin-left: -250px; margin-top: 60px;">
