@@ -38,9 +38,9 @@ $current_url = base64_encode("http://".$SERVER['HTTP_HOST'].$_SERVER['REQUEST_UR
 				$_SESSION['staff'] = $email;
 				if( $thisClient->isAdmin == 1 )
 				{
-					header( 'Location: '.$pathPrefix.'adminHelp.html' ); exit;
+					header( 'Location: '.$pathPrefix.'/estudio-2015/ea/backend' ); exit;
 				} else {
-					header( 'Location: '.$pathPrefix.'tutorProfile.php' ); exit;
+					header( 'Location: '.$pathPrefix.'/estudio-2015/ea/backend' ); exit;
 				}
 			}
 			else  // the password didn't match, or the email was not found.

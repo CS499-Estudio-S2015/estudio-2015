@@ -80,7 +80,7 @@ if (!$select->execute()) {
 			header( 'Location: '.$pathPrefix.'index.php?error=execute' ); exit;
 		} else {
 			$_SESSION['user'] = mysqli_insert_id($mysqli);
-			header( 'Location: '.$pathPrefix.'estudioMakeAppointment.php' ); exit;
+			header( 'Location: '.$pathPrefix.'./ea' ); exit;
 		}
 
 		$insert->close();
