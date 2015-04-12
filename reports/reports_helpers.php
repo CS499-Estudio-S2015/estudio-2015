@@ -239,6 +239,11 @@ function getDatesFromType($type) {
 function getCategories($type) {
 	$table = array();
 	switch ($type) {
+		case 'Overall':
+			array_push($table, array('Num. of Appointments'));
+			array_push($table, array('Num. of Participants'));
+			break;
+
 		case 'Service':
 			// 
 			$query = "SELECT name FROM ea_services";

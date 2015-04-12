@@ -19,9 +19,8 @@ function getCurrentOverall() {
 	require('../Config.php');
 
 	// Set up two-dimensional array to hold data for output
-	$table = array();
-	array_push($table, array('Num. of Appointments'));
-	array_push($table, array('Num. of Participants'));
+	$table = getCategories('Overall');
+	
 	$i = 1;
 
 	// Loop to get current and previous month data
