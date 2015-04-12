@@ -250,6 +250,7 @@ var FrontendBook = {
                 'id_users_provider': formData['appointment']['id_users_provider'],
                 'id_services': formData['appointment']['id_services'],
                 'start_datetime': formData['appointment']['start_datetime'],
+                'group_size': formData['appointment']['group_size'],
             };
             
             if (GlobalVariables.manageMode) {
@@ -314,7 +315,8 @@ var FrontendBook = {
             'selected_date': selDate,
             'service_duration': selServiceDuration,
             'manage_mode': FrontendBook.manageMode,
-            'appointment_id': appointmentId
+            'appointment_id': appointmentId,
+            'group_size': $('#group_size').val()
         };
 
         // Make ajax post request and get the available hours.
@@ -426,7 +428,7 @@ var FrontendBook = {
         		+ '<strong class="text-info">' 
                     + $('#select-provider option:selected').text() + '<br>'
         			+ selectedDate + ' ' +  $('.selected-hour').text() 
-                    + servicePrice + ' ' + serviceCurrency
+// Turn Off Currency                    + servicePrice + ' ' + serviceCurrency
     			+ '</strong>' + 
             '</p>'
         );
@@ -468,7 +470,8 @@ var FrontendBook = {
             'notes': $('#notes').val(),
             'is_unavailable': false,
             'id_users_provider': $('#select-provider').val(),
-            'id_services': $('#select-service').val()
+            'id_services': $('#select-service').val(),
+            'group_size': $('#group_size').val()
         };
         
         postData['manage_mode'] = FrontendBook.manageMode;
@@ -527,6 +530,7 @@ var FrontendBook = {
             // Select Service & Provider
             $('#select-service').val(appointment['id_services']).trigger('change');
             $('#select-provider').val(appointment['id_users_provider']);
+            $('#group_size').val(appointment['group_size']);
             
             // Set Appointment Date
             $('#select-date').datepicker('setDate', 
@@ -578,11 +582,11 @@ var FrontendBook = {
                     html += '[' + EALang['duration'] + ' ' + service.duration 
                             + ' ' + EALang['minutes'] + '] ';
                 }
-                
+/* Turn Off Currency               
                 if (service.price != '' && service.price != null) {
                     html += '[' + EALang['price'] + ' ' + service.price + ' ' + service.currency  + ']';
                 }   
-                
+ */               
                 html += '<br>';
                 
                 return false;

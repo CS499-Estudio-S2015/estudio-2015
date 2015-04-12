@@ -227,6 +227,18 @@
                         </label>
                         
                         <select id="select-provider"></select>
+
+                        <label for="group_size">
+                            <strong><?php echo $this->lang->line('group_size'); ?></strong>
+                        </label>
+                        
+                        <select id="group_size">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
                         
                         <div id="service-description" style="display:none;"></div>
                     </div>
