@@ -12,7 +12,7 @@ To prevent recoding, we should probably create a list of To-Do's and individuall
 * [] Fix formatting issues caused by additional form inputs
 * [] Integrate Client Login, Profile, etc into EA system
 * [] Need to integrate major and year into the Client Registration
-* [] Add Link to Reporting Section of Admin Header
+* [Matt] Add Link to Reporting Section of Admin Header
 * [Matt] Add a created date column when clients register an account
 * [] Add corresponding columns in database for added form inputs
 * Make prepared statements for all database writes (May not need to do this anymore)
