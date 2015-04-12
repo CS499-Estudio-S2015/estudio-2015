@@ -78,11 +78,13 @@ function getCurrentService() {
 			list($month, $year) = explode(" ", $date);
 
 			// Query String
-			$query = "SELECT COUNT(id) AS Ctr
-					  FROM ea_appointments
-					  WHERE MONTH(start_datetime) = " . $month . " AND
-					  		YEAR(start_datetime) = " . $year . " AND
-					  		"
+			$query = "SELECT COUNT(A.id) AS Ctr
+					  FROM ea_appointments AS A
+					  	   RIGHT JOIN ea_services AS S ON A.id_services = S.id
+					  WHERE MONTH(A.start_datetime) = " . $month . " AND
+					  		YEAR(A.start_datetime) = " . $year . " AND
+					  		S.name = '" . $table[$row][0] . "'";
+ 
 /*
 			$query = "SELECT COUNT(A.apptID) AS Ctr
 					  FROM Appointment AS A
