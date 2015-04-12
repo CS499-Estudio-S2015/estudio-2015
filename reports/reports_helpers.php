@@ -1,24 +1,27 @@
 <?php
-
-
 /*******************************************************
  *                     Helper Methods                  *
  *******************************************************/
+
+
+
+
 // printCurrentTable() function
 // Inputs: 
-//	$table - the multideimensional array consisting of correct data
-//	$head - 
+//	$table - the multideimensional array consisting of pulled data
+//	$header - the header for the data table
 // Outputs:
 //	No return value, HTML is printed to the webpage
 // Notes:  
-//	The escape characters are used to nicely format the HTML output
-function printCurrentTable($table, $head) {
+//	The escape characters are used to nicely format the HTML output.
+//  Includes some formatting to find percent change between two numbers.
+function printCurrentTable($table, $header) {
 	echo "<div class='report-table'>\n";
 	echo "\t<table>\n";
 
 	// Print Header Row
 	echo "\t\t<tr>\n";
-	foreach($head as $row) {
+	foreach($header as $row) {
 		echo "\t\t\t<td>" . $row . "</td>\n";
 	}
 	echo "\t\t</tr>\n";
@@ -58,7 +61,14 @@ function printCurrentTable($table, $head) {
 	echo "</div>\n";
 }
 
-// Stub for Historic Print
+// printHistoricTable() function
+// Inputs: 
+//	$table - the multideimensional array consisting of pulled data
+//	$header - the header for the data table
+// Outputs:
+//	No return value, HTML is printed to the webpage
+// Notes:  
+//	The escape characters are used to nicely format the HTML output
 function printHistoricTable($table, $header) {
 	echo "<div class='report-table'>\n";
 	echo "\t<table>\n";
@@ -83,7 +93,13 @@ function printHistoricTable($table, $header) {
 	echo "</div>\n";
 }
 
-//
+// getDatesFromType() function
+// Inputs: 
+//	$type - the type of date 
+// Outputs:
+//	
+// Notes:  
+//	
 function getDatesFromType($type) {
 	// Get current date
 	date_default_timezone_set('America/Louisville');
@@ -170,6 +186,13 @@ function getDatesFromType($type) {
 	return $dates;
 }
 
+// getCategories() function
+// Inputs: 
+//	$type - the type of category
+// Outputs:
+//	
+// Notes:  
+//	
 function getCategories($type) {
 	switch ($type) {
 		case 'Service':
@@ -193,6 +216,14 @@ function getCategories($type) {
 	return $table;
 }
 
+// prepareQuery() function
+// Inputs: 
+//	$query - 
+//	$err_message - 
+// Outputs:
+//	
+// Notes:  
+//	
 function prepareQuery($query, $err_message) {
 	require('../Config.php');
 
