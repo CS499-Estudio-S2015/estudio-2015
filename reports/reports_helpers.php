@@ -242,6 +242,8 @@ function getCategories($type) {
 		case 'Overall':
 			array_push($table, array('Num. of Appointments'));
 			array_push($table, array('Num. of Participants'));
+
+			$stmt = false;	
 			break;
 
 		case 'Service':

@@ -6,6 +6,7 @@
 //
 // Includes
 include('reports_helpers.php');
+include('../Config.php');
 
 
 // getCategories() function
@@ -16,7 +17,6 @@ include('reports_helpers.php');
 // Notes:  
 //
 function getCurrentOverall() {
-	require('../Config.php');
 
 	// Set up two-dimensional array to hold data for output
 	$table = getCategories('Overall');
@@ -307,7 +307,6 @@ function getCurrentEnglish() {
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
 	$table = getCategories('English');
-	
 	
 	// Loop to get data for each category
 	for ($row = 0; $row < count($table); $row = $row + 1)

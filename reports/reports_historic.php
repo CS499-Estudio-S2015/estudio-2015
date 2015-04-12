@@ -5,9 +5,9 @@
 include('reports_helpers.php');
 
 
-// getCategories() function
+// getHistoricOverall() function
 // Inputs: 
-//	$type - the type of category
+//	$type - the type of date range
 // Outputs:
 //	
 // Notes:  
@@ -16,6 +16,7 @@ function getHistoricOverall($type) {
 
 	$table = getCategories('Overall');
 
+	// Get date range of data to be searched
 	$dates = getDatesFromType($type);
 
 	// Header Generation
@@ -72,6 +73,7 @@ function getHistoricService($type) {
 	// Makes secondary array for each category
 	$table = getCategories('Service');
 
+	// Get date range of data to be searched
 	$dates = getDatesFromType($type);
 
 	// Header Generation
