@@ -1,12 +1,20 @@
 <?php
-// File Description
-
-// Constants
+/*************************************************************
+ *                  Current Data Reporting                   *
+ *************************************************************/
+// This  
+//
+// Includes
 include('reports_helpers.php');
 
-/*******************************************************
- *                        Current                      *
- *******************************************************/
+
+// getCategories() function
+// Inputs: 
+//	$type - the type of category
+// Outputs:
+//	
+// Notes:  
+//
 function getCurrentOverall() {
 	require('../Config.php');
 
@@ -32,14 +40,7 @@ function getCurrentOverall() {
 				        YEAR(A.startTime) = " . $year;
 
 		// Try to execute query in database; print exception if failure		        
-		try {
-			$stmt = $db->prepare($query);
-			$stmt->execute();
-		} catch (Exception $e) {
-			echo "Count not retrieve Current - Overall data\n";
-			echo $e;
-			exit;
-		}
+		$stmt = prepareQuery($query, 'Could not retrieve Current - Overall data');
 
 		// If valid query execution, return data and insert into table array
 		// in the proper location
@@ -59,6 +60,13 @@ function getCurrentOverall() {
 	printCurrentTable($table, $head);
 }
 
+// getCategories() function
+// Inputs: 
+//	$type - the type of category
+// Outputs:
+//	
+// Notes:  
+//
 function getCurrentService() {
 	require('../Config.php');
 
@@ -94,7 +102,7 @@ function getCurrentService() {
  */
 
 			// Try to execute query in database; print exception if failure		        
-			$stmt = prepareQuery($query, "Count not retrieve Current - Service data");
+			$stmt = prepareQuery($query, "Could not retrieve Current - Service data");
 		
 			// If valid query execution, return data and insert into table array
 			// in the proper location
@@ -113,20 +121,19 @@ function getCurrentService() {
 	printCurrentTable($table, $head);
 }
 
+// getCategories() function
+// Inputs: 
+//	$type - the type of category
+// Outputs:
+//	
+// Notes:  
+//
 function getCurrentYear() {
 	require('../Config.php');
 
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
-	$table = array();
-	array_push($table, array('Freshman'));
-	array_push($table, array('Sophmore'));
-	array_push($table, array('Junior'));
-	array_push($table, array('Senior'));
-	array_push($table, array('Graduate Student'));
-	array_push($table, array('Faculty'));
-	array_push($table, array('Other'));
-	
+	$table = getCategories('Year');
 	
 	// Loop to get data for each category
 	for ($row = 0; $row < count($table); $row = $row + 1)
@@ -149,14 +156,7 @@ function getCurrentYear() {
 					        C.year = '" . $table[$row][0] . "'";
 
 			// Try to execute query in database; print exception if failure		        
-			try {
-				$stmt = $db->prepare($query);
-				$stmt->execute();
-			} catch (Exception $e) {
-				echo "Count not retrieve Current - Academic Year data\n";
-				echo $e;
-				exit;
-			}
+			$stmt = prepareQuery($query, 'Could not retrieve Current - Academic Year data');
 
 			// If valid query execution, return data and insert into table array
 			// in the proper location
@@ -180,21 +180,7 @@ function getCurrentMajor() {
 
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
-	$table = array();
-	array_push($table, array('Biosystems and Agricultural Engineering'));
-	array_push($table, array('Chemical Engineering'));
-	array_push($table, array('Civil Engineering'));
-	array_push($table, array('Computer Engineering'));
-	array_push($table, array('Computer Science'));
-	array_push($table, array('Electrical Engineering'));
-	array_push($table, array('Masters in Engineering'));
-	array_push($table, array('Manufacturing Systems Engineering'));
-	array_push($table, array('Materials Science and Engineering'));
-	array_push($table, array('Mechanical Engineering'));
-	array_push($table, array('Mining Engineering'));
-	array_push($table, array('Undeclared'));
-	array_push($table, array('Other'));
-	
+	$table = getCategories('Major');
 	
 	// Loop to get data for each category
 	for ($row = 0; $row < count($table); $row = $row + 1)
@@ -217,14 +203,7 @@ function getCurrentMajor() {
 					        C.major = '" . $table[$row][0] . "'";
 
 			// Try to execute query in database; print exception if failure		        
-			try {
-				$stmt = $db->prepare($query);
-				$stmt->execute();
-			} catch (Exception $e) {
-				echo "Count not retrieve Current - Major data\n";
-				echo $e;
-				exit;
-			}
+			$stmt = prepareQuery($query, 'Could not retrieve Current - Major Year data');
 
 			// If valid query execution, return data and insert into table array
 			// in the proper location
@@ -243,21 +222,32 @@ function getCurrentMajor() {
 	printCurrentTable($table, $head);
 }
 
+// getCategories() function
+// Inputs: 
+//	$type - the type of category
+// Outputs:
+//	
+// Notes:  
+//
 function getCurrentRequired() {
 	require('../Config.php');
 
 	// TODO: Need to add required visit to appointment form.
 }
 
+// getCategories() function
+// Inputs: 
+//	$type - the type of category
+// Outputs:
+//	
+// Notes:  
+//
 function getCurrentFirstVisit() {
 	require('../Config.php');
 
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
-	$table = array();
-	array_push($table, array('Yes'));
-	array_push($table, array('No'));
-	
+	$table = getCategories('First');
 	
 	// Loop to get data for each category
 	for ($row = 0; $row < count($table); $row = $row + 1)
@@ -286,14 +276,7 @@ function getCurrentFirstVisit() {
 					        A.firstVisit = " . $bit;
 
 			// Try to execute query in database; print exception if failure		        
-			try {
-				$stmt = $db->prepare($query);
-				$stmt->execute();
-			} catch (Exception $e) {
-				echo "Count not retrieve Current - First Visit data\n";
-				echo $e;
-				exit;
-			}
+			$stmt = prepareQuery($query, 'Could not retrieve Current - First Visit data');
 
 			// If valid query execution, return data and insert into table array
 			// in the proper location
@@ -312,14 +295,19 @@ function getCurrentFirstVisit() {
 	printCurrentTable($table, $head);
 }
 
+// getCategories() function
+// Inputs: 
+//	$type - the type of category
+// Outputs:
+//	
+// Notes:  
+//
 function getCurrentEnglish() {
 	require('../Config.php');
 
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
-	$table = array();
-	array_push($table, array('Yes'));
-	array_push($table, array('No'));
+	$table = getCategories('English');
 	
 	
 	// Loop to get data for each category
@@ -351,14 +339,7 @@ function getCurrentEnglish() {
 					        C.english = " . $bit;
 
 			// Try to execute query in database; print exception if failure		        
-			try {
-				$stmt = $db->prepare($query);
-				$stmt->execute();
-			} catch (Exception $e) {
-				echo "Count not retrieve Current - English data\n";
-				echo $e;
-				exit;
-			}
+			$stmt = prepareQuery($query, 'Count not retrieve Current - English data');
 
 			// If valid query execution, return data and insert into table array
 			// in the proper location
@@ -376,8 +357,6 @@ function getCurrentEnglish() {
 	$head = array('', 'Last Month', 'This Month', '% Change');
 	printCurrentTable($table, $head);
 }
-
-
 
 
 ?>

@@ -1,45 +1,16 @@
 <?php
+/*************************************************************
+ *                  Historic Data Reporting                  *
+ *************************************************************/
 include('reports_helpers.php');
 
-function getHistoricHeader($type, $dates) {
-	$header = array();
-	array_push($header, '');
 
-	foreach ($dates as $date) {
-		list($startYear, $startMonth, $startDay) = explode("-", $date[0]);
-		list($endYear, $endMonth, $endDay) = explode("-", $date[1]);
-		switch ($type) {
-			case "month":
-				// TO-DO: Format Month for abbreviation
-				$month = date('M', mktime(0, 0, 0, $startMonth, 1, $startYear));
-				$head = $month . " " . $startYear;
-				break;
-			case "semester":
-				$semester = "";
-				if ($startMonth >= 1 && $startMonth <= 6) {
-					$semester = "Spring ";
-				} else {
-					$semester = "Fall ";
-				}
-
-				$head = $semester . $startYear;
-				break;
-			case "year":
-				$head = $startYear . " - " . $endYear;
-				break;
-			default:
-				break;
-		}
-		
-		array_push($header, $head);
-	}
-
-	return $header;
-}
-
-/************************************
- *             Historic             *
- ************************************/
+// getCategories() function
+// Inputs: 
+//	$type - the type of category
+// Outputs:
+//	
+// Notes:  
 function getHistoricOverall($type) {
 	require('../Config.php');
 
@@ -75,14 +46,7 @@ function getHistoricOverall($type) {
 			}
 
 			// Try to execute query in database; print exception if failure		        
-			try {
-				$stmt = $db->prepare($query);
-				$stmt->execute();
-			} catch (Exception $e) {
-				echo "Count not retrieve Historic - Overall data\n";
-				echo $e;
-				exit;
-			}
+			$stmt = prepareQuery($query, 'Could not retrieve Historic - Overall data');
 
 			// If valid query execution, return data and insert into table array
 			// in the proper location
@@ -97,6 +61,12 @@ function getHistoricOverall($type) {
 	printHistoricTable($table, $header);
 }
 
+// getCategories() function
+// Inputs: 
+//	$type - the type of category
+// Outputs:
+//	
+// Notes:  
 function getHistoricService($type) {
 	require('../Config.php');
 
@@ -128,14 +98,7 @@ function getHistoricService($type) {
 					        helpService = '" . $table[$row][0] . "'";
 
 			// Try to execute query in database; print exception if failure		        
-			try {
-				$stmt = $db->prepare($query);
-				$stmt->execute();
-			} catch (Exception $e) {
-				echo "Count not retrieve Historic - Service data\n";
-				echo $e;
-				exit;
-			}
+			$stmt = $prepareQuery($query, 'Count not retrieve Historic - Service data');
 
 			// If valid query execution, return data and insert into table array
 			// in the proper location
@@ -149,6 +112,12 @@ function getHistoricService($type) {
 	printHistoricTable($table, $header);
 }
 
+// getCategories() function
+// Inputs: 
+//	$type - the type of category
+// Outputs:
+//	
+// Notes:  
 function getHistoricYear($type) {
 	require('../Config.php');
 
@@ -181,14 +150,7 @@ function getHistoricYear($type) {
 					        C.year = '" . $table[$row][0] . "'";
 
 			// Try to execute query in database; print exception if failure		        
-			try {
-				$stmt = $db->prepare($query);
-				$stmt->execute();
-			} catch (Exception $e) {
-				echo "Count not retrieve Historic - Year data\n";
-				echo $e;
-				exit;
-			}
+			$stmt = prepareQuery($query, 'Could not retrieve Historic - Year data');
 
 			// If valid query execution, return data and insert into table array
 			// in the proper location
@@ -202,6 +164,12 @@ function getHistoricYear($type) {
 	printHistoricTable($table, $header);
 }
 
+// getCategories() function
+// Inputs: 
+//	$type - the type of category
+// Outputs:
+//	
+// Notes:  
 function getHistoricMajor($type) {
 	require('../Config.php');
 
@@ -241,14 +209,7 @@ function getHistoricMajor($type) {
 					        C.major = '" . $table[$row][0] . "'";
 
 			// Try to execute query in database; print exception if failure		        
-			try {
-				$stmt = $db->prepare($query);
-				$stmt->execute();
-			} catch (Exception $e) {
-				echo "Count not retrieve Historic - Major data\n";
-				echo $e;
-				exit;
-			}
+			$stmt = prepareQuery($query, 'Could not retrieve Historic - Major data');
 
 			// If valid query execution, return data and insert into table array
 			// in the proper location
@@ -262,12 +223,24 @@ function getHistoricMajor($type) {
 	printHistoricTable($table, $header);
 }
 
+// getCategories() function
+// Inputs: 
+//	$type - the type of category
+// Outputs:
+//	
+// Notes:  
 function getHistoricRequired() {
 	require('../Config.php');
 
 	// TODO: Need to add required visit to appointment form.
 }
 
+// getCategories() function
+// Inputs: 
+//	$type - the type of category
+// Outputs:
+//	
+// Notes:  
 function getHistoricFirstVisit($type) {
 	require('../Config.php');
 
@@ -302,14 +275,8 @@ function getHistoricFirstVisit($type) {
 					        A.firstVisit = " . $bit;
 
 			// Try to execute query in database; print exception if failure		        
-			try {
-				$stmt = $db->prepare($query);
-				$stmt->execute();
-			} catch (Exception $e) {
-				echo "Count not retrieve Historic - First Visit data\n";
-				echo $e;
-				exit;
-			}
+			$stmt = prepareQuery($query, 'Could not retrieve Historic - First Visit data');
+			
 
 			// If valid query execution, return data and insert into table array
 			// in the proper location
@@ -323,6 +290,12 @@ function getHistoricFirstVisit($type) {
 	printHistoricTable($table, $header);
 }
 
+// getCategories() function
+// Inputs: 
+//	$type - the type of category
+// Outputs:
+//	
+// Notes:  
 function getHistoricEnglish($type) {
 	require('../Config.php');
 
@@ -359,14 +332,7 @@ function getHistoricEnglish($type) {
 					        C.english = " . $bit;
 
 			// Try to execute query in database; print exception if failure		        
-			try {
-				$stmt = $db->prepare($query);
-				$stmt->execute();
-			} catch (Exception $e) {
-				echo "Count not retrieve Historic - English data\n";
-				echo $e;
-				exit;
-			}
+			$stmt = prepareQuery($query, 'Count not retrieve Historic - English data');
 
 			// If valid query execution, return data and insert into table array
 			// in the proper location

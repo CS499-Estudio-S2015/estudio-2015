@@ -1,8 +1,10 @@
 <?php
-/*******************************************************
- *                     Helper Methods                  *
- *******************************************************/
-
+/*************************************************************
+ *                       Helper Methods                      *
+ *************************************************************/
+// This file includes methods that help form the statistics
+// for both types of searches, Historic and Current.  Methods 
+// include printing tables with acquired data, 
 
 
 
@@ -91,6 +93,47 @@ function printHistoricTable($table, $header) {
 
 	echo "\t</table>\n";
 	echo "</div>\n";
+}
+
+// getCategories() function
+// Inputs: 
+//	$type - the type of category
+// Outputs:
+//	
+// Notes:  
+function getHistoricHeader($type, $dates) {
+	$header = array();
+	array_push($header, '');
+
+	foreach ($dates as $date) {
+		list($startYear, $startMonth, $startDay) = explode("-", $date[0]);
+		list($endYear, $endMonth, $endDay) = explode("-", $date[1]);
+		switch ($type) {
+			case "month":
+				$month = date('M', mktime(0, 0, 0, $startMonth, 1, $startYear));
+				$head = $month . " " . $startYear;
+				break;
+			case "semester":
+				$semester = "";
+				if ($startMonth >= 1 && $startMonth <= 6) {
+					$semester = "Spring ";
+				} else {
+					$semester = "Fall ";
+				}
+
+				$head = $semester . $startYear;
+				break;
+			case "year":
+				$head = $startYear . " - " . $endYear;
+				break;
+			default:
+				break;
+		}
+		
+		array_push($header, $head);
+	}
+
+	return $header;
 }
 
 // getDatesFromType() function
@@ -194,36 +237,81 @@ function getDatesFromType($type) {
 // Notes:  
 //	
 function getCategories($type) {
+	$table = array();
 	switch ($type) {
 		case 'Service':
-			$table = array();
-			
 			// 
 			$query = "SELECT name FROM ea_services";
 			$stmt = prepareQuery($query, "Could not prepare Service Category");
+			break;
 
-			// 
-			while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-				array_push($table, array($row[0]));
-		    }
+		case 'Year':
+/*
+			array_push($table, array('Freshman'));
+			array_push($table, array('Sophmore'));
+			array_push($table, array('Junior'));
+			array_push($table, array('Senior'));
+			array_push($table, array('Graduate Student'));
+			array_push($table, array('Faculty'));
+			array_push($table, array('Other'));
+*/
+			$query = "SELECT DISTINCT year FROM Client";
+			$stmt = prepareQuery($query, "Could not prepare Year Category");
+			break;
 
+		case 'Major':
+/*
+			array_push($table, array('Biosystems and Agricultural Engineering'));
+			array_push($table, array('Chemical Engineering'));
+			array_push($table, array('Civil Engineering'));
+			array_push($table, array('Computer Engineering'));
+			array_push($table, array('Computer Science'));
+			array_push($table, array('Electrical Engineering'));
+			array_push($table, array('Masters in Engineering'));
+			array_push($table, array('Manufacturing Systems Engineering'));
+			array_push($table, array('Materials Science and Engineering'));
+			array_push($table, array('Mechanical Engineering'));
+			array_push($table, array('Mining Engineering'));
+			array_push($table, array('Undeclared'));
+			array_push($table, array('Other'));
+*/
+			$query = "SELECT DISTINCT major FROM Client";
+			$stmt = prepareQuery($query, "Could not prepre Major Category");
+			break;
+
+		case 'English':
+		case 'Required':
+		case 'First':
+			array_push($table, array('Yes'));
+			array_push($table, array('No'));
+
+			$stmt = false;
 			break;
 
 		default:
+			$stmt = false;
 			break;
 	}
+
+	// Fetch all the rows from the executed statement and 
+	// create a two-dimensional array of categories if
+	// the statement executed
+	if ($stmt) {
+		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			array_push($table, array($row[0]));
+    	}
+	}
+	
 
 	return $table;
 }
 
 // prepareQuery() function
 // Inputs: 
-//	$query - 
-//	$err_message - 
+//	$query - the SQL query to prepare
+//	$err_message - error message string to print with stack trace
 // Outputs:
-//	
-// Notes:  
-//	
+//	$stmt - a PDO prepared statement object where results can be fetched
 function prepareQuery($query, $err_message) {
 	require('../Config.php');
 

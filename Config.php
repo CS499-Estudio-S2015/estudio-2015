@@ -14,7 +14,7 @@ $db_host = 'localhost';
 
 
 /* Matt's Test Server */
-$pathPrefix = '';
+$pathPrefix = 'localhost/estudio-2015/';
 
 // set database login info
 $db_username = 'root';
