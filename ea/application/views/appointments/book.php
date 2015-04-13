@@ -311,15 +311,6 @@
                             <input type="text" id="phone-number" class="required" maxlength="60" />
                             -->
 
-                            <label for="visit_reason"><?php echo $this->lang->line('visit_reason'); ?>  <strong>What do you need help with?</strong> *</label>
-                            <select id="visit_reason" class="required">
-                                <option value="writing_help">Writing Help</option>
-                                <option value="dm_help">Digital Media Help</option>
-                                <option value="op_help">Oral Presentation Help></option>
-                                <option value="ce_practive">Conversational English Practice for Non-Native Speakers</option>
-                                <option value="td_help">Thesis or Dissertation Help></option>
-                                </select>
-                            <br/><br/>
 
                             <label for="req_visit"><?php echo $this->lang->line('req_visit'); ?> <strong>Is this visit required? </strong> *</label>
                             <select id="req_visit" class="required">
@@ -327,8 +318,16 @@
                                 <option value="2">No</option>
                                 </select>
                             <br/><br/>
+                             <label for="first_visit"><?php echo $this->lang->line('first_visit'); ?> <strong>First visit? </strong> *</label>
+                            <select id="first visit" class="required">
+                                <option value="1">No</option>
+                                <option value="2">Yes</option>
+                                </select>
+                            <br/><br/>
                             <em id="form-message" class="text-error"><?php echo $this->lang->line('fields_are_required'); ?></em>
                         </div>
+
+
 
 
                         <div class="span3">
