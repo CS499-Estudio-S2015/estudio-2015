@@ -1,11 +1,11 @@
 <?php
 class SystemConfiguration {
     // General Settings
-    public static $base_url    = 'http://localhost/estudio-2015/ea/';
+    public static $base_url    = 'http://estudio/ea/';
     
     // Database Settings
     public static $db_host     = 'localhost';
-    public static $db_name     = 'test_db';
+    public static $db_name     = 'estudio-test';
 //    public static $db_name     = 'estudio_beta';
     public static $db_username = 'root';
     public static $db_password = '';

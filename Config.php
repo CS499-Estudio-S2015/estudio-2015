@@ -17,7 +17,7 @@ $pathPrefix = '';
 // set database login info
 $db_username = 'root';
 $db_password = '';
-$db_name = 'test_db';
+$db_name = 'estudio-test';
 $db_host = 'localhost';
 
 // connect to the database and set up a mysqli object

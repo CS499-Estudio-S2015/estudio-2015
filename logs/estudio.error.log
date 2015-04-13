@@ -1,0 +1,4 @@
+[Wed Apr 08 17:30:48.258165 2015] [authz_core:error] [pid 5864:tid 1756] [client 127.0.0.1:53613] AH01630: client denied by server configuration: C:/Users/Emily/Documents/GitHub/estudio-2015/
+[Wed Apr 08 17:30:49.078717 2015] [authz_core:error] [pid 5864:tid 1756] [client 127.0.0.1:53613] AH01630: client denied by server configuration: C:/Users/Emily/Documents/GitHub/estudio-2015/favicon.ico
+[Wed Apr 08 21:56:06.990553 2015] [core:alert] [pid 4344:tid 1752] [client 127.0.0.1:59154] C:/Users/Emily/Documents/GitHub/estudio-2015/ea/.htaccess: Invalid command 'RewriteEngine', perhaps misspelled or defined by a module not included in the server configuration
+[Wed Apr 08 21:56:10.833671 2015] [core:alert] [pid 4344:tid 1752] [client 127.0.0.1:59155] C:/Users/Emily/Documents/GitHub/estudio-2015/ea/.htaccess: Invalid command 'RewriteEngine', perhaps misspelled or defined by a module not included in the server configuration
