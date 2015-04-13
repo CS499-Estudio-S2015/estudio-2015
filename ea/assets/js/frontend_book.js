@@ -458,9 +458,9 @@ var FrontendBook = {
             'first_name': $('#first-name').val(),
             'email': $('#email').val(),
             'phone_number': $('#phone-number').val(),
-            'address': $('#address').val(),
-            'city': $('#city').val(),
-            'zip_code': $('#zip-code').val()
+            //'address': $('#address').val(),
+            //'city': $('#city').val(),
+            //'zip_code': $('#zip-code').val()
         };
         
         postData['appointment'] = {
@@ -471,7 +471,9 @@ var FrontendBook = {
             'is_unavailable': false,
             'id_users_provider': $('#select-provider').val(),
             'id_services': $('#select-service').val(),
-            'group_size': $('#group_size').val()
+            'group_size': $('#group_size').val(),
+            'req_visit' : $('#req_visit').val(),
+            'visit_reason' : $('#visit_reason').val()
         };
         
         postData['manage_mode'] = FrontendBook.manageMode;
