@@ -10,9 +10,9 @@ To prevent recoding, we should probably create a list of To-Do's and individuall
 ##TO-DO:
 ####For Interface & Database:
 * ~~[Matt] Add Group Size to Appointment Registration form~~
-* [] Add Required Visit to Appointment Registration form
-* [] Add First Visit to Appointment Registration form
-* [] Fix formatting issues caused by additional form inputs
+* ~~[David] Add Required Visit to Appointment Registration form~~ (not in master)
+* [David] Add First Visit to Appointment Registration form 
+* [David] Fix formatting issues caused by additional form inputs
 * [] Integrate Client Login, Profile, etc into EA system
 * [] Need to integrate major and year into the Client Registration
 * [Matt] Add Link to Reporting Section of Admin Header
