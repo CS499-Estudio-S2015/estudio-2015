@@ -97,17 +97,17 @@ function printHistoricTable($table, $header) {
 
 // getCategories() function
 // Inputs: 
-//	$type - the type of category
+//	$type - the type of date category
+//  $dates - the date ranges for the reports
 // Outputs:
-//	
-// Notes:  
+//	$header - the formatted table header based on the date category and ranges
 function getHistoricHeader($type, $dates) {
 	$header = array();
 	array_push($header, '');
 
 	foreach ($dates as $date) {
+		// Based on the specific date range, gets the starting date
 		list($startYear, $startMonth, $startDay) = explode("-", $date[0]);
-		list($endYear, $endMonth, $endDay) = explode("-", $date[1]);
 		switch ($type) {
 			case "month":
 				$month = date('M', mktime(0, 0, 0, $startMonth, 1, $startYear));
@@ -138,13 +138,11 @@ function getHistoricHeader($type, $dates) {
 
 // getDatesFromType() function
 // Inputs: 
-//	$type - the type of date 
+//	$type - the type of date needed (month, semester, or year)
 // Outputs:
-//	
-// Notes:  
-//	
+//	$dates - the proper date range intervals for SQL reads kept in an array
 function getDatesFromType($type) {
-	// Get current date
+	// Get current date from our local timezone
 	date_default_timezone_set('America/Louisville');
 	$currentDate = date('j n Y', mktime(0, 0, 0, date('m'), date('d'), date('Y')));
 	list($day, $month, $year) = explode(" ", $currentDate);
@@ -152,6 +150,7 @@ function getDatesFromType($type) {
 	$dates = array();
 	switch ($type) {
 		case "month":
+			// Gets date range for past 6 months in 1 month intervals
 			for ($i = 0; $i < 6; $i = $i + 1) {
 				$start = date('Y-m-d H:i:s', mktime(0, 0, 0, $month - $i, 1, $year));
 				$end = date('Y-m-d H:i:s', mktime(23, 59, 59, ($month - $i) + 1, 0, $year));
@@ -163,29 +162,31 @@ function getDatesFromType($type) {
 				array_push($dates, $temp);
 			}
 			break;
+
 		case "semester":
+			// Gets the date range for past 6 semesters by dividing into 6 month intervals
 			$offset = 0;
 			for ($i = 0; $i < 6; $i = $i + 1) {
 				if ($month >= 1 && $month <= 6) {
-					//echo "Current date is Spring\n";
+					// Offset is used to determine spring or fall if month is currently in spring semester
 					$offset += $i % 2;
 					if ($i % 2 == 0) {
-						//echo "Spring\n";
+						// Spring
 						$start = date('Y-m-d H:i:s', mktime(0, 0, 0, 1, 1, $year - $offset));
 						$end = date('Y-m-d H:i:s', mktime(0, 0, 0, 7, 1, $year - $offset));
 					} else {
-						//echo "Fall\n";
+						// Fall
 						$start = date('Y-m-d H:i:s', mktime(0, 0, 0, 7, 1, $year - $offset));
 						$end = date('Y-m-d H:i:s', mktime(0, 0, 0, 1, 1, $year - ($offset + 1)));
 					}
 				} else {
-					// echo "Current date is Fall\n";
+					// If date is in fall, no offset is needed
 					if ($i % 2 == 0) {
-						// echo "Fall\n";
+						// Fall
 						$start = date('Y-m-d H:i:s', mktime(0, 0, 0, 7, 1, $year));
 						$end = date('Y-m-d H:i:s', mktime(0, 0, 0, 1, 1, $year));
 					} else {
-						// echo "Spring\n";
+						// Spring
 						$start = date('Y-m-d H:i:s', mktime(0, 0, 0, 1, 1, $year));
 						$end = date('Y-m-d H:i:s', mktime(0, 0, 0, 7, 1, $year));		
 					}
@@ -198,16 +199,18 @@ function getDatesFromType($type) {
 				array_push($dates, $temp);
 			}
 			break;
+
 		case "year":
+			// Gets the date range for the last 3 years dividing into academic year intervals
 			for ($i = 0; $i < 3; $i = $i + 1) {
 				if ($month <= 12 && $month >= 9) {
-					//echo "Fall";
+					// Current date is in Fall
 					$start = date('Y-m-d H:i:s', mktime(0, 0, 0, 8, 1, $year - $i));
 					$end = date('Y-m-d H:i:s', mktime(0, 0, 0, 6, 1, ($year - $i) + 1));
 				}
 
 				if ($month <= 8 && $month >= 1) {
-					//echo "Spring";
+					/// Current date is in spring, 
 					$start = date('Y-m-d H:i:s', mktime(0, 0, 0, 8, 1, $year - ($i + 1)));
 					$end = date('Y-m-d H:i:s', mktime(0, 0, 0, 6, 1, $year - $i));
 				}
@@ -220,24 +223,23 @@ function getDatesFromType($type) {
 			}
 			
 			break;
+
 		default:
 			break;
 	}
 
 	// Return array to use for processing
-	//var_dump($dates);
 	return $dates;
 }
 
 // getCategories() function
 // Inputs: 
-//	$type - the type of category
+//	$type - the type of category to report on
 // Outputs:
-//	
-// Notes:  
-//	
+//	$table - a two-dimensional array with given categories to search on
 function getCategories($type) {
 	$table = array();
+	// Depending on type of category, gives the proper categories for the table
 	switch ($type) {
 		case 'Overall':
 			array_push($table, array('Num. of Appointments'));
@@ -247,13 +249,13 @@ function getCategories($type) {
 			break;
 
 		case 'Service':
-			// 
+			// Query to gather services to report on
 			$query = "SELECT name FROM ea_services";
 			$stmt = prepareQuery($query, "Could not prepare Service Category");
 			break;
 
 		case 'Year':
-/*
+/* Commented code may be subbed back in for query
 			array_push($table, array('Freshman'));
 			array_push($table, array('Sophmore'));
 			array_push($table, array('Junior'));
@@ -267,7 +269,7 @@ function getCategories($type) {
 			break;
 
 		case 'Major':
-/*
+/* Commented code may be subbed back for query
 			array_push($table, array('Biosystems and Agricultural Engineering'));
 			array_push($table, array('Chemical Engineering'));
 			array_push($table, array('Civil Engineering'));
@@ -323,9 +325,11 @@ function prepareQuery($query, $err_message) {
 	require('../Config.php');
 
 	try {
+		// Prepared statement for the query
 		$stmt = $db->prepare($query);
 		$stmt->execute();
 	} catch (Exception $e) {
+		// Error message if unsuccessful
 		echo $err_message . "\n";
 		echo $e;
 		exit;

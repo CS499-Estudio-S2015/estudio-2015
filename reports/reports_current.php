@@ -2,20 +2,21 @@
 /*************************************************************
  *                  Current Data Reporting                   *
  *************************************************************/
-// This  
-//
+// This files provides info for each report by reading from 
+// the database and formatting a table for output.  The file
+// defines only the methods for the Current Reporting Section
+
 // Includes
 include('reports_helpers.php');
 include('../Config.php');
 
 
-// getCategories() function
+// getCurrentOverall() function
 // Inputs: 
-//	$type - the type of category
+//	None
 // Outputs:
-//	
-// Notes:  
-//
+//	A formatted and statistically accurate date is written to
+//  the webpage from this method
 function getCurrentOverall() {
 
 	// Set up two-dimensional array to hold data for output
@@ -59,13 +60,12 @@ function getCurrentOverall() {
 	printCurrentTable($table, $head);
 }
 
-// getCategories() function
+// getCurrentService() function
 // Inputs: 
-//	$type - the type of category
+//	None
 // Outputs:
-//	
-// Notes:  
-//
+//	A formatted and statistically accurate date is written to
+//  the webpage from this method
 function getCurrentService() {
 	require('../Config.php');
 
@@ -120,13 +120,12 @@ function getCurrentService() {
 	printCurrentTable($table, $head);
 }
 
-// getCategories() function
+// getCurrentYear() function
 // Inputs: 
-//	$type - the type of category
+//	None
 // Outputs:
-//	
-// Notes:  
-//
+//	A formatted and statistically accurate date is written to
+//  the webpage from this method
 function getCurrentYear() {
 	require('../Config.php');
 
@@ -174,6 +173,12 @@ function getCurrentYear() {
 	printCurrentTable($table, $head);
 }
 
+// getCurrentMajor() function
+// Inputs: 
+//	None
+// Outputs:
+//	A formatted and statistically accurate date is written to
+//  the webpage from this method
 function getCurrentMajor() {
 	require('../Config.php');
 
@@ -221,26 +226,24 @@ function getCurrentMajor() {
 	printCurrentTable($table, $head);
 }
 
-// getCategories() function
+// getCurrentRequired() function
 // Inputs: 
-//	$type - the type of category
+//	None
 // Outputs:
-//	
-// Notes:  
-//
+//	A formatted and statistically accurate date is written to
+//  the webpage from this method
 function getCurrentRequired() {
 	require('../Config.php');
 
 	// TODO: Need to add required visit to appointment form.
 }
 
-// getCategories() function
+// getCurrentFirstVisit() function
 // Inputs: 
-//	$type - the type of category
+//	None
 // Outputs:
-//	
-// Notes:  
-//
+//	A formatted and statistically accurate date is written to
+//  the webpage from this method
 function getCurrentFirstVisit() {
 	require('../Config.php');
 
@@ -294,13 +297,12 @@ function getCurrentFirstVisit() {
 	printCurrentTable($table, $head);
 }
 
-// getCategories() function
+// getCurrentEnglish() function
 // Inputs: 
-//	$type - the type of category
+//	None
 // Outputs:
-//	
-// Notes:  
-//
+//	A formatted and statistically accurate date is written to
+//  the webpage from this method
 function getCurrentEnglish() {
 	require('../Config.php');
 

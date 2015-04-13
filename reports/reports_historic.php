@@ -2,15 +2,21 @@
 /*************************************************************
  *                  Historic Data Reporting                  *
  *************************************************************/
+// This files provides info for each report by reading from 
+// the database and formatting a table for output.  The file
+// defines only the methods for the Current Reporting Section
+
+// Includes
 include('reports_helpers.php');
+include('../Config.php');
 
 
 // getHistoricOverall() function
 // Inputs: 
-//	$type - the type of date range
+//	$type - the type of date range (month, semester, year)
 // Outputs:
-//	
-// Notes:  
+//	A formatted and statistically accurate date is written to
+//  the webpage from this method  
 function getHistoricOverall($type) {
 	require('../Config.php');
 
@@ -56,16 +62,16 @@ function getHistoricOverall($type) {
 		}
 	}
 
-
+	// Print table to webpage
 	printHistoricTable($table, $header);
 }
 
-// getCategories() function
+// getHistoricOverall() function
 // Inputs: 
-//	$type - the type of category
+//	$type - the type of date range (month, semester, year)
 // Outputs:
-//	
-// Notes:  
+//	A formatted and statistically accurate date is written to
+//  the webpage from this method   
 function getHistoricService($type) {
 	require('../Config.php');
 
@@ -102,15 +108,16 @@ function getHistoricService($type) {
 		}
 	}
 
+	// Print table to webpage
 	printHistoricTable($table, $header);
 }
 
-// getCategories() function
+// getHistoricOverall() function
 // Inputs: 
-//	$type - the type of category
+//	$type - the type of date range (month, semester, year)
 // Outputs:
-//	
-// Notes:  
+//	A formatted and statistically accurate date is written to
+//  the webpage from this method   
 function getHistoricYear($type) {
 	require('../Config.php');
 
@@ -148,15 +155,16 @@ function getHistoricYear($type) {
 		}
 	}
 
+	// Print table to webpage
 	printHistoricTable($table, $header);
 }
 
-// getCategories() function
+// getHistoricOverall() function
 // Inputs: 
-//	$type - the type of category
+//	$type - the type of date range (month, semester, year)
 // Outputs:
-//	
-// Notes:  
+//	A formatted and statistically accurate date is written to
+//  the webpage from this method  
 function getHistoricMajor($type) {
 	require('../Config.php');
 
@@ -195,27 +203,28 @@ function getHistoricMajor($type) {
 		}
 	}
 
+	// Print table to webpage
 	printHistoricTable($table, $header);
 }
 
-// getCategories() function
+// getHistoricOverall() function
 // Inputs: 
-//	$type - the type of category
+//	$type - the type of date range (month, semester, year)
 // Outputs:
-//	
-// Notes:  
+//	A formatted and statistically accurate date is written to
+//  the webpage from this method   
 function getHistoricRequired() {
 	require('../Config.php');
 
 	// TODO: Need to add required visit to appointment form.
 }
 
-// getCategories() function
+// getHistoricOverall() function
 // Inputs: 
-//	$type - the type of category
+//	$type - the type of date range (month, semester, year)
 // Outputs:
-//	
-// Notes:  
+//	A formatted and statistically accurate date is written to
+//  the webpage from this method   
 function getHistoricFirstVisit($type) {
 	require('../Config.php');
 
@@ -260,15 +269,16 @@ function getHistoricFirstVisit($type) {
 		}
 	}
 
+	// Print table to webpage
 	printHistoricTable($table, $header);
 }
 
-// getCategories() function
+// getHistoricOverall() function
 // Inputs: 
-//	$type - the type of category
+//	$type - the type of date range (month, semester, year)
 // Outputs:
-//	
-// Notes:  
+//	A formatted and statistically accurate date is written to
+//  the webpage from this method   
 function getHistoricEnglish($type) {
 	require('../Config.php');
 
@@ -314,6 +324,7 @@ function getHistoricEnglish($type) {
 		}
 	}
 
+	// Print table to webpage
 	printHistoricTable($table, $header);
 }
 

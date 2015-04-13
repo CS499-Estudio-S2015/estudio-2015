@@ -5,8 +5,8 @@ class SystemConfiguration {
     
     // Database Settings
     public static $db_host     = 'localhost';
-    public static $db_name     = 'test_db';
-//    public static $db_name     = 'estudio_beta';
+    // public static $db_name     = 'test_db';
+    public static $db_name     = 'estudio_beta';
     public static $db_username = 'root';
     public static $db_password = '';
     
