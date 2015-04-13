@@ -191,6 +191,14 @@
             <?php echo $this->lang->line('add_to_google_calendar'); ?>
         </button>
         <?php } ?>
+        <button class = "btn btn-primary" ONCLICK=window.location.href='http://localhost/estudio-2015/clientInfo.php#tab1'>
+            <i class="icon-plus icon-white"></i>
+            <?php echo ('Client Page'); ?>
+            Make sure to change the link above for actual usage
+           
+            </button>
+
+
         
         <?php 
             // Display exceptions (if any).

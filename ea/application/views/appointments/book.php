@@ -111,11 +111,11 @@
                     <div id="step-2" class="book-step" title="<?php echo $this->lang->line('step_two_title'); ?>">
                         <strong>2</strong>
                     </div>
-                    <div id="step-3" class="book-step" title="<?php echo $this->lang->line('step_three_title'); ?>">
+                 <!--    <div id="step-3" class="book-step" title="<?php echo $this->lang->line('step_three_title'); ?>">
                         <strong>3</strong>
-                    </div>
-                    <div id="step-4" class="book-step" title="<?php echo $this->lang->line('step_four_title'); ?>">
-                        <strong>4</strong>
+                    </div> -->
+                    <div id="step-3" class="book-step" title="<?php echo $this->lang->line('step_four_title'); ?>">
+                        <strong>3</strong>
                     </div>
                 </div>
             </div>
@@ -280,7 +280,8 @@
                     </button>
                     <button type="button" id="button-next-2" class="btn button-next btn-primary" 
                             data-step_index="2">
-                        <?php echo $this->lang->line('next'); ?>
+                        <?php 
+                        echo $this->lang->line('next');?>
                         <i class="icon-forward icon-white"></i>
                     </button>
                 </div>
@@ -290,8 +291,34 @@
                 // ------------------------------------------------------
                 // ENTER CUSTOMER DATA
                 // ------------------------------------------------------ ?>
-            <div id="wizard-frame-3" class="wizard-frame" style="display:none;">
-                <div class="frame-container">
+           <div id="wizard-frame-3" class="wizard-frame" style="display:none;">
+    <div class="frame-container">
+                    <h3 class="frame-title"><?php echo $this->lang->line('step_four_title'); ?></h3>
+                    <div class="frame-content" style="width:600px">
+                        <div id="appointment-details" class="span3"></div>
+                        <div class="span3">
+                            put some customer info here /view/book.php
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="command-buttons">
+                    <button type="button" id="button-back-4" class="btn button-back" 
+                            data-step_index="3"><i class="icon-backward"></i> 
+                        <?php echo $this->lang->line('back'); ?>
+                    </button>
+                    <form id="book-appointment-form" style="display:inline-block" method="post">
+                        <button id="book-appointment-submit" type="button" class="btn btn-success">
+                            <i class="icon-ok icon-white"></i>
+                            <?php
+                                echo (!$manage_mode) ? $this->lang->line('confirm')
+                                        : $this->lang->line('update');
+                            ?>
+                        </button>
+                        <input type="hidden" name="post_data" />
+                    </form>
+                </div>
+      <!--          <div class="frame-container">
                     
                     <h3 class="frame-title"><?php echo $this->lang->line('step_three_title'); ?></h3>
                     
@@ -340,13 +367,13 @@
                         <i class="icon-forward icon-white"></i>
                     </button>
                 </div>
-            </div>
+            </div> -->
 
             <?php 
                 // ------------------------------------------------------
                 // APPOINTMENT DATA CONFIRMATION 
                 // ------------------------------------------------------ ?>
-            <div id="wizard-frame-4" class="wizard-frame" style="display:none;">
+            <!-- <div id="wizard-frame-4" class="wizard-frame" style="display:none;">
                 <div class="frame-container">
                     <h3 class="frame-title"><?php echo $this->lang->line('step_four_title'); ?></h3>
                     <div class="frame-content" style="width:600px">
@@ -357,7 +384,7 @@
                 
                 <div class="command-buttons">
                     <button type="button" id="button-back-4" class="btn button-back" 
-                            data-step_index="4"><i class="icon-backward"></i> 
+                            data-step_index="3"><i class="icon-backward"></i> 
                         <?php echo $this->lang->line('back'); ?>
                     </button>
                     <form id="book-appointment-form" style="display:inline-block" method="post">
@@ -371,7 +398,7 @@
                         <input type="hidden" name="post_data" />
                     </form>
                 </div>
-            </div>
+            </div> -->
             
             <?php 
                 // ------------------------------------------------------
