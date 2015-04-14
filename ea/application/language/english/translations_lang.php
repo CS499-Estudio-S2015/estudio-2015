@@ -271,3 +271,9 @@ $lang['google_calendar_selected'] = 'Google calendar has been successfully selec
 $lang['oops_something_went_wrong'] = 'Oops! Something Went Wrong!';
 $lang['could_not_add_to_google_calendar'] = 'Your appointment could not be added to your Google Calendar account.';
 $lang['ea_update_success'] = 'Easy!Appointments has been successfully updated!';
+
+// Reporting Interface
+$lang['reports'] = 'Reports';
+$lang['reports_hint'] = 'Reporting interface to view eStudio statistics';
+$lang['current'] = 'Current';
+$lang['historic'] = 'Historic';

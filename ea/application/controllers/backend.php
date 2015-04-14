@@ -163,6 +163,27 @@ class Backend extends CI_Controller {
         $this->load->view('backend/users', $view);
         $this->load->view('backend/footer', $view);
     }
+
+    /**
+     * Display the report interface.
+     */
+    public function reports() {
+        $this->session->set_userdata('dest_url', $this->config->item('base_url') . 'backend/reports');
+        if (!$this->hasPrivileges(PRIV_REPORTS)) return;
+
+        $this->load->model('settings_model');
+        $this->load->model('user_model');
+
+        $view['base_url'] = $this->config->item('base_url');
+        $view['active_menu'] = PRIV_REPORTS;
+        $view['company_name'] = $this->settings_model->get_setting('company_name');
+        $view['user_display_name'] = $this->user_model->get_user_display_name($this->session->userdata('user_id'));
+        $this->setUserData($view);
+
+        $this->load->view('backend/header', $view);
+        $this->load->view('backend/reports', $view);
+        $this->load->view('backend/footer', $view);
+    }
     
     /**
      * Display the user/system settings.

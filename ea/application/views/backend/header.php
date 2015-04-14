@@ -115,6 +115,15 @@
                 title="<?php echo $this->lang->line('manage_users_hint'); ?>">
             <?php echo $this->lang->line('users'); ?>
         </a>
+
+        <?php // REPORTS MENU ITEM 
+              // ------------------------------------------------------ ?>
+        <?php $hidden = ($privileges[PRIV_REPORTS]['view'] ==  TRUE) ? '' : 'hidden'; ?>
+        <?php $active = ($active_menu == PRIV_REPORTS) ? 'active' : ''; ?>
+        <a href="<?php echo $base_url; ?>backend/reports" class="menu-item <?php echo $hidden; ?><?php echo $active; ?>"
+                title="<?php echo $this->lang->line('reports_hint'); ?>">
+            <?php echo $this->lang->line('reports'); ?>
+        </a>
         
         <?php // SETTINGS MENU ITEM 
               // ------------------------------------------------------ ?>
