@@ -66,7 +66,7 @@ function getHistoricOverall($type) {
 	printHistoricTable($table, $header);
 }
 
-// getHistoricOverall() function
+// getHistoricService() function
 // Inputs: 
 //	$type - the type of date range (month, semester, year)
 // Outputs:
@@ -112,7 +112,7 @@ function getHistoricService($type) {
 	printHistoricTable($table, $header);
 }
 
-// getHistoricOverall() function
+// getHistoricYear() function
 // Inputs: 
 //	$type - the type of date range (month, semester, year)
 // Outputs:
@@ -159,7 +159,7 @@ function getHistoricYear($type) {
 	printHistoricTable($table, $header);
 }
 
-// getHistoricOverall() function
+// getHistoricMajor() function
 // Inputs: 
 //	$type - the type of date range (month, semester, year)
 // Outputs:
@@ -207,7 +207,7 @@ function getHistoricMajor($type) {
 	printHistoricTable($table, $header);
 }
 
-// getHistoricOverall() function
+// getHistoricRequired() function
 // Inputs: 
 //	$type - the type of date range (month, semester, year)
 // Outputs:
@@ -219,7 +219,7 @@ function getHistoricRequired() {
 	// TODO: Need to add required visit to appointment form.
 }
 
-// getHistoricOverall() function
+// getHistoricFirstVisit() function
 // Inputs: 
 //	$type - the type of date range (month, semester, year)
 // Outputs:
@@ -273,7 +273,7 @@ function getHistoricFirstVisit($type) {
 	printHistoricTable($table, $header);
 }
 
-// getHistoricOverall() function
+// getHistoricEnglish() function
 // Inputs: 
 //	$type - the type of date range (month, semester, year)
 // Outputs:
