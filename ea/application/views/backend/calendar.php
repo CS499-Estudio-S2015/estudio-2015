@@ -246,38 +246,29 @@
                     </div>
 
                     <div class="control-group">
-                        <label for="phone-number" class="control-label">
-                            <?php echo $this->lang->line('phone_number'); ?>*</label>
+                        <label for="year" class="control-label">
+                            <?php echo $this->lang->line('year'); ?>*</label>
                         <div class="controls">
-                            <input type="text" id="phone-number" class="required" />
+                            <input type="text" id="year" class="required" />
                         </div>
                     </div>
                 </div>
                 <div class="span6">
                     <div class="control-group">
-                        <label for="address" class="control-label">
-                            <?php echo $this->lang->line('address'); ?>
+                        <label for="major" class="control-label">
+                            <?php echo $this->lang->line('major'); ?>
                         </label>
                         <div class="controls">
-                            <input type="text" id="address" />
+                            <input type="text" id="major" />
                         </div>
                     </div>
 
                     <div class="control-group">
-                        <label for="city" class="control-label">
-                            <?php echo $this->lang->line('city'); ?>
+                        <label for="esl" class="control-label">
+                            <?php echo $this->lang->line('esl'); ?>
                         </label>
                         <div class="controls">
-                            <input type="text" id="city" />
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label for="zip-code" class="control-label">
-                            <?php echo $this->lang->line('zip_code'); ?>
-                        </label>
-                        <div class="controls">
-                            <input type="text" id="zip-code" />
+                            <input type="text" id="esl" />
                         </div>
                     </div>
                     

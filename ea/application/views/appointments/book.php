@@ -306,22 +306,19 @@
                             <label for="email"><?php echo $this->lang->line('email'); ?> *</label>
                             <input type="text" id="email" class="required" maxlength="250" />
 
-                            <label for="phone-number"><?php echo $this->lang->line('phone_number'); ?> *</label>
-                            <input type="text" id="phone-number" class="required" maxlength="60" />
+                            <label for="year"><?php echo $this->lang->line('year'); ?> *</label>
+                            <input type="text" id="year" maxlength="60" />
 
                             <br/><br/>
                             <em id="form-message" class="text-error"><?php echo $this->lang->line('fields_are_required'); ?></em>
                         </div>
 
                         <div class="span3">
-                            <label for="address"><?php echo $this->lang->line('address'); ?></label>
-                            <input type="text" id="address" maxlength="250" />
+                            <label for="major"><?php echo $this->lang->line('major'); ?></label>
+                            <input type="text" id="major" maxlength="250" />
 
-                            <label for="city"><?php echo $this->lang->line('city'); ?></label>
-                            <input type="text" id="city" maxlength="120" />
-
-                            <label for="zip-code"><?php echo $this->lang->line('zip_code'); ?></label>
-                            <input type="text" id="zip-code" maxlength="120" />
+                            <label for="esl"><?php echo $this->lang->line('esl'); ?></label>
+                            <input type="text" id="esl" maxlength="120" />
 
                             <label for="notes"><?php echo $this->lang->line('notes'); ?></label>
                             <textarea id="notes" maxlength="500" rows="3"></textarea>
