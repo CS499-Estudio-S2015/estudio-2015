@@ -251,6 +251,8 @@ var FrontendBook = {
                 'id_services': formData['appointment']['id_services'],
                 'start_datetime': formData['appointment']['start_datetime'],
                 'group_size': formData['appointment']['group_size'],
+                'req_visit': formData['appointment']['req_visit'],
+                'first_visit': formData['appointment']['first_visit'],
             };
             
             if (GlobalVariables.manageMode) {
@@ -316,7 +318,9 @@ var FrontendBook = {
             'service_duration': selServiceDuration,
             'manage_mode': FrontendBook.manageMode,
             'appointment_id': appointmentId,
-            'group_size': $('#group_size').val()
+            'group_size': $('#group_size').val(),
+            'req_visit': $('#req_visit').val(),
+            'first_visit': $('#first_visit').val()
         };
 
         // Make ajax post request and get the available hours.
@@ -471,7 +475,9 @@ var FrontendBook = {
             'is_unavailable': false,
             'id_users_provider': $('#select-provider').val(),
             'id_services': $('#select-service').val(),
-            'group_size': $('#group_size').val()
+            'group_size': $('#group_size').val(),
+            'req_visit': $('#req_visit').val(),
+            'first_visit': $('#first_visit').val()
         };
         
         postData['manage_mode'] = FrontendBook.manageMode;
@@ -531,6 +537,8 @@ var FrontendBook = {
             $('#select-service').val(appointment['id_services']).trigger('change');
             $('#select-provider').val(appointment['id_users_provider']);
             $('#group_size').val(appointment['group_size']);
+            $('#req_visit').val(appointment['req_visit']);
+            $('#first_visit').val(appointment['first_visit']);
             
             // Set Appointment Date
             $('#select-date').datepicker('setDate', 

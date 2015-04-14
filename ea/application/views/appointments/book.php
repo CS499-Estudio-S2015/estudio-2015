@@ -239,6 +239,24 @@
                             <option value="4">4</option>
                             <option value="5">5</option>
                         </select>
+
+                        <label for="req_visit">
+                            <strong><?php echo $this->lang->line('req_visit'); ?></strong>                         
+                        </label>
+
+                        <select id="req_visit">
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                            
+                        <label for="first_visit"> 
+                            <strong><?php echo $this->lang->line('first_visit'); ?></strong>
+                        </label>
+
+                        <select id="first visit">
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
                         
                         <div id="service-description" style="display:none;"></div>
                     </div>

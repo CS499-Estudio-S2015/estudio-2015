@@ -10,8 +10,8 @@ root {
    -------------------------------------------------------------------- */
 #header {
     height: 70px;
-    background-color: #35B66F;
-    border-bottom: 4px solid #247A4B;
+    background-color: #662e8f;/* #35B66F */
+    border-bottom: 4px solid #06255D; /* #247A4B */
 }
 
 #header #header-logo { 
@@ -22,9 +22,9 @@ root {
 
 #header #header-logo img { 
     float: left; 
-    width: 50px; 
+    width: 100px; 
     height: 50px; 
-    margin-right: 6px; 
+    margin-right: 16px; 
 }
 
 #header #header-logo span { 
@@ -57,14 +57,13 @@ root {
 }
 
 #header #header-menu .menu-item:hover:not(.active) { 
-    background-color: #2A8F57;
-    border-bottom: 2px solid #2E7244;
+    background-color: #521A7E; /* #2A8F57 */
+    border-bottom: 2px solid #06255D; /* #2E7244 */
 }
 
 #header #header-menu .active { 
-    color: #C5FFD6;
-    background: #29A067;
-    border-bottom: 2px solid #2A7751;
+    background:  #3f007f; /* #29A067 */
+    border-bottom: 2px solid #06255D; /* #2A7751 */
 }
 
 #footer {
