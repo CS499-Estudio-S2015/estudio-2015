@@ -193,8 +193,7 @@ class Admins_Model extends CI_Model {
 
         // Validate required fields integrity.
         if (!isset($admin['last_name'])
-                || !isset($admin['email'])
-                || !isset($admin['phone_number'])) { 
+                || !isset($admin['email']){ 
             throw new Exception('Not all required fields are provided : ' . print_r($admin, TRUE));
         }
 

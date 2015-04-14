@@ -173,8 +173,7 @@ class Customers_Model extends CI_Model {
         }
         // Validate required fields
         if (!isset($customer['last_name'])
-                || !isset($customer['email'])
-                || !isset($customer['phone_number'])) { 
+                || !isset($customer['email']) { 
             throw new Exception('Not all required fields are provided : ' 
                     . print_r($customer, TRUE));
         }

@@ -191,8 +191,7 @@ class Secretaries_Model extends CI_Model {
 
         // Validate required fields integrity.
         if (!isset($secretary['last_name'])
-                || !isset($secretary['email'])
-                || !isset($secretary['phone_number'])) { 
+                || !isset($secretary['email']){ 
             throw new Exception('Not all required fields are provided : ' . print_r($secretary, TRUE));
         }
 
