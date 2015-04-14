@@ -162,106 +162,110 @@
                 <div class="frame-container">
                     <h3 class="frame-title"><?php echo $this->lang->line('step_one_title'); ?></h3>
                     
-                    <div class="frame-content" style="width:520px">
-                        <label for="select-service">
-                            <strong><?php echo $this->lang->line('select_service'); ?></strong>
-                        </label>
-                        
-                        <select id="select-service">
-                            <?php 
-                                // Group services by category, only if there is at least one service 
-                                // with a parent category.
-                                foreach($available_services as $service) {
-                                    if ($service['category_id'] != NULL) {
-                                        $has_category = TRUE;
-                                        break;
-                                    }
-                                }
-                                
-                                if ($has_category) {
-                                    $grouped_services = array();
-
+                    <div class="frame-content" style="width:600px">
+                        <div class="span3">
+                            <label for="select-service">
+                                <strong><?php echo $this->lang->line('select_service'); ?></strong>
+                            </label>
+                            
+                            <select id="select-service">
+                                <?php 
+                                    // Group services by category, only if there is at least one service 
+                                    // with a parent category.
                                     foreach($available_services as $service) {
                                         if ($service['category_id'] != NULL) {
-                                            if (!isset($grouped_services[$service['category_name']])) {
-                                                $grouped_services[$service['category_name']] = array();
-                                            }
-
-                                            $grouped_services[$service['category_name']][] = $service;
-                                        } 
-                                    }
-
-                                    // We need the uncategorized services at the end of the list so
-                                    // we will use another iteration only for the uncategorized services.
-                                    $grouped_services['uncategorized'] = array();
-                                    foreach($available_services as $service) {
-                                        if ($service['category_id'] == NULL) {
-                                            $grouped_services['uncategorized'][] = $service;
+                                            $has_category = TRUE;
+                                            break;
                                         }
                                     }
+                                    
+                                    if ($has_category) {
+                                        $grouped_services = array();
 
-                                    foreach($grouped_services as $key => $group) {
-                                        $group_label = ($key != 'uncategorized')
-                                                ? $group[0]['category_name'] : 'Uncategorized';
-                                        
-                                        if (count($group) > 0) {
-                                            echo '<optgroup label="' . $group_label . '">';
-                                            foreach($group as $service) {
-                                                echo '<option value="' . $service['id'] . '">' 
-                                                    . $service['name'] . '</option>';
+                                        foreach($available_services as $service) {
+                                            if ($service['category_id'] != NULL) {
+                                                if (!isset($grouped_services[$service['category_name']])) {
+                                                    $grouped_services[$service['category_name']] = array();
+                                                }
+
+                                                $grouped_services[$service['category_name']][] = $service;
+                                            } 
+                                        }
+
+                                        // We need the uncategorized services at the end of the list so
+                                        // we will use another iteration only for the uncategorized services.
+                                        $grouped_services['uncategorized'] = array();
+                                        foreach($available_services as $service) {
+                                            if ($service['category_id'] == NULL) {
+                                                $grouped_services['uncategorized'][] = $service;
                                             }
-                                            echo '</optgroup>';
+                                        }
+
+                                        foreach($grouped_services as $key => $group) {
+                                            $group_label = ($key != 'uncategorized')
+                                                    ? $group[0]['category_name'] : 'Uncategorized';
+                                            
+                                            if (count($group) > 0) {
+                                                echo '<optgroup label="' . $group_label . '">';
+                                                foreach($group as $service) {
+                                                    echo '<option value="' . $service['id'] . '">' 
+                                                        . $service['name'] . '</option>';
+                                                }
+                                                echo '</optgroup>';
+                                            }
+                                        }
+                                    }  else {
+                                        foreach($available_services as $service) {
+                                            echo '<option value="' . $service['id'] . '">' 
+                                                        . $service['name'] . '</option>';
                                         }
                                     }
-                                }  else {
-                                    foreach($available_services as $service) {
-                                        echo '<option value="' . $service['id'] . '">' 
-                                                    . $service['name'] . '</option>';
-                                    }
-                                }
-                            ?>
-                        </select>
+                                ?>
+                            </select>
 
-                        <label for="select-provider">
-                            <strong><?php echo $this->lang->line('select_provider'); ?></strong>
-                        </label>
-                        
-                        <select id="select-provider"></select>
-
-                        <label for="group_size">
-                            <strong><?php echo $this->lang->line('group_size'); ?></strong>
-                        </label>
-                        
-                        <select id="group_size">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-
-                        <label for="req_visit">
-                            <strong><?php echo $this->lang->line('req_visit'); ?></strong>                         
-                        </label>
-
-                        <select id="req_visit">
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
+                            <label for="select-provider">
+                                <strong><?php echo $this->lang->line('select_provider'); ?></strong>
+                            </label>
                             
-                        <label for="first_visit"> 
-                            <strong><?php echo $this->lang->line('first_visit'); ?></strong>
-                        </label>
+                            <select id="select-provider"></select>
 
-                        <select id="first visit">
-                            <option value="0">No</option>
-                            <option value="1">Yes</option>
-                        </select>
-                        
-                        <div id="service-description" style="display:none;"></div>
+                            <label for="group_size">
+                                <strong><?php echo $this->lang->line('group_size'); ?></strong>
+                            </label>
+                            
+                            <select id="group_size">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                       
+                        <div class="span3">
+                            <label for="req_visit">
+                                <strong><?php echo $this->lang->line('req_visit'); ?></strong>                         
+                            </label>
+
+                            <select id="req_visit">
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                                
+                            <label for="first_visit"> 
+                                <strong><?php echo $this->lang->line('first_visit'); ?></strong>
+                            </label>
+
+                            <select id="first_visit">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+
                     </div>
+                    
                 </div>
-                
+                <!--div id="service-description" style="display:none;"></div-->
                 <div class="command-buttons">
                     <button type="button" id="button-next-1" class="btn button-next btn-primary" 
                             data-step_index="1">
@@ -394,7 +398,8 @@
             <?php 
                 // ------------------------------------------------------
                 // FRAME FOOTER 
-                // ------------------------------------------------------ ?>
+                // ------------------------------------------------------ 
+/*            
             <div id="frame-footer">
                 Powered By 
                 <a href="http://easyappointments.org" target="_blank">
@@ -405,6 +410,8 @@
 		        	<?php echo ucfirst($this->config->item('language')); ?>
 		        </span>
             </div>
+*/
+            ?>
         </div>
     </div>
 <script 
