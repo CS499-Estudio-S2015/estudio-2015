@@ -20,6 +20,12 @@ To prevent recoding, we should probably create a list of To-Do's and individuall
 * [] Add corresponding columns in database for added form inputs
 * Make prepared statements for all database writes (May not need to do this anymore)
 
+####For customer login
+* [] move page 3 of the wizard to the front, create registration form/login 
+* ~~[Matt] give customers permission to login to backend with correct view/edit permissions~~
+* [] create registration and login pages that link to the wizard and backend appropriately
+* []  
+
 ####For Reporting:
 * [Matt] Adjust reporting queries for new EA database
 * ~~[Matt] Divide reportQueries file into different sections so it's not 1000 lines long~~
