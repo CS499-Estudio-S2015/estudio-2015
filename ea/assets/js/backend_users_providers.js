@@ -125,12 +125,9 @@ ProvidersHelper.prototype.bindEventHandlers = function() {
             'first_name': $('#provider-first-name').val(),
             'last_name': $('#provider-last-name').val(),
             'email': $('#provider-email').val(),
-            'mobile_number': $('#provider-mobile-number').val(),
-            'phone_number': $('#provider-phone-number').val(),
-            'address': $('#provider-address').val(),
-            'city': $('#provider-city').val(),
-            'state': $('#provider-state').val(),
-            'zip_code': $('#provider-zip-code').val(),
+            'year': $('#provider-year').val(),
+            'major': $('#provider-major').val(),
+            'esl': $('#provider-esl').val(),
             'notes': $('#provider-notes').val(),
             'settings': {
                 'username': $('#provider-username').val(),  
@@ -350,12 +347,9 @@ ProvidersHelper.prototype.display = function(provider) {
     $('#provider-first-name').val(provider.first_name);
     $('#provider-last-name').val(provider.last_name);
     $('#provider-email').val(provider.email);
-    $('#provider-mobile-number').val(provider.mobile_number);
-    $('#provider-phone-number').val(provider.phone_number);
-    $('#provider-address').val(provider.address);
-    $('#provider-city').val(provider.city);
-    $('#provider-state').val(provider.state);
-    $('#provider-zip-code').val(provider.zip_code);
+    $('#provider-year').val(provider.year);
+    $('#provider-major').val(provider.major);
+    $('#provider-esl').val(provider.esl);
     $('#provider-notes').val(provider.notes);
     
     $('#provider-username').val(provider.settings.username);
@@ -433,10 +427,10 @@ ProvidersHelper.prototype.filter = function(key, selectId, display) {
 ProvidersHelper.prototype.getFilterHtml = function(provider) {
     var name = provider.first_name + ' ' + provider.last_name;
     var info = provider.email;
-    info = (provider.mobile_number != '' && provider.mobile_number != null)
-            ? info + ', ' + provider.mobile_number : info;
-    info = (provider.phone_number != '' && provider.phone_number != null)
-            ? info + ', ' + provider.phone_number : info;        
+    info = (provider.year != '' && provider.year != null)
+            ? info + ', ' + provider.year : info;
+    info = (provider.major != '' && provider.major != null)
+            ? info + ', ' + provider.major : info;        
     
     var html =
             '<div class="provider-row" data-id="' + provider.id + '">' + 

@@ -115,12 +115,9 @@ AdminsHelper.prototype.bindEventHandlers = function() {
             'first_name': $('#admin-first-name').val(),
             'last_name': $('#admin-last-name').val(),
             'email': $('#admin-email').val(),
-            'mobile_number': $('#admin-mobile-number').val(),
-            'phone_number': $('#admin-phone-number').val(),
-            'address': $('#admin-address').val(),
-            'city': $('#admin-city').val(),
-            'state': $('#admin-state').val(),
-            'zip_code': $('#admin-zip-code').val(),
+            'major': $('#admin-major').val(),
+            'esl': $('#admin-esl').val(),
+            'year': $('#admin-year').val(),
             'notes': $('#admin-notes').val(),
             'settings': {
                 'username': $('#admin-username').val(),                    
@@ -289,12 +286,9 @@ AdminsHelper.prototype.display = function(admin) {
     $('#admin-first-name').val(admin.first_name);
     $('#admin-last-name').val(admin.last_name);
     $('#admin-email').val(admin.email);
-    $('#admin-mobile-number').val(admin.mobile_number);
-    $('#admin-phone-number').val(admin.phone_number);
-    $('#admin-address').val(admin.address);
-    $('#admin-city').val(admin.city);
-    $('#admin-state').val(admin.state);
-    $('#admin-zip-code').val(admin.zip_code);
+    $('#admin-major').val(admin.major);
+    $('#admin-esl').val(admin.esl);
+    $('#admin-year').val(admin.year);
     $('#admin-notes').val(admin.notes);
     
     $('#admin-username').val(admin.settings.username);
@@ -356,10 +350,10 @@ AdminsHelper.prototype.filter = function(key, selectId, display) {
 AdminsHelper.prototype.getFilterHtml = function(admin) {
     var name = admin.first_name + ' ' + admin.last_name;
     var info = admin.email;
-    info = (admin.mobile_number != '' && admin.mobile_number != null) 
-            ? info + ', ' + admin.mobile_number : info;
-    info = (admin.phone_number != '' && admin.phone_number != null) 
-            ? info + ', ' + admin.phone_number : info;
+    info = (admin.major != '' && admin.major != null) 
+            ? info + ', ' + admin.major : info;
+    info = (admin.esl != '' && admin.esl != null) 
+            ? info + ', ' + admin.esl : info;
     
     var html =
             '<div class="admin-row" data-id="' + admin.id + '">' + 

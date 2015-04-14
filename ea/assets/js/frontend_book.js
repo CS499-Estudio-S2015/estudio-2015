@@ -437,15 +437,13 @@ var FrontendBook = {
         $('#customer-details').html(
             '<h4>' + $('#first-name').val() + ' ' + $('#last-name').val() + '</h4>' + 
             '<p>' + 
-            	EALang['phone'] + ': ' + $('#phone-number').val() + 
+            	EALang['major'] + ': ' + $('#major').val() + 
             	'<br/>' + 
             	EALang['email'] + ': ' + $('#email').val() + 
             	'<br/>' + 
-            	EALang['address'] + ': ' + $('#address').val() + 
+            	EALang['year'] + ': ' + $('#year').val() + 
             	'<br/>' + 
-            	EALang['city'] + ': ' + $('#city').val() + 
-            	'<br/>' + 
-            	EALang['zip_code'] + ': ' + $('#zip-code').val() + 
+            	EALang['esl'] + ': ' + $('#esl').val() + 
         	'</p>'
         );
             
@@ -457,10 +455,9 @@ var FrontendBook = {
             'last_name': $('#last-name').val(),
             'first_name': $('#first-name').val(),
             'email': $('#email').val(),
-            'phone_number': $('#phone-number').val(),
-            'address': $('#address').val(),
-            'city': $('#city').val(),
-            'zip_code': $('#zip-code').val()
+            'major': $('#major').val(),
+            'year': $('#year').val(),
+            'esl': $('#esl').val(),
         };
         
         postData['appointment'] = {
@@ -541,10 +538,9 @@ var FrontendBook = {
             $('#last-name').val(customer['last_name']);
             $('#first-name').val(customer['first_name']);
             $('#email').val(customer['email']);
-            $('#phone-number').val(customer['phone_number']);
-            $('#address').val(customer['address']);
-            $('#city').val(customer['city']);
-            $('#zip-code').val(customer['zip_code']);
+            $('#major').val(customer['major']);
+            $('#esl').val(customer['esl']);
+            $('#year').val(customer['year']);
             var appointmentNotes = (appointment['notes'] !== null) 
                     ? appointment['notes'] : '';
             $('#notes').val(appointmentNotes);

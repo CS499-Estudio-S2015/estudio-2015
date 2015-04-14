@@ -118,12 +118,9 @@ SecretariesHelper.prototype.bindEventHandlers = function() {
             'first_name': $('#secretary-first-name').val(),
             'last_name': $('#secretary-last-name').val(),
             'email': $('#secretary-email').val(),
-            'mobile_number': $('#secretary-mobile-number').val(),
-            'phone_number': $('#secretary-phone-number').val(),
-            'address': $('#secretary-address').val(),
-            'city': $('#secretary-city').val(),
-            'state': $('#secretary-state').val(),
-            'zip_code': $('#secretary-zip-code').val(),
+            'esl': $('#secretary-esl').val(),
+            'major': $('#secretary-major').val(),
+            'year': $('#secretary-year').val(),
             'notes': $('#secretary-notes').val(),
             'settings': {
                 'username': $('#secretary-username').val(),                    
@@ -253,7 +250,7 @@ SecretariesHelper.prototype.validate = function(secretary) {
         // Validate user email.
         if (!GeneralFunctions.validateEmail($('#secretary-email').val())) {
             $('#secretary-email').css('border', '2px solid red');
-            throw 'Invalid email address!';
+            throw 'Invalid email year!';
         }
         
         // Check if username exists
@@ -302,12 +299,9 @@ SecretariesHelper.prototype.display = function(secretary) {
     $('#secretary-first-name').val(secretary.first_name);
     $('#secretary-last-name').val(secretary.last_name);
     $('#secretary-email').val(secretary.email);
-    $('#secretary-mobile-number').val(secretary.mobile_number);
-    $('#secretary-phone-number').val(secretary.phone_number);
-    $('#secretary-address').val(secretary.address);
-    $('#secretary-city').val(secretary.city);
-    $('#secretary-state').val(secretary.state);
-    $('#secretary-zip-code').val(secretary.zip_code);
+    $('#secretary-esl').val(secretary.esl);
+    $('#secretary-major').val(secretary.major);
+    $('#secretary-year').val(secretary.year);
     $('#secretary-notes').val(secretary.notes);
     
     $('#secretary-username').val(secretary.settings.username);
@@ -377,10 +371,10 @@ SecretariesHelper.prototype.filter = function(key, selectId, display) {
 SecretariesHelper.prototype.getFilterHtml = function(secretary) {
     var name = secretary.first_name + ' ' + secretary.last_name;
     var info = secretary.email;
-    info = (secretary.mobile_number != '' && secretary.mobile_number != null)
-            ? info + ', ' + secretary.mobile_number : info;
-    info = (secretary.phone_number != '' && secretary.phone_number != null)
-            ? info + ', ' + secretary.phone_number : info;   
+    info = (secretary.esl != '' && secretary.esl != null)
+            ? info + ', ' + secretary.esl : info;
+    info = (secretary.major != '' && secretary.major != null)
+            ? info + ', ' + secretary.major : info;   
             
     var html =
             '<div class="secretary-row" data-id="' + secretary.id + '">' + 

@@ -173,10 +173,9 @@ CustomersHelper.prototype.bindEventHandlers = function() {
             'first_name': $('#first-name').val(),
             'last_name': $('#last-name').val(),
             'email': $('#email').val(),
-            'phone_number': $('#phone-number').val(),
-            'address': $('#address').val(),
-            'city': $('#city').val(),
-            'zip_code': $('#zip-code').val(),
+            'major': $('#major').val(),
+            'esl': $('#esl').val(),
+            'year': $('#year').val(),
             'notes': $('#notes').val()
         };
 
@@ -321,10 +320,9 @@ CustomersHelper.prototype.display = function(customer) {
     $('#first-name').val(customer.first_name);
     $('#last-name').val(customer.last_name);
     $('#email').val(customer.email);
-    $('#phone-number').val(customer.phone_number);
-    $('#address').val(customer.address);
-    $('#city').val(customer.city);
-    $('#zip-code').val(customer.zip_code);
+    $('#major').val(customer.major);
+    $('#esl').val(customer.esl);
+    $('#year').val(customer.year);
     $('#notes').val(customer.notes);
 
     $('#customer-appointments').data('jsp').destroy();

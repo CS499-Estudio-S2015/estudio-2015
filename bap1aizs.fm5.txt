@@ -1,0 +1,19 @@
+﻿updated javascript for backend
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch db_merge
+# Your branch is up-to-date with 'origin/db_merge'.
+#
+# Changes to be committed:
+#	modified:   ea/assets/js/backend_calendar.js
+#	modified:   ea/assets/js/backend_customers.js
+#	modified:   ea/assets/js/backend_services.js
+#	modified:   ea/assets/js/backend_settings.js
+#	modified:   ea/assets/js/backend_users_admins.js
+#	modified:   ea/assets/js/backend_users_providers.js
+#	modified:   ea/assets/js/backend_users_secretaries.js
+#	modified:   ea/assets/js/frontend_book.js
+#	new file:   feyudtnu.o22.txt
+#	new file:   logs/estudio.access.log
+#
+

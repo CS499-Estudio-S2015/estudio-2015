@@ -1,0 +1,4 @@
+127.0.0.1 - - [13/Apr/2015:19:09:30 -0400] "GET /ea/ HTTP/1.1" 200 29723 "-" "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36"
+127.0.0.1 - - [13/Apr/2015:19:10:18 -0400] "GET /ea/backend HTTP/1.1" 302 - "-" "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36"
+127.0.0.1 - - [13/Apr/2015:19:10:19 -0400] "GET /ea/user/login HTTP/1.1" 200 776 "-" "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36"
+127.0.0.1 - - [13/Apr/2015:19:10:19 -0400] "GET /favicon.ico HTTP/1.1" 404 1052 "-" "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36"
