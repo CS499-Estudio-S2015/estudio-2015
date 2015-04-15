@@ -2,8 +2,7 @@
 class SystemConfiguration {
     // General Settings
     public static $base_url    = 'http://localhost/estudio-2015/ea/';
-    public static $reports_url = 'http://localhost/estudio-2015/reports/reports_current.php';
-    
+   
     // Database Settings
     public static $db_host     = 'localhost';
     // public static $db_name     = 'test_db';

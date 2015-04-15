@@ -175,7 +175,7 @@ function getDatesFromType($type) {
 					} else {
 						//echo "Fall\n";
 						$start = date('Y-m-d H:i:s', mktime(0, 0, 0, 7, 1, $year - $offset));
-						$end = date('Y-m-d H:i:s', mktime(0, 0, 0, 1, 1, $year - ($offset + 1)));
+						$end = date('Y-m-d H:i:s', mktime(0, 0, 0, 1, 1, ($year - $offset) + 1));
 					}
 				} else {
 					// echo "Current date is Fall\n";
@@ -282,7 +282,7 @@ function getCategories($type) {
 			array_push($table, array('Other'));
 */
 			$query = "SELECT DISTINCT major FROM Client";
-			$stmt = prepareQuery($query, "Could not prepre Major Category");
+			$stmt = prepareQuery($query, "Could not prepare Major Category");
 			break;
 
 		case 'English':
@@ -292,6 +292,11 @@ function getCategories($type) {
 			array_push($table, array('No'));
 
 			$stmt = false;
+			break;
+
+		case 'Tutors':
+			$query = "SELECT DISTINCT first_name, last_name FROM ea_users WHERE id_roles = 2";
+			$stmt = prepareQuery($query, "Could not prepare Tutors Category");
 			break;
 
 		default:
@@ -304,7 +309,12 @@ function getCategories($type) {
 	// the statement executed
 	if ($stmt) {
 		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			array_push($table, array($row[0]));
+			if ($type == 'Tutors') {
+				array_push($table, array($row[0], $row[1]));
+			} else {
+				array_push($table, array($row[0]));
+			}
+			
     	}
 	}
 	

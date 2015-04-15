@@ -31,11 +31,11 @@ function getCurrentOverall() {
 
 		// Query String 
 		// TODO: still need to add client creation date
-		$query = "SELECT COUNT(A.apptID) AS Ctr,
-	   					 SUM(A.groupSize) AS Sum
-				  FROM Appointment AS A
-				  WHERE MONTH(A.startTime) = " . $month . " AND
-				        YEAR(A.startTime) = " . $year;
+		$query = "SELECT COUNT(A.id) AS Ctr,
+	   					 SUM(A.group_size) AS Sum
+				  FROM ea_appointments AS A
+				  WHERE MONTH(A.book_datetime) = " . $month . " AND
+				        YEAR(A.book_datetime) = " . $year;
 
 		// Try to execute query in database; print exception if failure		        
 		$stmt = prepareQuery($query, 'Could not retrieve Current - Overall data');
@@ -88,14 +88,6 @@ function getCurrentService() {
 					  WHERE MONTH(A.start_datetime) = " . $month . " AND
 					  		YEAR(A.start_datetime) = " . $year . " AND
 					  		S.name = '" . $table[$row][0] . "'";
- 
-/*
-			$query = "SELECT COUNT(A.apptID) AS Ctr
-					  FROM Appointment AS A
-					  WHERE MONTH(A.startTime) = " . $month . " AND
-					        YEAR(A.startTime) = " . $year . " AND
-					        helpService = '" . $table[$row][0] . "'";
- */
 
 			// Try to execute query in database; print exception if failure		        
 			$stmt = prepareQuery($query, "Could not retrieve Current - Service data");
@@ -222,8 +214,56 @@ function getCurrentMajor() {
 // Notes:  
 //
 function getCurrentRequired() {
-	// TODO: Need to add required visit to appointment form.
+	// Set up two-dimensional array to hold data for output
+	// Makes secondary array for each category
+	$table = getCategories('Required');
+	
+	// Loop to get data for each category
+	for ($row = 0; $row < count($table); $row = $row + 1)
+	{
+		// Convert category string to number for DB read 
+		// (Yes = 1, No = 0)
+		if ($row == 0) {
+			$bit = 1;
+		} else {
+			$bit = 0;
+		}
+
+		// Loop to get current and previous month data
+		$i = 1;
+		while ($i >= 0)
+		{
+			// Get the date needed for database read
+			$date = date('n Y', mktime(0, 0, 0, date('m') - $i, 1, date('Y')));
+			list($month, $year) = explode(" ", $date);
+
+			// Query String 
+			$query = "SELECT COUNT(A.id) AS Ctr
+					  FROM ea_appointments AS A
+					  WHERE MONTH(A.book_datetime) = " . $month . " AND
+					        YEAR(A.book_datetime) = " . $year . " AND
+					        A.first_visit = " . $bit;
+
+			// Try to execute query in database; print exception if failure		        
+			$stmt = prepareQuery($query, 'Could not retrieve Current - First Visit data');
+
+			// If valid query execution, return data and insert into table array
+			// in the proper location
+			if ($stmt) {
+				$thisData = $stmt->fetchAll();
+				array_push($table[$row], $thisData[0][0]);
+			}
+		
+			// Increment counter to find next date
+			$i = $i - 1;
+		}
+	}
+
+	// Define table header and print table
+	$head = array('', 'Last Month', 'This Month', '% Change');
+	printCurrentTable($table, $head);
 }
+
 
 // getCategories() function
 // Inputs: 
@@ -257,11 +297,11 @@ function getCurrentFirstVisit() {
 			list($month, $year) = explode(" ", $date);
 
 			// Query String 
-			$query = "SELECT COUNT(A.apptID) AS Ctr
-					  FROM Appointment AS A
-					  WHERE MONTH(A.startTime) = " . $month . " AND
-					        YEAR(A.startTime) = " . $year . " AND
-					        A.firstVisit = " . $bit;
+			$query = "SELECT COUNT(A.id) AS Ctr
+					  FROM ea_appointments AS A
+					  WHERE MONTH(A.book_datetime) = " . $month . " AND
+					        YEAR(A.book_datetime) = " . $year . " AND
+					        A.first_visit = " . $bit;
 
 			// Try to execute query in database; print exception if failure		        
 			$stmt = prepareQuery($query, 'Could not retrieve Current - First Visit data');
@@ -317,8 +357,8 @@ function getCurrentEnglish() {
 			// Query String 
 			$query = "SELECT COUNT(A.apptID) AS Ctr
 					  FROM Appointment AS A
-					  		INNER JOIN Client AS C
-					  		ON A.clientID = C.id
+					  	   INNER JOIN Client AS C
+					  	   ON A.clientID = C.id
 					  WHERE MONTH(A.startTime) = " . $month . " AND
 					        YEAR(A.startTime) = " . $year . " AND
 					        C.english = " . $bit;
@@ -336,6 +376,61 @@ function getCurrentEnglish() {
 			// Increment counter to find next date
 			$i = $i - 1;
 		}
+	}
+
+	// Define table header and print table
+	$head = array('', 'Last Month', 'This Month', '% Change');
+	printCurrentTable($table, $head);
+}
+
+//
+//
+//
+function getCurrentTutors() {
+	// Set up two-dimensional array to hold data for output
+	// Makes secondary array for each category
+	$table = getCategories('Tutors');
+	
+	// Loop to get data for each category
+	for ($row = 0; $row < count($table); $row = $row + 1)
+	{
+
+		// Pop last name from the current table[$row] for future formatting change
+		$last_name = array_pop($table[$row]);
+
+		// Loop to get current and previous month data
+		$i = 1;
+		while ($i >= 0)
+		{
+			// Get the date needed for database read
+			$date = date('n Y', mktime(0, 0, 0, date('m') - $i, 1, date('Y')));
+			list($month, $year) = explode(" ", $date);
+
+			// Query String
+			$query = "SELECT COUNT(A.id) AS Ctr
+					  FROM ea_appointments AS A
+					  	   INNER JOIN ea_users AS U ON A.id_users_provider = U.id
+					  WHERE MONTH(A.start_datetime) = " . $month . " AND
+					  		YEAR(A.start_datetime) = " . $year . " AND
+					  		U.first_name = '" . $table[$row][0] . "' AND
+					  		U.last_name = '" . $last_name . "'";
+
+			// Try to execute query in database; print exception if failure		        
+			$stmt = prepareQuery($query, "Could not retrieve Current - Tutors data");
+		
+			// If valid query execution, return data and insert into table array
+			// in the proper location
+			if ($stmt) {
+				$thisData = $stmt->fetchAll();
+				array_push($table[$row], $thisData[0][0]);
+			}
+		
+			// Increment counter to find next date
+			$i = $i - 1;
+		}
+
+		// Append last name to first for proper formatting
+		$table[$row][0] .= (" " . $last_name);
 	}
 
 	// Define table header and print table
@@ -373,14 +468,14 @@ function getHistoricOverall($type) {
 			// TODO: still need to add client creation date
 			switch ($row) {
 				case 0:
-					$query = "SELECT COUNT(A.apptID) AS Ctr
-					  		  FROM Appointment AS A
-					  		  WHERE A.startTime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "'";
+					$query = "SELECT COUNT(A.id) AS Ctr
+					  		  FROM ea_appointments AS A
+					  		  WHERE A.book_datetime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "'";
 					break;
 				case 1:
-					$query = "SELECT SUM(A.groupSize) AS Sum
-					  		  FROM Appointment AS A
-					  		  WHERE A.startTime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "'";
+					$query = "SELECT SUM(A.group_size) AS Sum
+					  		  FROM ea_appointments AS A
+					  		  WHERE A.book_datetime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "'";
 					break;
 				default:
 					break;
@@ -425,10 +520,11 @@ function getHistoricService($type) {
 		// Loop to get category data across each date
 		foreach($dates as $date) {
 			// Query String
-			$query = "SELECT COUNT(A.apptID) AS Ctr
-					  FROM Appointment AS A
-					  WHERE A.startTime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "' AND
-					        helpService = '" . $table[$row][0] . "'";
+			$query = "SELECT COUNT(A.id) AS Ctr
+					  FROM ea_appointments AS A
+					  	   RIGHT JOIN ea_services AS S ON A.id_services = S.id
+					  WHERE A.book_datetime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "' AND
+					        S.name = '" . $table[$row][0] . "'";
 
 			// Try to execute query in database; print exception if failure		        
 			$stmt = prepareQuery($query, 'Could not retrieve Historic - Service data');
@@ -541,8 +637,48 @@ function getHistoricMajor($type) {
 //	
 // Notes:  
 function getHistoricRequired() {
+	// Set up two-dimensional array to hold data for output
+	// Makes secondary array for each category
+	$table = getCategories('Required');
 
-	// TODO: Need to add required visit to appointment form.
+	// Get date range of data to be searched
+	$dates = getDatesFromType($type);
+
+	// Header Generation
+	$header = getHistoricHeader($type, $dates);
+	
+	// Loop to get data for each category
+	for ($row = 0; $row < count($table); $row = $row + 1) {
+		// Convert category string to number for DB read 
+		// (Yes = 1, No = 0)
+		if ($row == 0) {
+			$bit = 1;
+		} else {
+			$bit = 0;
+		}
+
+		// Loop to get category data across each date
+		foreach($dates as $date) {
+			// Query String
+			$query = "SELECT COUNT(A.id) AS Ctr
+					  FROM ea_appointments AS A
+					  WHERE A.book_datetime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "' AND
+					        A.req_visit = " . $bit;
+
+			// Try to execute query in database; print exception if failure		        
+			$stmt = prepareQuery($query, 'Could not retrieve Historic - First Visit data');
+			
+
+			// If valid query execution, return data and insert into table array
+			// in the proper location
+			if ($stmt) {
+				$thisData = $stmt->fetchAll();
+				array_push($table[$row], $thisData[0][0]);
+			}
+		}
+	}
+
+	printHistoricTable($table, $header);
 }
 
 // getCategories() function
@@ -575,10 +711,10 @@ function getHistoricFirstVisit($type) {
 		// Loop to get category data across each date
 		foreach($dates as $date) {
 			// Query String
-			$query = "SELECT COUNT(A.apptID) AS Ctr
-					  FROM Appointment AS A
-					  WHERE A.startTime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "' AND
-					        A.firstVisit = " . $bit;
+			$query = "SELECT COUNT(A.id) AS Ctr
+					  FROM ea_appointments AS A
+					  WHERE A.book_datetime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "' AND
+					        A.first_visit = " . $bit;
 
 			// Try to execute query in database; print exception if failure		        
 			$stmt = prepareQuery($query, 'Could not retrieve Historic - First Visit data');

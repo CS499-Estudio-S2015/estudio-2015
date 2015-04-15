@@ -39,6 +39,10 @@
             <?php getCurrentOverall(); ?>
         </div>
         <div class="report-grid">
+            <h2>Tutors</h2>
+            <?php getCurrentTutors(); ?>
+        </div>
+        <div class="report-grid">
             <h2>Service</h2>
             <?php getCurrentService(); ?>
         </div>
@@ -58,12 +62,10 @@
             <h2>English as Second Language</h2>
             <?php getCurrentEnglish(); ?>
         </div>
-        <!--div class="report-grid">
-            <?php 
-                // TODO:
-                // getCurrentRequired(); 
-            ?>
-        </div-->
+        <div class="report-grid">
+            <h2>Required Visit</h2>
+            <?php getCurrentRequired(); ?>
+        </div>
     </div>
 
 
@@ -198,10 +200,25 @@
             </form>
         </div>
         <div class="report-grid">
-            <?php 
-                // TODO:
-                // getHistoricRequired(); 
-            ?>
+            <h2>Required Visit</h2>
+            <form action="" name="required" method="post">
+                <?php 
+                    if(!isset($_POST['required'])) {
+                        $_POST['required'] = "month";
+                    }
+                    getHistoricEnglish($_POST['required']); 
+                    
+                    $reqMonthCheck = ($_POST['required'] == "month") ? " checked" : "";
+                    $reqSemCheck = ($_POST['required'] == "semester") ? " checked" : "";
+                    $reqYearCheck = ($_POST['required'] == "year") ? " checked" : "";
+                    
+
+                    echo "\t\t\t\t<br />\n";
+                    echo "\t\t\t\t<input type='radio' name='required' onclick='javascript: submit()' value='month'" . $reqMonthCheck . ">Monthly\n";
+                    echo "\t\t\t\t<input type='radio' name='required' onclick='javascript: submit()' value='semester'" . $reqSemCheck . ">Semester\n";
+                    echo "\t\t\t\t<input type='radio' name='required' onclick='javascript: submit()' value='year'" . $reqYearCheck . ">Yearly\n";
+                ?>              
+            </form>
         </div>
     </div>
     
