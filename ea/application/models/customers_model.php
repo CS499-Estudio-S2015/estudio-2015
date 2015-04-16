@@ -31,6 +31,8 @@ class Customers_Model extends CI_Model {
 
         // :: INSERT OR UPDATE CUSTOMER RECORD
         if (!isset($customer['id'])) {
+            date_default_timezone_set('America/Louisville');
+            $customer['create_date'] = date('Y-m-d H:i:s', mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y')));
             $customer['id'] = $this->insert($customer);
         } else {
             $this->update($customer);
