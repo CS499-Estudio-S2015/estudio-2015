@@ -95,7 +95,7 @@ function printHistoricTable($table, $header) {
 	echo "</div>\n";
 }
 
-// getCategories() function
+// getHistoricHeader() function
 // Inputs: 
 //	$type - the type of date category
 //  $dates - the date ranges for the reports
@@ -255,7 +255,7 @@ function getCategories($type) {
 			break;
 
 		case 'Year':
-/* Commented code may be subbed back in for query
+/* Commented code (may be subbed to replace $query)
 			array_push($table, array('Freshman'));
 			array_push($table, array('Sophmore'));
 			array_push($table, array('Junior'));
@@ -269,7 +269,7 @@ function getCategories($type) {
 			break;
 
 		case 'Major':
-/* Commented code may be subbed back for query
+/* Commented code (may be subbed to replace $query)
 			array_push($table, array('Biosystems and Agricultural Engineering'));
 			array_push($table, array('Chemical Engineering'));
 			array_push($table, array('Civil Engineering'));
