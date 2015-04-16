@@ -43,7 +43,7 @@ function printCurrentTable($table, $header) {
 		{
 			// And current data is not 0
 			if ($arr[2] != 0) {
-				echo "\t\t\t<td>100.00</td>";	// Print 100 gain
+				echo "\t\t\t<td><span style='color:green'>100.00</span></td>";	// Print 100 gain
 			}
 			// Otherwise, both data points are 0
 			else {
@@ -55,7 +55,16 @@ function printCurrentTable($table, $header) {
 		{
 			// TO-DO: CSS format red for neg change, green for pos change
 			$change = (float)($arr[2] - $arr[1]) / $arr[1] * 100;
-			echo "\t\t\t<td>" . number_format($change, 2, '.', '') . "</td>";
+
+			if ($change > 0) {
+				$span = "<span style='color:green'>";
+			} else if ($change < 0) {
+				$span = "<span style='color:red'>";
+			} else {
+				$span = "<span>";
+			}
+
+			echo "\t\t\t<td>" . $span . number_format($change, 2, '.', '') . "</span></td>";
 		}
 		echo "\t\t</tr>\n";
 	}
