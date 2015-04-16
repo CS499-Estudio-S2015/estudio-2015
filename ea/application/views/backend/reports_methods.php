@@ -30,7 +30,6 @@ function getCurrentOverall() {
 		list($month, $year) = explode(" ", $date);
 
 		// Query String 
-		// TODO: still need to add client creation date
 		$query = "SELECT COUNT(A.id) AS Ctr,
 	   					 SUM(A.group_size) AS Sum
 				  FROM ea_appointments AS A
@@ -38,7 +37,7 @@ function getCurrentOverall() {
 				        YEAR(A.start_datetime) = " . $year;
 
 		// Try to execute query in database; print exception if failure		        
-		$stmt = prepareQuery($query, 'Could not retrieve Current - Overall data');
+		$stmt = prepareQuery($query, 'Could not retrieve appt and group data from Current - Overall data');
 
 		// If valid query execution, return data and insert into table array
 		// in the proper location
@@ -47,7 +46,22 @@ function getCurrentOverall() {
 			array_push($table[0], $thisData[0][0]);
 			array_push($table[1], $thisData[0][1]);
 		}
-	
+
+		// Query to find all newly created customers
+		$creation = "SELECT COUNT(U.id) AS Ctr
+					 FROM ea_users AS U
+					 WHERE MONTH(U.create_date) = " . $month . " AND
+					 	   YEAR(U.create_date) = " . $year . " AND
+					 	   id_roles = 3";
+
+		// Try to execute the creation query; print error message and exception on failure
+		$create_stmt = prepareQuery($creation, "Could not retrieve new customer data from Current - Overall data");
+
+		if ($create_stmt) {
+			$moreData = $create_stmt->fetchAll();
+			array_push($table[2], $moreData[0][0]);
+		}
+
 		// Increment counter to find next date
 		$i = $i - 1;
 	}

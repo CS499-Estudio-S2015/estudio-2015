@@ -243,6 +243,7 @@ function getCategories($type) {
 		case 'Overall':
 			array_push($table, array('Num. of Appointments'));
 			array_push($table, array('Num. of Participants'));
+			array_push($table, array('New Customers'));
 
 			$stmt = false;	
 			break;
