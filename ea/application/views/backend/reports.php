@@ -19,6 +19,10 @@
     });
 </script>
 
+<script type="text/javascript"
+    src="<?php echo $base_url; ?>assets/js/backend_reports_select.js">
+</script>
+
 <div id="reports-page" class="row-fluid">
     <ul class="nav nav-tabs">
         <li class="current-tab tab active"><a><?php echo $this->lang->line('current'); ?></a></li>
@@ -79,146 +83,131 @@
     <div id="historic" class="tab-content">   
         <div class="report-grid">
             <h2>Overall Performance</h2>
-            <form action="" name="overall" method="post">
-                <?php 
-                    if (!isset($_POST['overall'])) {
-                        $_POST['overall'] = "month";
-                    }
-                    getHistoricOverall($_POST['overall']); 
-                    $overallMonthCheck = ($_POST['overall'] == "month") ? " checked" : "";
-                    $overallSemCheck = ($_POST['overall'] == "semester") ? " checked" : "";
-                    $overallYearCheck = ($_POST['overall'] == "year") ? " checked" : "";
-
-                    echo "\t\t\t\t<br />\n";
-                    echo "\t\t\t\t<input type='radio' name='overall' onclick='javascript: submit()' value='month'" . $overallMonthCheck . ">Monthly\n";
-                    echo "\t\t\t\t<input type='radio' name='overall' onclick='javascript: submit()' value='semester'" . $overallSemCheck . ">Semester\n";
-                    echo "\t\t\t\t<input type='radio' name='overall' onclick='javascript: submit()' value='year'" . $overallYearCheck . ">Yearly\n";
-                ?>              
-            </form>
+            <div id="overall_month">
+                <?php getHistoricOverall('month'); ?>
+            </div>
+            <div id="overall_semester" style="display:none">
+                <?php getHistoricOverall('semester'); ?>
+            </div>
+            <div id="overall_year" style="display:none">
+                <?php getHistoricOverall('year'); ?>
+            </div>
+            <br />
+            <button type="button" onclick="show_overall('overall_month');">Month</button>
+            <button type="button" onclick="show_overall('overall_semester');">Semester</button>
+            <button type="button" onclick="show_overall('overall_year');">Year</button>
+        </div>
+        <div class="report-grid">
+            <h2>Tutors</h2>
+            <div id="tutor_month">
+                <?php getHistoricTutors('month'); ?>
+            </div>
+            <div id="tutor_semester" style="display:none">
+                <?php getHistoricTutors('semester'); ?>
+            </div>
+            <div id="tutor_year" style="display:none">
+                <?php getHistoricTutors('year'); ?>
+            </div>
+            <br />
+            <button type="button" onclick="show_tutors('tutor_month');">Month</button>
+            <button type="button" onclick="show_tutors('tutor_semester');">Semester</button>
+            <button type="button" onclick="show_tutors('tutor_year');">Year</button>
         </div>
         <div class="report-grid">
             <h2>Service</h2>
-            <form action="" name="service" method="post">
-                <?php 
-                    if (!isset($_POST['service'])) {
-                        $_POST['service'] = "month";
-                    }
-                    getHistoricService($_POST['service']); 
-                    $servMonthCheck = ($_POST['service'] == "month") ? " checked" : "";
-                    $servSemCheck = ($_POST['service'] == "semester") ? " checked" : "";
-                    $servYearCheck = ($_POST['service'] == "year") ? " checked" : "";
-
-                    echo "\t\t\t\t<br />\n";
-                    echo "\t\t\t\t<input type='radio' name='service' onclick='javascript: submit()' value='month'" . $servMonthCheck . ">Monthly\n";
-                    echo "\t\t\t\t<input type='radio' name='service' onclick='javascript: submit()' value='semester'" . $servSemCheck . ">Semester\n";
-                    echo "\t\t\t\t<input type='radio' name='service' onclick='javascript: submit()' value='year'" . $servYearCheck . ">Yearly\n";
-                ?>              
-            </form>
+            <div id="service_month">
+                <?php getHistoricService('month'); ?>
+            </div>
+            <div id="service_semester" style="display:none">
+                <?php getHistoricService('semester'); ?>
+            </div>
+            <div id="service_year" style="display:none">
+                <?php getHistoricService('year'); ?>
+            </div>
+            <br />
+            <button type="button" onclick="show_service('service_month');">Month</button>
+            <button type="button" onclick="show_service('service_semester');">Semester</button>
+            <button type="button" onclick="show_service('service_year');">Year</button>
         </div>
         <div class="report-grid">
             <h2>Academic Year</h2>
-            <form action="" name="year" method="post">
-                <?php 
-                    if(!isset($_POST['year'])) {
-                        $_POST['year'] = "month";
-                    }
-                    getHistoricYear($_POST['year']); 
-                    
-                    $yearMonthCheck = ($_POST['year'] == "month") ? " checked" : "";
-                    $yearSemCheck = ($_POST['year'] == "semester") ? " checked" : "";
-                    $yearYearCheck = ($_POST['year'] == "year") ? " checked" : "";
-                    
-
-                    echo "\t\t\t\t<br />\n";
-                    echo "\t\t\t\t<input type='radio' name='year' onclick='javascript: submit()' value='month'" . $yearMonthCheck . ">Monthly\n";
-                    echo "\t\t\t\t<input type='radio' name='year' onclick='javascript: submit()' value='semester'" . $yearSemCheck . ">Semester\n";
-                    echo "\t\t\t\t<input type='radio' name='year' onclick='javascript: submit()' value='year'" . $yearYearCheck . ">Yearly\n";
-                ?>              
-            </form>
+            <div id="year_month">
+                <?php getHistoricYear('month'); ?>
+            </div>
+            <div id="year_semester" style="display:none">
+                <?php getHistoricYear('semester'); ?>
+            </div>
+            <div id="year_year" style="display:none">
+                <?php getHistoricYear('year'); ?>
+            </div>
+            <br />
+            <button type="button" onclick="show_year('year_month');">Month</button>
+            <button type="button" onclick="show_year('year_semester');">Semester</button>
+            <button type="button" onclick="show_year('year_year');">Year</button>
         </div>
         <div class="report-grid">
             <h2>Major</h2>
-            <form action="" name="major" method="post">
-                <?php 
-                    if(!isset($_POST['major'])) {
-                        $_POST['major'] = "month";
-                    }
-                    getHistoricMajor($_POST['major']); 
-                    
-                    $majorMonthCheck = ($_POST['major'] == "month") ? " checked" : "";
-                    $majorSemCheck = ($_POST['major'] == "semester") ? " checked" : "";
-                    $majorYearCheck = ($_POST['major'] == "year") ? " checked" : "";
-                    
-
-                    echo "\t\t\t\t<br />\n";
-                    echo "\t\t\t\t<input type='radio' name='major' onclick='javascript: submit()' value='month'" . $majorMonthCheck . ">Monthly\n";
-                    echo "\t\t\t\t<input type='radio' name='major' onclick='javascript: submit()' value='semester'" . $majorSemCheck . ">Semester\n";
-                    echo "\t\t\t\t<input type='radio' name='major' onclick='javascript: submit()' value='year'" . $majorYearCheck . ">Yearly\n";
-                ?>              
-            </form>
+            <div id="major_month">
+                <?php getHistoricMajor('month'); ?>
+            </div>
+            <div id="major_semester" style="display:none">
+                <?php getHistoricMajor('semester'); ?>
+            </div>
+            <div id="major_year" style="display:none">
+                <?php getHistoricMajor('year'); ?>
+            </div>
+            <br />
+            <button type="button" onclick="show_major('major_month');">Month</button>
+            <button type="button" onclick="show_major('major_semester');">Semester</button>
+            <button type="button" onclick="show_major('major_year');">Year</button>
         </div>
         <div class="report-grid">
             <h2>First Visit</h2>
-            <form action="" name="firstVisit" method="post">
-                <?php 
-                    if(!isset($_POST['firstVisit'])) {
-                        $_POST['firstVisit'] = "month";
-                    }
-                    getHistoricFirstVisit($_POST['firstVisit']); 
-                    
-                    $firstVisitMonthCheck = ($_POST['firstVisit'] == "month") ? " checked" : "";
-                    $firstVisitSemCheck = ($_POST['firstVisit'] == "semester") ? " checked" : "";
-                    $firstVisitYearCheck = ($_POST['firstVisit'] == "year") ? " checked" : "";
-                    
-
-                    echo "\t\t\t\t<br />\n";
-                    echo "\t\t\t\t<input type='radio' name='firstVisit' onclick='javascript: submit()' value='month'" . $firstVisitMonthCheck . ">Monthly\n";
-                    echo "\t\t\t\t<input type='radio' name='firstVisit' onclick='javascript: submit()' value='semester'" . $firstVisitSemCheck . ">Semester\n";
-                    echo "\t\t\t\t<input type='radio' name='firstVisit' onclick='javascript: submit()' value='year'" . $firstVisitYearCheck . ">Yearly\n";
-                ?>              
-            </form>
+            <div id="first_month">
+                <?php getHistoricFirstVisit('month'); ?>
+            </div>
+            <div id="first_semester" style="display:none">
+                <?php getHistoricFirstVisit('semester'); ?>
+            </div>
+            <div id="first_year" style="display:none">
+                <?php getHistoricFirstVisit('year'); ?>
+            </div>
+            <br />
+            <button type="button" onclick="show_firstVisit('first_month');">Month</button>
+            <button type="button" onclick="show_firstVisit('first_semester');">Semester</button>
+            <button type="button" onclick="show_firstVisit('first_year');">Year</button>
         </div>
         <div class="report-grid">
             <h2>English as Second Language</h2>
-            <form action="" name="english" method="post">
-                <?php 
-                    if(!isset($_POST['english'])) {
-                        $_POST['english'] = "month";
-                    }
-                    getHistoricEnglish($_POST['english']); 
-                    
-                    $englishMonthCheck = ($_POST['english'] == "month") ? " checked" : "";
-                    $englishSemCheck = ($_POST['english'] == "semester") ? " checked" : "";
-                    $englishYearCheck = ($_POST['english'] == "year") ? " checked" : "";
-                    
-
-                    echo "\t\t\t\t<br />\n";
-                    echo "\t\t\t\t<input type='radio' name='english' onclick='javascript: submit()' value='month'" . $englishMonthCheck . ">Monthly\n";
-                    echo "\t\t\t\t<input type='radio' name='english' onclick='javascript: submit()' value='semester'" . $englishSemCheck . ">Semester\n";
-                    echo "\t\t\t\t<input type='radio' name='english' onclick='javascript: submit()' value='year'" . $englishYearCheck . ">Yearly\n";
-                ?>              
-            </form>
+            <div id="esl_month">
+                <?php getHistoricEnglish('month'); ?>
+            </div>
+            <div id="esl_semester" style="display:none">
+                <?php getHistoricEnglish('semester'); ?>
+            </div>
+            <div id="esl_year" style="display:none">
+                <?php getHistoricEnglish('year'); ?>
+            </div>
+            <br />
+            <button type="button" onclick="show_esl('esl_month');">Month</button>
+            <button type="button" onclick="show_esl('esl_semester');">Semester</button>
+            <button type="button" onclick="show_esl('esl_year');">Year</button>
         </div>
         <div class="report-grid">
             <h2>Required Visit</h2>
-            <form action="" name="required" method="post">
-                <?php 
-                    if(!isset($_POST['required'])) {
-                        $_POST['required'] = "month";
-                    }
-                    getHistoricEnglish($_POST['required']); 
-                    
-                    $reqMonthCheck = ($_POST['required'] == "month") ? " checked" : "";
-                    $reqSemCheck = ($_POST['required'] == "semester") ? " checked" : "";
-                    $reqYearCheck = ($_POST['required'] == "year") ? " checked" : "";
-                    
-
-                    echo "\t\t\t\t<br />\n";
-                    echo "\t\t\t\t<input type='radio' name='required' onclick='javascript: submit()' value='month'" . $reqMonthCheck . ">Monthly\n";
-                    echo "\t\t\t\t<input type='radio' name='required' onclick='javascript: submit()' value='semester'" . $reqSemCheck . ">Semester\n";
-                    echo "\t\t\t\t<input type='radio' name='required' onclick='javascript: submit()' value='year'" . $reqYearCheck . ">Yearly\n";
-                ?>              
-            </form>
+            <div id="req_month">
+                <?php getHistoricRequired('month'); ?>
+            </div>
+            <div id="req_semester" style="display:none">
+                <?php getHistoricRequired('semester'); ?>
+            </div>
+            <div id="req_year" style="display:none">
+                <?php getHistoricRequired('year'); ?>
+            </div>
+            <br />
+            <button type="button" onclick="show_reqVisit('req_month');">Month</button>
+            <button type="button" onclick="show_reqVisit('req_semester');">Semester</button>
+            <button type="button" onclick="show_reqVisit('req_year');">Year</button>
         </div>
     </div>
     

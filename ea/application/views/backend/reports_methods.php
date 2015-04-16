@@ -34,8 +34,8 @@ function getCurrentOverall() {
 		$query = "SELECT COUNT(A.id) AS Ctr,
 	   					 SUM(A.group_size) AS Sum
 				  FROM ea_appointments AS A
-				  WHERE MONTH(A.book_datetime) = " . $month . " AND
-				        YEAR(A.book_datetime) = " . $year;
+				  WHERE MONTH(A.start_datetime) = " . $month . " AND
+				        YEAR(A.start_datetime) = " . $year;
 
 		// Try to execute query in database; print exception if failure		        
 		$stmt = prepareQuery($query, 'Could not retrieve Current - Overall data');
@@ -240,8 +240,8 @@ function getCurrentRequired() {
 			// Query String 
 			$query = "SELECT COUNT(A.id) AS Ctr
 					  FROM ea_appointments AS A
-					  WHERE MONTH(A.book_datetime) = " . $month . " AND
-					        YEAR(A.book_datetime) = " . $year . " AND
+					  WHERE MONTH(A.start_datetime) = " . $month . " AND
+					        YEAR(A.start_datetime) = " . $year . " AND
 					        A.first_visit = " . $bit;
 
 			// Try to execute query in database; print exception if failure		        
@@ -299,8 +299,8 @@ function getCurrentFirstVisit() {
 			// Query String 
 			$query = "SELECT COUNT(A.id) AS Ctr
 					  FROM ea_appointments AS A
-					  WHERE MONTH(A.book_datetime) = " . $month . " AND
-					        YEAR(A.book_datetime) = " . $year . " AND
+					  WHERE MONTH(A.start_datetime) = " . $month . " AND
+					        YEAR(A.start_datetime) = " . $year . " AND
 					        A.first_visit = " . $bit;
 
 			// Try to execute query in database; print exception if failure		        
@@ -470,12 +470,12 @@ function getHistoricOverall($type) {
 				case 0:
 					$query = "SELECT COUNT(A.id) AS Ctr
 					  		  FROM ea_appointments AS A
-					  		  WHERE A.book_datetime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "'";
+					  		  WHERE A.start_datetime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "'";
 					break;
 				case 1:
 					$query = "SELECT SUM(A.group_size) AS Sum
 					  		  FROM ea_appointments AS A
-					  		  WHERE A.book_datetime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "'";
+					  		  WHERE A.start_datetime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "'";
 					break;
 				default:
 					break;
@@ -493,7 +493,7 @@ function getHistoricOverall($type) {
 		}
 	}
 
-
+	// Print table to webpage
 	printHistoricTable($table, $header);
 }
 
@@ -523,7 +523,7 @@ function getHistoricService($type) {
 			$query = "SELECT COUNT(A.id) AS Ctr
 					  FROM ea_appointments AS A
 					  	   RIGHT JOIN ea_services AS S ON A.id_services = S.id
-					  WHERE A.book_datetime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "' AND
+					  WHERE A.start_datetime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "' AND
 					        S.name = '" . $table[$row][0] . "'";
 
 			// Try to execute query in database; print exception if failure		        
@@ -538,6 +538,7 @@ function getHistoricService($type) {
 		}
 	}
 
+	// Print table to webpage
 	printHistoricTable($table, $header);
 }
 
@@ -582,6 +583,7 @@ function getHistoricYear($type) {
 		}
 	}
 
+	// Print table to webpage
 	printHistoricTable($table, $header);
 }
 
@@ -627,6 +629,7 @@ function getHistoricMajor($type) {
 		}
 	}
 
+	// Print table to webpage
 	printHistoricTable($table, $header);
 }
 
@@ -636,7 +639,7 @@ function getHistoricMajor($type) {
 // Outputs:
 //	
 // Notes:  
-function getHistoricRequired() {
+function getHistoricRequired($type) {
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
 	$table = getCategories('Required');
@@ -662,7 +665,7 @@ function getHistoricRequired() {
 			// Query String
 			$query = "SELECT COUNT(A.id) AS Ctr
 					  FROM ea_appointments AS A
-					  WHERE A.book_datetime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "' AND
+					  WHERE A.start_datetime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "' AND
 					        A.req_visit = " . $bit;
 
 			// Try to execute query in database; print exception if failure		        
@@ -678,6 +681,7 @@ function getHistoricRequired() {
 		}
 	}
 
+	// Print table to webpage
 	printHistoricTable($table, $header);
 }
 
@@ -713,7 +717,7 @@ function getHistoricFirstVisit($type) {
 			// Query String
 			$query = "SELECT COUNT(A.id) AS Ctr
 					  FROM ea_appointments AS A
-					  WHERE A.book_datetime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "' AND
+					  WHERE A.start_datetime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "' AND
 					        A.first_visit = " . $bit;
 
 			// Try to execute query in database; print exception if failure		        
@@ -729,6 +733,7 @@ function getHistoricFirstVisit($type) {
 		}
 	}
 
+	// Print table to webpage
 	printHistoricTable($table, $header);
 }
 
@@ -781,6 +786,58 @@ function getHistoricEnglish($type) {
 		}
 	}
 
+	// Print table to webpage
+	printHistoricTable($table, $header);
+}
+
+//
+//
+// TO-DO
+function getHistoricTutors($type) {
+	// Set up two-dimensional array to hold data for output
+	// Makes secondary array for each category
+	$table = getCategories('Tutors');
+
+	// Get date range of data to be searched
+	$dates = getDatesFromType($type);
+
+	// Header Generation
+	$header = getHistoricHeader($type, $dates);
+
+	// Loop to get data for each category
+	for ($row = 0; $row < count($table); $row = $row + 1) {
+
+		// Pop last name from the current table[$row] for future formatting change
+		$last_name = array_pop($table[$row]);
+
+		// Loop to get category data across each date
+		foreach($dates as $date) {
+			// Query String
+			$query = "SELECT COUNT(A.id) AS Ctr
+					  FROM ea_appointments AS A
+					  	   INNER JOIN ea_users AS U ON A.id_users_provider = U.id
+					  WHERE A.start_datetime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "' AND
+					  		U.first_name = '" . $table[$row][0] . "' AND
+					  		U.last_name = '" . $last_name . "'";
+
+			// Try to execute query in database; print exception if failure		        
+			$stmt = prepareQuery($query, 'Could not retrieve Historic - Tutor data');
+
+			// If valid query execution, return data and insert into table array
+			// in the proper location
+			if ($stmt) {
+				$thisData = $stmt->fetchAll();
+				array_push($table[$row], $thisData[0][0]);
+			}
+		}
+
+		// Append last name to first for proper formatting
+		$table[$row][0] .= (" " . $last_name);
+	}
+
+	
+
+	// Print table to webpage
 	printHistoricTable($table, $header);
 }
 

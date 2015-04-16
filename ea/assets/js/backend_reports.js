@@ -38,9 +38,7 @@ var BackendReports = {
             } else if ($(this).hasClass('historic-tab')) {  // display historic tab
                 $('#historic').show();
             }
-            
-            $('.filter-key').val('');
         });
-    }
 
+    }
 };
