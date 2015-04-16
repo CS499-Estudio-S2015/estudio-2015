@@ -2,15 +2,16 @@
 To prevent recoding, we should probably create a list of To-Do's and individually mark what they are doing.  We can populate this list as needed.  Hopefully this can keep us organized over the next month.  Please feel free to add to this list. 
 
 ##DATABASE UPDATES:
-* [4/16] ALTER TABLE ea_users ADD create_date datetime;
+* [4/16] 
+  * ALTER TABLE ea_users ADD create_date datetime;
 * [4/14] 
   * ALTER TABLE ea_appointments ADD req_visit tinyint(1);
   * ALTER TABLE ea_appointments ADD first_visit tinyint(1);
   * ALTER TABLE ea_roles ADD reports int(4);
   * UPDATE ea_roles SET reports = 15 WHERE id = 1;
   * UPDATE ea_roles SET reports = 0 WHERE id != 1;
-* [4/12] ALTER TABLE ea_appointments ADD group_size int(4);
-  
+* [4/12] 
+  * ALTER TABLE ea_appointments ADD group_size int(4);
 
 ##TO-DO:
 ####For Frontend:
@@ -39,6 +40,6 @@ To prevent recoding, we should probably create a list of To-Do's and individuall
 * [Matt] Adjust reporting queries for new EA database
 * ~~[Matt] Divide reportQueries file into different sections so it's not 1000 lines long~~
 * ~~[Matt] Refactor reporting methods to eliminate repetitive statements~~
-* [Matt] Highlight % change in current reporting (red for - change, green for +)
+* ~~[Matt] Highlight % change in current reporting (red for - change, green for +)~~
 * ~~[Matt] Add a created date column when clients register an account~~
 * ~~[Matt] Remove POST forms from historic page and replace with a more dynamic way to view stats~~
