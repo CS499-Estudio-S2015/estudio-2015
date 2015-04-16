@@ -2,11 +2,13 @@
 To prevent recoding, we should probably create a list of To-Do's and individually mark what they are doing.  We can populate this list as needed.  Hopefully this can keep us organized over the next month.  Please feel free to add to this list. 
 
 ##DATABASE UPDATES:
-* [4/14] ALTER TABLE ea_appointments ADD req_visit tinyint(1);
-  ALTER TABLE ea_appointments ADD first_visit tinyint(1);
-  ALTER TABLE ea_roles ADD reports int(4);
-  UPDATE ea_roles SET reports = 15 WHERE id = 1;
-  UPDATE ea_roles SET reports = 0 WHERE id != 1;
+* [4/16] ALTER TABLE ea_users ADD create_date datetime;
+* [4/14] 
+  * ALTER TABLE ea_appointments ADD req_visit tinyint(1);
+  * ALTER TABLE ea_appointments ADD first_visit tinyint(1);
+  * ALTER TABLE ea_roles ADD reports int(4);
+  * UPDATE ea_roles SET reports = 15 WHERE id = 1;
+  * UPDATE ea_roles SET reports = 0 WHERE id != 1;
 * [4/12] ALTER TABLE ea_appointments ADD group_size int(4);
   
 
