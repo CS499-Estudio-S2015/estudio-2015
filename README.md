@@ -30,7 +30,7 @@ To prevent recoding, we should probably create a list of To-Do's and individuall
 * ~~[Matt] Add Link to Reporting Section of Admin Header~~
 * ~~[Matt] Switched out Providers for Tutors (cosmetic change only)~~
 * [] Remove secretaries (just need to remove the secretary tab in users)
-* [] Adjust book_time of ea_appointments to write at proper time (currently 6 hours ahead)
+* ~~[Matt] Adjust book_time of ea_appointments to write at proper time (currently 6 hours ahead)~~
 * [] Remove unnecessary fields like phone number, address, etc. (may be best just to remove view code for now and keep js and database fields. can check up on this after other core improvements are complete)
 * [] Give admin ability to extend appointment times
 
