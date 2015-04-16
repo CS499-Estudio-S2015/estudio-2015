@@ -493,11 +493,19 @@ function getHistoricOverall($type) {
 					  		  FROM ea_appointments AS A
 					  		  WHERE A.start_datetime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "'";
 					break;
+
 				case 1:
 					$query = "SELECT SUM(A.group_size) AS Sum
 					  		  FROM ea_appointments AS A
 					  		  WHERE A.start_datetime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "'";
 					break;
+
+				case 2:
+					$query = "SELECT COUNT(U.id) AS New
+							  FROM ea_users AS U
+							  WHERE U.create_date BETWEEN '" . $date[0] . "' AND '" . $date[1] . "'";
+					break;
+
 				default:
 					break;
 			}
