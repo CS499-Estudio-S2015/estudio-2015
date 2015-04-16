@@ -1,10 +1,12 @@
 <?php
-/*************************************************************
- *                       Helper Methods                      *
- *************************************************************/
+/*******************************************************************
+ *                          Helper Methods                         *
+ *******************************************************************/
 // This file includes methods that help form the statistics
 // for both types of searches, Historic and Current.  Methods 
-// include printing tables with acquired data, \
+// include printing tables with acquired data, formatting table 
+// headers, preparing statements from a read query to inject data 
+// into the tables, and to find parameters for a category.
 
 
 // printCurrentTable() function

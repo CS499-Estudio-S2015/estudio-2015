@@ -1,21 +1,21 @@
 <?php
-/*************************************************************
- *                  Current Data Reporting                   *
- *************************************************************/
-// This  
-//
+/*******************************************************************
+ *                     Current Data Reporting                      *
+ *******************************************************************/
+// This files provides info for each report by reading from 
+// the database and formatting a table for output.  This region
+// defines only the methods for the Current Reporting Section
+
 // Includes
 include('reports_helpers.php');
-//include('../../../../Config.php');
 
 
-// getCategories() function
+// getCurrentOverall() function
 // Inputs: 
-//	$type - the type of category
+//	None
 // Outputs:
-//	
-// Notes:  
-//
+//	A formatted and statistically accurate table is written 
+//  to the webpage from this method providing Overall data
 function getCurrentOverall() {
 	// Set up two-dimensional array to hold data for output
 	$table = getCategories('Overall');
@@ -58,13 +58,12 @@ function getCurrentOverall() {
 	printCurrentTable($table, $head);
 }
 
-// getCategories() function
+// getCurrentService() function
 // Inputs: 
-//	$type - the type of category
+//	None
 // Outputs:
-//	
-// Notes:  
-//
+//	A formatted and statistically accurate table is written 
+//  to the webpage from this method providing Service data
 function getCurrentService() {
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
@@ -109,13 +108,12 @@ function getCurrentService() {
 	printCurrentTable($table, $head);
 }
 
-// getCategories() function
+// getCurrentYear() function
 // Inputs: 
-//	$type - the type of category
+//	None
 // Outputs:
-//	
-// Notes:  
-//
+//	A formatted and statistically accurate table is written 
+//  to the webpage from this method providing Academic Year data
 function getCurrentYear() {
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
@@ -161,6 +159,12 @@ function getCurrentYear() {
 	printCurrentTable($table, $head);
 }
 
+// getCurrentMajor() function
+// Inputs: 
+//	None
+// Outputs:
+//	A formatted and statistically accurate table is written 
+//  to the webpage from this method providing Major data
 function getCurrentMajor() {
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
@@ -206,13 +210,12 @@ function getCurrentMajor() {
 	printCurrentTable($table, $head);
 }
 
-// getCategories() function
+// getCurrentRequired() function
 // Inputs: 
-//	$type - the type of category
+//	None
 // Outputs:
-//	
-// Notes:  
-//
+//	A formatted and statistically accurate table is written 
+//  to the webpage from this method providing Required Visit data
 function getCurrentRequired() {
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
@@ -265,13 +268,12 @@ function getCurrentRequired() {
 }
 
 
-// getCategories() function
+// getCurrentFirstVisit() function
 // Inputs: 
-//	$type - the type of category
+//	None
 // Outputs:
-//	
-// Notes:  
-//
+//	A formatted and statistically accurate table is written 
+//  to the webpage from this method providing First Visit data
 function getCurrentFirstVisit() {
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
@@ -323,13 +325,12 @@ function getCurrentFirstVisit() {
 	printCurrentTable($table, $head);
 }
 
-// getCategories() function
+// getCurrentEnglish() function
 // Inputs: 
-//	$type - the type of category
+//	None
 // Outputs:
-//	
-// Notes:  
-//
+//	A formatted and statistically accurate table is written 
+//  to the webpage from this method providing ESL data
 function getCurrentEnglish() {
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
@@ -383,9 +384,12 @@ function getCurrentEnglish() {
 	printCurrentTable($table, $head);
 }
 
-//
-//
-//
+// getCurrentTutors() function
+// Inputs: 
+//	None
+// Outputs:
+//	A formatted and statistically accurate table is written 
+//  to the webpage from this method providing Tutor data
 function getCurrentTutors() {
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
@@ -439,17 +443,20 @@ function getCurrentTutors() {
 }
 
 
-/*************************************************************
- *                  Historic Data Reporting                  *
- *************************************************************/
+/*******************************************************************
+ *                     Historic Data Reporting                     *
+ *******************************************************************/
+// This files provides info for each report by reading from 
+// the database and formatting a table for output.  This region
+// defines only the methods for the Historic Reporting Section
 
 
 // getHistoricOverall() function
 // Inputs: 
-//	$type - the type of date range
+//	$type - the type of date range (month, semester, year)
 // Outputs:
-//	
-// Notes:  
+//	A formatted and statistically accurate table is written to
+//  the webpage from this method giving Overall data  
 function getHistoricOverall($type) {
 	$table = getCategories('Overall');
 
@@ -497,12 +504,12 @@ function getHistoricOverall($type) {
 	printHistoricTable($table, $header);
 }
 
-// getCategories() function
+// getHistoricService() function
 // Inputs: 
-//	$type - the type of category
+//	$type - the type of date range (month, semester, year)
 // Outputs:
-//	
-// Notes:  
+//	A formatted and statistically accurate table is written to
+//  the webpage from this method giving Service data 
 function getHistoricService($type) {
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
@@ -542,12 +549,12 @@ function getHistoricService($type) {
 	printHistoricTable($table, $header);
 }
 
-// getCategories() function
+// getHistoricYear() function
 // Inputs: 
-//	$type - the type of category
+//	$type - the type of date range (month, semester, year)
 // Outputs:
-//	
-// Notes:  
+//	A formatted and statistically accurate table is written to
+//  the webpage from this method giving Academic Year data
 function getHistoricYear($type) {
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
@@ -587,12 +594,12 @@ function getHistoricYear($type) {
 	printHistoricTable($table, $header);
 }
 
-// getCategories() function
+// getHistoricMajor() function
 // Inputs: 
-//	$type - the type of category
+//	$type - the type of date range (month, semester, year)
 // Outputs:
-//	
-// Notes:  
+//	A formatted and statistically accurate table is written to
+//  the webpage from this method giving Major data 
 function getHistoricMajor($type) {
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
@@ -633,12 +640,12 @@ function getHistoricMajor($type) {
 	printHistoricTable($table, $header);
 }
 
-// getCategories() function
+// getHistoricRequired() function
 // Inputs: 
-//	$type - the type of category
+//	$type - the type of date range (month, semester, year)
 // Outputs:
-//	
-// Notes:  
+//	A formatted and statistically accurate table is written to
+//  the webpage from this method giving Required Visit data  
 function getHistoricRequired($type) {
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
@@ -685,12 +692,12 @@ function getHistoricRequired($type) {
 	printHistoricTable($table, $header);
 }
 
-// getCategories() function
+// getHistoricFirstVisit() function
 // Inputs: 
-//	$type - the type of category
+//	$type - the type of date range (month, semester, year)
 // Outputs:
-//	
-// Notes:  
+//	A formatted and statistically accurate table is written to
+//  the webpage from this method giving First Visit data
 function getHistoricFirstVisit($type) {
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
@@ -737,12 +744,12 @@ function getHistoricFirstVisit($type) {
 	printHistoricTable($table, $header);
 }
 
-// getCategories() function
+// getHistoricEnglish() function
 // Inputs: 
-//	$type - the type of category
+//	$type - the type of date range (month, semester, year)
 // Outputs:
-//	
-// Notes:  
+//	A formatted and statistically accurate table is written to
+//  the webpage from this method giving ESL data 
 function getHistoricEnglish($type) {
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
@@ -790,9 +797,12 @@ function getHistoricEnglish($type) {
 	printHistoricTable($table, $header);
 }
 
-//
-//
-// TO-DO
+// getHistoricTutors() function
+// Inputs: 
+//	$type - the type of date range (month, semester, year)
+// Outputs:
+//	A formatted and statistically accurate table is written to
+//  the webpage from this method giving Tutor data 
 function getHistoricTutors($type) {
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
@@ -834,8 +844,6 @@ function getHistoricTutors($type) {
 		// Append last name to first for proper formatting
 		$table[$row][0] .= (" " . $last_name);
 	}
-
-	
 
 	// Print table to webpage
 	printHistoricTable($table, $header);

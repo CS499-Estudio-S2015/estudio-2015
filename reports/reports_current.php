@@ -1,9 +1,9 @@
 <?php
-/*************************************************************
- *                  Current Data Reporting                   *
- *************************************************************/
+/***************************************************************
+ *                   Current Data Reporting                    *
+ ***************************************************************/
 // This files provides info for each report by reading from 
-// the database and formatting a table for output.  The file
+// the database and formatting a table for output.  This region
 // defines only the methods for the Current Reporting Section
 
 // Includes
@@ -15,10 +15,9 @@ include('../Config.php');
 // Inputs: 
 //	None
 // Outputs:
-//	A formatted and statistically accurate date is written to
-//  the webpage from this method
+//	A formatted and statistically accurate table is written 
+//  to the webpage from this method providing Overall data
 function getCurrentOverall() {
-
 	// Set up two-dimensional array to hold data for output
 	$table = getCategories('Overall');
 	
@@ -33,11 +32,11 @@ function getCurrentOverall() {
 
 		// Query String 
 		// TODO: still need to add client creation date
-		$query = "SELECT COUNT(A.apptID) AS Ctr,
-	   					 SUM(A.groupSize) AS Sum
-				  FROM Appointment AS A
-				  WHERE MONTH(A.startTime) = " . $month . " AND
-				        YEAR(A.startTime) = " . $year;
+		$query = "SELECT COUNT(A.id) AS Ctr,
+	   					 SUM(A.group_size) AS Sum
+				  FROM ea_appointments AS A
+				  WHERE MONTH(A.start_datetime) = " . $month . " AND
+				        YEAR(A.start_datetime) = " . $year;
 
 		// Try to execute query in database; print exception if failure		        
 		$stmt = prepareQuery($query, 'Could not retrieve Current - Overall data');
@@ -64,11 +63,9 @@ function getCurrentOverall() {
 // Inputs: 
 //	None
 // Outputs:
-//	A formatted and statistically accurate date is written to
-//  the webpage from this method
+//	A formatted and statistically accurate table is written 
+//  to the webpage from this method providing Service data
 function getCurrentService() {
-	require('../Config.php');
-
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
 	$table = getCategories('Service');
@@ -91,14 +88,6 @@ function getCurrentService() {
 					  WHERE MONTH(A.start_datetime) = " . $month . " AND
 					  		YEAR(A.start_datetime) = " . $year . " AND
 					  		S.name = '" . $table[$row][0] . "'";
- 
-/*
-			$query = "SELECT COUNT(A.apptID) AS Ctr
-					  FROM Appointment AS A
-					  WHERE MONTH(A.startTime) = " . $month . " AND
-					        YEAR(A.startTime) = " . $year . " AND
-					        helpService = '" . $table[$row][0] . "'";
- */
 
 			// Try to execute query in database; print exception if failure		        
 			$stmt = prepareQuery($query, "Could not retrieve Current - Service data");
@@ -124,11 +113,9 @@ function getCurrentService() {
 // Inputs: 
 //	None
 // Outputs:
-//	A formatted and statistically accurate date is written to
-//  the webpage from this method
+//	A formatted and statistically accurate table is written 
+//  to the webpage from this method providing Academic Year data
 function getCurrentYear() {
-	require('../Config.php');
-
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
 	$table = getCategories('Year');
@@ -177,11 +164,9 @@ function getCurrentYear() {
 // Inputs: 
 //	None
 // Outputs:
-//	A formatted and statistically accurate date is written to
-//  the webpage from this method
+//	A formatted and statistically accurate table is written 
+//  to the webpage from this method providing Major data
 function getCurrentMajor() {
-	require('../Config.php');
-
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
 	$table = getCategories('Major');
@@ -230,23 +215,67 @@ function getCurrentMajor() {
 // Inputs: 
 //	None
 // Outputs:
-//	A formatted and statistically accurate date is written to
-//  the webpage from this method
+//	A formatted and statistically accurate table is written 
+//  to the webpage from this method providing Required Visit data
 function getCurrentRequired() {
-	require('../Config.php');
+	// Set up two-dimensional array to hold data for output
+	// Makes secondary array for each category
+	$table = getCategories('Required');
+	
+	// Loop to get data for each category
+	for ($row = 0; $row < count($table); $row = $row + 1)
+	{
+		// Convert category string to number for DB read 
+		// (Yes = 1, No = 0)
+		if ($row == 0) {
+			$bit = 1;
+		} else {
+			$bit = 0;
+		}
 
-	// TODO: Need to add required visit to appointment form.
+		// Loop to get current and previous month data
+		$i = 1;
+		while ($i >= 0)
+		{
+			// Get the date needed for database read
+			$date = date('n Y', mktime(0, 0, 0, date('m') - $i, 1, date('Y')));
+			list($month, $year) = explode(" ", $date);
+
+			// Query String 
+			$query = "SELECT COUNT(A.id) AS Ctr
+					  FROM ea_appointments AS A
+					  WHERE MONTH(A.start_datetime) = " . $month . " AND
+					        YEAR(A.start_datetime) = " . $year . " AND
+					        A.first_visit = " . $bit;
+
+			// Try to execute query in database; print exception if failure		        
+			$stmt = prepareQuery($query, 'Could not retrieve Current - First Visit data');
+
+			// If valid query execution, return data and insert into table array
+			// in the proper location
+			if ($stmt) {
+				$thisData = $stmt->fetchAll();
+				array_push($table[$row], $thisData[0][0]);
+			}
+		
+			// Increment counter to find next date
+			$i = $i - 1;
+		}
+	}
+
+	// Define table header and print table
+	$head = array('', 'Last Month', 'This Month', '% Change');
+	printCurrentTable($table, $head);
 }
+
 
 // getCurrentFirstVisit() function
 // Inputs: 
 //	None
 // Outputs:
-//	A formatted and statistically accurate date is written to
-//  the webpage from this method
+//	A formatted and statistically accurate table is written 
+//  to the webpage from this method providing First Visit data
 function getCurrentFirstVisit() {
-	require('../Config.php');
-
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
 	$table = getCategories('First');
@@ -271,11 +300,11 @@ function getCurrentFirstVisit() {
 			list($month, $year) = explode(" ", $date);
 
 			// Query String 
-			$query = "SELECT COUNT(A.apptID) AS Ctr
-					  FROM Appointment AS A
-					  WHERE MONTH(A.startTime) = " . $month . " AND
-					        YEAR(A.startTime) = " . $year . " AND
-					        A.firstVisit = " . $bit;
+			$query = "SELECT COUNT(A.id) AS Ctr
+					  FROM ea_appointments AS A
+					  WHERE MONTH(A.start_datetime) = " . $month . " AND
+					        YEAR(A.start_datetime) = " . $year . " AND
+					        A.first_visit = " . $bit;
 
 			// Try to execute query in database; print exception if failure		        
 			$stmt = prepareQuery($query, 'Could not retrieve Current - First Visit data');
@@ -301,11 +330,9 @@ function getCurrentFirstVisit() {
 // Inputs: 
 //	None
 // Outputs:
-//	A formatted and statistically accurate date is written to
-//  the webpage from this method
+//	A formatted and statistically accurate table is written 
+//  to the webpage from this method providing ESL data
 function getCurrentEnglish() {
-	require('../Config.php');
-
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
 	$table = getCategories('English');
@@ -332,8 +359,8 @@ function getCurrentEnglish() {
 			// Query String 
 			$query = "SELECT COUNT(A.apptID) AS Ctr
 					  FROM Appointment AS A
-					  		INNER JOIN Client AS C
-					  		ON A.clientID = C.id
+					  	   INNER JOIN Client AS C
+					  	   ON A.clientID = C.id
 					  WHERE MONTH(A.startTime) = " . $month . " AND
 					        YEAR(A.startTime) = " . $year . " AND
 					        C.english = " . $bit;
@@ -351,6 +378,64 @@ function getCurrentEnglish() {
 			// Increment counter to find next date
 			$i = $i - 1;
 		}
+	}
+
+	// Define table header and print table
+	$head = array('', 'Last Month', 'This Month', '% Change');
+	printCurrentTable($table, $head);
+}
+
+// getCurrentTutors() function
+// Inputs: 
+//	None
+// Outputs:
+//	A formatted and statistically accurate table is written 
+//  to the webpage from this method providing Tutor data
+function getCurrentTutors() {
+	// Set up two-dimensional array to hold data for output
+	// Makes secondary array for each category
+	$table = getCategories('Tutors');
+	
+	// Loop to get data for each category
+	for ($row = 0; $row < count($table); $row = $row + 1)
+	{
+
+		// Pop last name from the current table[$row] for future formatting change
+		$last_name = array_pop($table[$row]);
+
+		// Loop to get current and previous month data
+		$i = 1;
+		while ($i >= 0)
+		{
+			// Get the date needed for database read
+			$date = date('n Y', mktime(0, 0, 0, date('m') - $i, 1, date('Y')));
+			list($month, $year) = explode(" ", $date);
+
+			// Query String
+			$query = "SELECT COUNT(A.id) AS Ctr
+					  FROM ea_appointments AS A
+					  	   INNER JOIN ea_users AS U ON A.id_users_provider = U.id
+					  WHERE MONTH(A.start_datetime) = " . $month . " AND
+					  		YEAR(A.start_datetime) = " . $year . " AND
+					  		U.first_name = '" . $table[$row][0] . "' AND
+					  		U.last_name = '" . $last_name . "'";
+
+			// Try to execute query in database; print exception if failure		        
+			$stmt = prepareQuery($query, "Could not retrieve Current - Tutors data");
+		
+			// If valid query execution, return data and insert into table array
+			// in the proper location
+			if ($stmt) {
+				$thisData = $stmt->fetchAll();
+				array_push($table[$row], $thisData[0][0]);
+			}
+		
+			// Increment counter to find next date
+			$i = $i - 1;
+		}
+
+		// Append last name to first for proper formatting
+		$table[$row][0] .= (" " . $last_name);
 	}
 
 	// Define table header and print table
