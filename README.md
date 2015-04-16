@@ -11,8 +11,7 @@ To prevent recoding, we should probably create a list of To-Do's and individuall
   
 
 ##TO-DO:
-####For Interface & Database:
-###For Frontend:
+####For Frontend:
 * ~~[Matt] Add Group Size to appointment details form (page 2 of wizard)~~
 * ~~[David] Add Required Visit to appointment details form (page 2 of wizard)~~
 * ~~[David] Add First Visit to appointment details form (page 2 of wizard)~~ 
@@ -24,7 +23,7 @@ To prevent recoding, we should probably create a list of To-Do's and individuall
 * [] Fix page 4 of wizard (confirmation page) to redirect to front page or give login option (we'll decide on this) 
 
 
-###For Backend:
+####For Backend:
 * ~~[Matt] give customers permission to login to backend with correct view/edit permissions~~
 * ~~[Matt] Add Link to Reporting Section of Admin Header~~
 * ~~[Matt] Switched out Providers for Tutors (cosmetic change only)~~
@@ -39,5 +38,5 @@ To prevent recoding, we should probably create a list of To-Do's and individuall
 * ~~[Matt] Divide reportQueries file into different sections so it's not 1000 lines long~~
 * ~~[Matt] Refactor reporting methods to eliminate repetitive statements~~
 * [Matt] Highlight % change in current reporting (red for - change, green for +)
-* [Matt] Add a created date column when clients register an account
-* [Matt] Remove post forms from historic page and replace with a more dynamic view access
+* ~~[Matt] Add a created date column when clients register an account~~
+* ~~[Matt] Remove POST forms from historic page and replace with a more dynamic way to view stats~~
