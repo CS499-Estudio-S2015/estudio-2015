@@ -49,7 +49,7 @@
     <ul class="nav nav-tabs">
         <li class="admins-tab tab active"><a><?php echo $this->lang->line('admins'); ?></a></li>
         <li class="providers-tab tab"><a><?php echo $this->lang->line('providers'); ?></a></li>
-        <li class="secretaries-tab tab"><a><?php echo $this->lang->line('secretaries'); ?></a></li>
+        <!--li class="secretaries-tab tab"><a><?php echo $this->lang->line('secretaries'); ?></a></li-->
     </ul>
     
     <?php 
