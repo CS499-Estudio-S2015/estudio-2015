@@ -34,10 +34,11 @@ To prevent recoding, we should probably create a list of To-Do's and individuall
 * ~~[Matt] Adjust book_time of ea_appointments to write at proper time (currently 6 hours ahead)~~
 * [] Remove unnecessary fields like phone number, address, etc. (may be best just to remove view code for now and keep js and database fields. can check up on this after other core improvements are complete)
 * ~~[] Give admin ability to extend appointment times~~ (already a feature of ea. admin can do in calendar)
+* Give admin ability to turn off appointment wizard
 
 
 ####For Reporting Interface:
-* [Matt] Adjust reporting queries for new EA database
+* [Matt] Adjust reporting queries for new EA database (need major, year, esl)
 * ~~[Matt] Divide reportQueries file into different sections so it's not 1000 lines long~~
 * ~~[Matt] Refactor reporting methods to eliminate repetitive statements~~
 * ~~[Matt] Highlight % change in current reporting (red for - change, green for +)~~
