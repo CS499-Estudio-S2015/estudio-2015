@@ -80,7 +80,7 @@ class Notifications {
             
             '$customer_name'            => $customer_data['first_name'] . ' ' . $customer_data['last_name'],
             '$customer_email'           => $customer_data['email'],
-            '$customer_phone'           => $customer_data['phone_number'],
+//            '$customer_phone'           => $customer_data['phone_number'],
             '$customer_address'         => $customer_data['address'],
             
             // Translations
@@ -92,7 +92,7 @@ class Notifications {
             'Customer Details' => $this->ci->lang->line('customer_details_title'),
             'Name' => $this->ci->lang->line('name'),
             'Email' => $this->ci->lang->line('email'),
-            'Phone' => $this->ci->lang->line('phone'),
+//            'Phone' => $this->ci->lang->line('phone'),
             'Address' => $this->ci->lang->line('address'),
             'Appointment Link' => $this->ci->lang->line('appointment_link_title')
         );

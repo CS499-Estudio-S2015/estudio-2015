@@ -33,7 +33,19 @@ class Customers_Model extends CI_Model {
         if (!isset($customer['id'])) {
             date_default_timezone_set('America/Louisville');
             $customer['create_date'] = date('Y-m-d H:i:s', mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y')));
+            
+            // Get Settings and Unset
+            $this->load->helper('general');
+            $settings = $customer['settings'];
+            unset($customer['settings']);
+
             $customer['id'] = $this->insert($customer);
+
+             // Settings saved here
+            $settings['salt'] = generate_salt();
+            $settings['password'] = hash_password($settings['salt'], $settings['password']);
+            $settings['username'] = $customer['email'];
+            $this->save_settings($settings, $customer['id']);
         } else {
             $this->update($customer);
         }
@@ -118,6 +130,46 @@ class Customers_Model extends CI_Model {
         
         return intval($customer['id']);
     }
+
+    /**
+     * Save the provider settings (used from insert or update operation).
+     * 
+     * @param array $settings Contains the setting values.
+     * @param numeric $provider_id Record id of the provider.
+     */
+    private function save_settings($settings, $customer_id) {
+        if (!is_numeric($customer_id)) {
+            throw new Exception('Invalid $customer_id argument given :' . $customer_id);
+        }
+        
+        if (count($settings) == 0 || !is_array($settings)) {
+            throw new Exception('Invalid $settings argument given:' . print_r($settings, TRUE));
+        }
+        
+        // Check if the setting record exists in db.
+        if ($this->db->get_where('ea_user_settings', array('id_users' => $customer_id))
+                ->num_rows() == 0) {
+            $this->db->insert('ea_user_settings', array('id_users' => $customer_id));
+        }
+        
+        foreach($settings as $name=>$value) {
+            $this->set_setting($name, $value, $customer_id);
+        }
+    }
+
+    /**
+     * Set a provider's setting value in the database. 
+     * 
+     * The provider and settings record must already exist.
+     * 
+     * @param string $setting_name The setting's name.
+     * @param string $value The setting's value.
+     * @param numeric $provider_id The selected provider id.
+     */
+    public function set_setting($setting_name, $value, $customer_id) {
+        $this->db->where(array('id_users' => $customer_id));
+        return $this->db->update('ea_user_settings', array($setting_name => $value));
+    }
     
     /**
      * Find the database id of a customer record. 
@@ -176,7 +228,8 @@ class Customers_Model extends CI_Model {
         // Validate required fields
         if (!isset($customer['last_name'])
                 || !isset($customer['email'])
-                || !isset($customer['phone_number'])) { 
+//                || !isset($customer['password'])
+            ) { 
             throw new Exception('Not all required fields are provided : ' 
                     . print_r($customer, TRUE));
         }

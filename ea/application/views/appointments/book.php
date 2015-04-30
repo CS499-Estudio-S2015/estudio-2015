@@ -328,8 +328,8 @@
                             <label for="email"><?php echo $this->lang->line('email'); ?> *</label>
                             <input type="text" id="email" class="required" maxlength="250" />
 
-                            <label for="phone-number"><?php echo $this->lang->line('phone_number'); ?> *</label>
-                            <input type="text" id="phone-number" class="required" maxlength="60" />
+                            <label for="password"><?php echo $this->lang->line('password'); ?> *</label>
+                            <input type="text" id="password" class="required" maxlength="12" />
 
                             <br/><br/>
                             <em id="form-message" class="text-error"><?php echo $this->lang->line('fields_are_required'); ?></em>

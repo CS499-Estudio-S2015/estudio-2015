@@ -441,7 +441,7 @@ var FrontendBook = {
         $('#customer-details').html(
             '<h4>' + $('#first-name').val() + ' ' + $('#last-name').val() + '</h4>' + 
             '<p>' + 
-            	EALang['phone'] + ': ' + $('#phone-number').val() + 
+            	EALang['password'] + ': ' + $('#password').val() + 
             	'<br/>' + 
             	EALang['email'] + ': ' + $('#email').val() + 
             	'<br/>' + 
@@ -461,11 +461,16 @@ var FrontendBook = {
             'last_name': $('#last-name').val(),
             'first_name': $('#first-name').val(),
             'email': $('#email').val(),
-            'phone_number': $('#phone-number').val(),
             'address': $('#address').val(),
             'city': $('#city').val(),
-            'zip_code': $('#zip-code').val()
+            'zip_code': $('#zip-code').val(),
+            'settings': {
+                'password': $('#password').val()
+            }
         };
+
+//        console.log(('#password').val());
+        console.log(postData['customer']['password']);
         
         postData['appointment'] = {
             'start_datetime': $('#select-date').datepicker('getDate').toString('yyyy-MM-dd') 
@@ -549,7 +554,7 @@ var FrontendBook = {
             $('#last-name').val(customer['last_name']);
             $('#first-name').val(customer['first_name']);
             $('#email').val(customer['email']);
-            $('#phone-number').val(customer['phone_number']);
+            $('#password').val(customer['settings']['password']);
             $('#address').val(customer['address']);
             $('#city').val(customer['city']);
             $('#zip-code').val(customer['zip_code']);
