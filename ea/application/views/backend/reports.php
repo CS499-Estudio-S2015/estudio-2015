@@ -17,6 +17,14 @@
     $(document).ready(function() {
         BackendReports.initialize(true);
     });
+
+    $(".report_btn").click(function(){
+   var url = $(this).attr("data");
+       //alert(url);
+       $.ajax ({
+          url: url+".php",//pass the url here or you can use whatever I used .php. And do the other stuff etc.
+       });
+    });
 </script>
 
 <script type="text/javascript"
@@ -27,6 +35,9 @@
     <ul class="nav nav-tabs">
         <li class="current-tab tab active"><a><?php echo $this->lang->line('current'); ?></a></li>
         <li class="historic-tab tab"><a><?php echo $this->lang->line('historic'); ?></a></li>
+        <li class="reports-dump">
+            <button class="report_btn" data="reports_dump">Report Dump</button>
+        </li>
     </ul>
     
     <?php
