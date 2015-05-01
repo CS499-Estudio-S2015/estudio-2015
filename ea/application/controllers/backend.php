@@ -27,47 +27,62 @@ class Backend extends CI_Controller {
      */
     public function index($appointment_hash = '') {
         $this->session->set_userdata('dest_url', $this->config->item('base_url') . 'backend');
-        if (!$this->hasPrivileges(PRIV_APPOINTMENTS)) return;
-        
-        $this->load->model('appointments_model');
-        $this->load->model('providers_model');
-        $this->load->model('services_model');
-        $this->load->model('customers_model');
-        $this->load->model('settings_model');
-        $this->load->model('roles_model');
-        $this->load->model('user_model');
-        $this->load->model('secretaries_model');
-        
-        $view['base_url'] = $this->config->item('base_url');
-        $view['user_display_name'] = $this->user_model->get_user_display_name($this->session->userdata('user_id'));
-        $view['active_menu'] = PRIV_APPOINTMENTS;
-        $view['book_advance_timeout'] = $this->settings_model->get_setting('book_advance_timeout');
-        $view['company_name'] = $this->settings_model->get_setting('company_name');
-        $view['available_providers'] = $this->providers_model->get_available_providers();
-        $view['available_services'] = $this->services_model->get_available_services();
-        $view['customers'] = $this->customers_model->get_batch();
-        $this->setUserData($view);
-        
-        if ($this->session->userdata('role_slug') == DB_SLUG_SECRETARY) {
-            $secretary = $this->secretaries_model->get_row($this->session->userdata('user_id'));
-            $view['secretary_providers'] = $secretary['providers'];
+        if (!$this->hasPrivileges(PRIV_APPOINTMENTS)) { return; }
+
+        if ($this->session->userdata('role_slug') == DB_SLUG_CUSTOMER) {
+            $this->load->model('settings_model');
+            $this->load->model('user_model');
+
+            $view['base_url'] = $this->config->item('base_url');
+            $view['active_menu'] = PRIV_MAKE;
+            $view['company_name'] = $this->settings_model->get_setting('company_name');
+            $view['user_display_name'] = $this->user_model->get_user_display_name($this->session->userdata('user_id'));
+            $this->setUserData($view);
+            var_dump($view);
+
+            $this->load->view('backend/header', $view);
+            $this->load->view('backend/make', $view);
+            $this->load->view('backend/footer', $view);
         } else {
-            $view['secretary_providers'] = array();
+            $this->load->model('appointments_model');
+            $this->load->model('providers_model');
+            $this->load->model('services_model');
+            $this->load->model('customers_model');
+            $this->load->model('settings_model');
+            $this->load->model('roles_model');
+            $this->load->model('user_model');
+            $this->load->model('secretaries_model');
+            
+            $view['base_url'] = $this->config->item('base_url');
+            $view['user_display_name'] = $this->user_model->get_user_display_name($this->session->userdata('user_id'));
+            $view['active_menu'] = PRIV_APPOINTMENTS;
+            $view['book_advance_timeout'] = $this->settings_model->get_setting('book_advance_timeout');
+            $view['company_name'] = $this->settings_model->get_setting('company_name');
+            $view['available_providers'] = $this->providers_model->get_available_providers();
+            $view['available_services'] = $this->services_model->get_available_services();
+            $view['customers'] = $this->customers_model->get_batch();
+            $this->setUserData($view);
+            
+            if ($this->session->userdata('role_slug') == DB_SLUG_SECRETARY) {
+                $secretary = $this->secretaries_model->get_row($this->session->userdata('user_id'));
+                $view['secretary_providers'] = $secretary['providers'];
+            } else {
+                $view['secretary_providers'] = array();
+            }
+            
+            $results = $this->appointments_model->get_batch(array('hash' => $appointment_hash));
+            if ($appointment_hash != '' && count($results) > 0) {
+                $appointment = $results[0];
+                $appointment['customer'] = $this->customers_model->get_row($appointment['id_users_customer']);
+                $view['edit_appointment'] = $appointment; // This will display the appointment edit dialog on page load.
+            } else {
+                $view['edit_appointment'] = NULL;
+            }
+            
+            $this->load->view('backend/header', $view);
+            $this->load->view('backend/calendar', $view);
+            $this->load->view('backend/footer', $view);
         }
-        
-        
-        $results = $this->appointments_model->get_batch(array('hash' => $appointment_hash));
-        if ($appointment_hash != '' && count($results) > 0) {
-            $appointment = $results[0];
-            $appointment['customer'] = $this->customers_model->get_row($appointment['id_users_customer']);
-            $view['edit_appointment'] = $appointment; // This will display the appointment edit dialog on page load.
-        } else {
-            $view['edit_appointment'] = NULL;
-        }
-        
-        $this->load->view('backend/header', $view);
-        $this->load->view('backend/calendar', $view);
-        $this->load->view('backend/footer', $view);
     }
     
     /**
@@ -214,6 +229,27 @@ class Backend extends CI_Controller {
         
         $this->load->view('backend/header', $view);
         $this->load->view('backend/settings', $view);
+        $this->load->view('backend/footer', $view);
+    }
+
+    /**
+     * Displays interface for logged in customers to make an appointment.
+     */
+    public function make() {
+        $this->session->set_userdata('dest_url', $this->config->item('base_url') . 'backend/make');
+        if (!$this->hasPrivileges(PRIV_MAKE)) return;
+
+        $this->load->model('settings_model');
+        $this->load->model('user_model');
+
+        $view['base_url'] = $this->config->item('base_url');
+        $view['active_menu'] = PRIV_MAKE;
+        $view['company_name'] = $this->settings_model->get_setting('company_name');
+        $view['user_display_name'] = $this->user_model->get_user_display_name($this->session->userdata('user_id'));
+        $this->setUserData($view);
+
+        $this->load->view('backend/header', $view);
+        $this->load->view('backend/make', $view);
         $this->load->view('backend/footer', $view);
     }
     

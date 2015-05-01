@@ -71,6 +71,7 @@ define('PRIV_USERS', 'users');
 define('PRIV_REPORTS', 'reports');
 define('PRIV_SYSTEM_SETTINGS', 'system_settings');
 define('PRIV_USER_SETTINGS', 'user_settings');
+define('PRIV_MAKE', 'make');
 
 define('MIN_PASSWORD_LENGTH', 7);
 /* End of file constants.php */

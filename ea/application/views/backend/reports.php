@@ -28,8 +28,7 @@
 </script>
 
 <script type="text/javascript"
-    src="<?php echo $base_url; ?>assets/js/backend_reports_select.js">
-</script>
+    src="<?php echo $base_url; ?>assets/js/backend_reports_select.js"></script>
 
 <div id="reports-page" class="row-fluid">
     <ul class="nav nav-tabs">
