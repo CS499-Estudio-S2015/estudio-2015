@@ -47,6 +47,7 @@ class Customers_Model extends CI_Model {
             $settings['username'] = $customer['email'];
             $this->save_settings($settings, $customer['id']);
         } else {
+            unset($customer['settings']);
             $this->update($customer);
         }
 

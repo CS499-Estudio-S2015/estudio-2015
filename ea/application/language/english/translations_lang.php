@@ -15,7 +15,7 @@ $lang['back'] = 'Back';
 $lang['step_two_title'] = 'Select Appointment Date And Time';
 $lang['no_available_hours'] = 'There are no available appointment hours for the selected date. Please choose another date.';
 $lang['appointment_hour_missing'] = 'Please select an appointment hour before continuing!';
-$lang['step_three_title'] = 'Fill In Your Information';
+$lang['step_three_title'] = 'Please Register or Login '; //'Fill In Your Information';
 $lang['first_name'] = 'First Name';
 $lang['last_name'] = 'Last Name';
 $lang['email'] = 'Email';
@@ -274,7 +274,12 @@ $lang['oops_something_went_wrong'] = 'Oops! Something Went Wrong!';
 $lang['could_not_add_to_google_calendar'] = 'Your appointment could not be added to your Google Calendar account.';
 $lang['ea_update_success'] = 'Easy!Appointments has been successfully updated!';
 $lang['make'] = 'Make Appointment';
-$land['make_hint'] = 'Schedule a new appointment';
+$lang['make_hint'] = 'Schedule a new appointment';
+$lang['esl'] = 'English as a Second Language?';
+$lang['major'] = 'Major';
+$lang['year'] = 'Academic Year';
+$lang['verify'] = 'Verify Password';
+$lang['char'] = '(8-16 Characters)';
 
 // Reporting Interface
 $lang['reports'] = 'Reports';

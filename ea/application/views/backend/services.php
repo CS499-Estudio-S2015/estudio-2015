@@ -89,12 +89,6 @@
             <label for="service-duration"><?php echo $this->lang->line('duration_minutes'); ?> *</label>
             <input type="text" id="service-duration" class="required"  />
             
-            <label for="service-price"><?php echo $this->lang->line('price'); ?> *</label>
-            <input type="text" id="service-price" class="span12 required" />
-            
-            <label for="service-currency"><?php echo $this->lang->line('currency'); ?></label>
-            <input type="text" id="service-currency" class="span12" />
-            
             <label for="service-category"><?php echo $this->lang->line('category'); ?></label>
             <select id="service-category" class="span12"></select>
             

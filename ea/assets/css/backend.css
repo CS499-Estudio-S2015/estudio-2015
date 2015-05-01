@@ -751,6 +751,10 @@ padding: 4px 7px;
 #reports-page .details .ui-spinner a { 
     cursor: pointer; 
 }
+
+.report-btn {
+  float: right;
+}
    
 .report-select {
   margin: 0px;
@@ -781,10 +785,10 @@ padding: 4px 7px;
   border-radius: 28px;
   font-family: Arial;
   color: #ffffff;
-  font-size: 18px;
-  padding: 10px 20px 10px 20px;
+  font-size: 16px;
+  padding: 5px 5px 5px 5px;
   text-decoration: none;
-  width: 10%;
+  width: 125px;
   display: inline-block;
   text-align: center;
 }

@@ -34,10 +34,9 @@
     <ul class="nav nav-tabs">
         <li class="current-tab tab active"><a><?php echo $this->lang->line('current'); ?></a></li>
         <li class="historic-tab tab"><a><?php echo $this->lang->line('historic'); ?></a></li>
-        <li class="reports-dump">
-            <button class="report_btn" data="reports_dump">Report Dump</button>
-        </li>
+        <button class="report-btn" data="reports_dump">Data Dump</button>
     </ul>
+
     
     <?php
         // -------------------------------------------------------------- 

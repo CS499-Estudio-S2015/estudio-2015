@@ -101,6 +101,7 @@
                 // FRAME TOP BAR 
                 // ------------------------------------------------------ ?>
             <div id="header">
+                <!--img src="<?php echo $this->config->base_url(); ?>assets/images/logo.png"-->
                 <span id="company-name"><?php echo $company_name; ?></span>
                 
                 <div id="steps">
@@ -140,7 +141,8 @@
                         </div>';
                 }   
             ?>
-            
+   
+
             <?php 
                 // ------------------------------------------------------
                 // DISPLAY EXCEPTIONS (IF ANY)
@@ -153,12 +155,77 @@
                     }
                     echo '</div>';
                 }
-            ?>            
+            ?>     
+
+
+            <?php 
+                // ------------------------------------------------------
+                // ENTER CUSTOMER DATA
+                // ------------------------------------------------------ ?>
+            <div id="wizard-frame-1" class="wizard-frame">
+                <div class="frame-container">
+                    
+                    <h3 class="frame-title"><?php echo $this->lang->line('step_three_title'); ?><a href="user/login">Here</a></h3>
+                    
+                    <div class="frame-content" style="width:600px">
+                        <div class="span3">
+                            <label for="first-name"><?php echo $this->lang->line('first_name'); ?> *</label>
+                            <input type="text" id="first-name" class="required" maxlength="100" />
+
+                            <label for="last-name"><?php echo $this->lang->line('last_name'); ?> *</label>
+                            <input type="text" id="last-name" class="required" maxlength="250" />
+                            
+                            <label for="email"><?php echo $this->lang->line('email'); ?> *</label>
+                            <input type="text" id="email" class="required" maxlength="250" />
+
+                            <label for="password"><?php echo $this->lang->line('password'); ?> * <?php echo $this->lang->line('char'); ?></label>
+                            <input type="text" id="password" class="required" maxlength="16" />
+
+                            <label for="verify"><?php echo $this->lang->line('verify'); ?> *</label>
+                            <input type="text" id="verify" class="required" maxlength="16" />
+                            <br/>
+                            <em id="form-message" class="text-error"><?php echo $this->lang->line('fields_are_required'); ?></em>
+                        </div>
+
+                        <div class="span3">
+                            <label for="major"><?php echo $this->lang->line('major'); ?></label>
+                            <select id="major">
+                                <option value="0">Computer Science</option>
+                                <option value="1">Computer Engineering</option>
+                            </select>
+
+                            <label for="year"><?php echo $this->lang->line('year'); ?></label>
+                            <select id="year">
+                                <option value="0">Freshman</option>
+                                <option value="1">Sophmore</option>
+                            </select>
+
+                            <label for="esl"><?php echo $this->lang->line('esl'); ?></label>
+                            <select id="esl">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+
+                            <label for="notes"><?php echo $this->lang->line('notes'); ?></label>
+                            <textarea id="notes" maxlength="500" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="command-buttons">
+                    <button type="button" id="button-next-1" class="btn button-next btn-primary" 
+                            data-step_index="1">
+                        <?php echo $this->lang->line('next'); ?>
+                        <i class="icon-forward icon-white"></i>
+                    </button>
+                </div>
+            </div>
+
             <?php 
                 // ------------------------------------------------------
                 // SELECT SERVICE AND PROVIDER 
                 // ------------------------------------------------------ ?>
-            <div id="wizard-frame-1" class="wizard-frame">                
+            <div id="wizard-frame-2" class="wizard-frame" style="display:none;">                
                 <div class="frame-container">
                     <h3 class="frame-title"><?php echo $this->lang->line('step_one_title'); ?></h3>
                     
@@ -246,7 +313,6 @@
                             <label for="req_visit">
                                 <strong><?php echo $this->lang->line('req_visit'); ?></strong>                         
                             </label>
-
                             <select id="req_visit">
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>
@@ -255,7 +321,6 @@
                             <label for="first_visit"> 
                                 <strong><?php echo $this->lang->line('first_visit'); ?></strong>
                             </label>
-
                             <select id="first_visit">
                                 <option value="0">No</option>
                                 <option value="1">Yes</option>
@@ -267,8 +332,12 @@
                 </div>
                 <!--div id="service-description" style="display:none;"></div-->
                 <div class="command-buttons">
-                    <button type="button" id="button-next-1" class="btn button-next btn-primary" 
-                            data-step_index="1">
+                    <button type="button" id="button-back-2" class="btn button-back" 
+                            data-step_index="2"><i class="icon-backward"></i> 
+                        <?php echo $this->lang->line('back'); ?>
+                    </button>
+                    <button type="button" id="button-next-2" class="btn button-next btn-primary" 
+                            data-step_index="2">
                         <?php echo $this->lang->line('next'); ?> 
                         <i class="icon-forward icon-white"></i></button>
                 </div>
@@ -278,7 +347,7 @@
                 // ------------------------------------------------------
                 // SELECT APPOINTMENT DATE
                 // ------------------------------------------------------ ?>
-            <div id="wizard-frame-2" class="wizard-frame" style="display:none;">
+            <div id="wizard-frame-3" class="wizard-frame" style="display:none;">
                 <div class="frame-container">
                     
                     <h3 class="frame-title"><?php echo $this->lang->line('step_two_title'); ?></h3>
@@ -296,64 +365,8 @@
                 </div>
                 
                 <div class="command-buttons">
-                    <button type="button" id="button-back-2" class="btn button-back" 
-                            data-step_index="2"><i class="icon-backward"></i> 
-                        <?php echo $this->lang->line('back'); ?>
-                    </button>
-                    <button type="button" id="button-next-2" class="btn button-next btn-primary" 
-                            data-step_index="2">
-                        <?php echo $this->lang->line('next'); ?>
-                        <i class="icon-forward icon-white"></i>
-                    </button>
-                </div>
-            </div>
-
-            <?php 
-                // ------------------------------------------------------
-                // ENTER CUSTOMER DATA
-                // ------------------------------------------------------ ?>
-            <div id="wizard-frame-3" class="wizard-frame" style="display:none;">
-                <div class="frame-container">
-                    
-                    <h3 class="frame-title"><?php echo $this->lang->line('step_three_title'); ?></h3>
-                    
-                    <div class="frame-content" style="width:600px">
-                        <div class="span3">
-                            <label for="first-name"><?php echo $this->lang->line('first_name'); ?> *</label>
-                            <input type="text" id="first-name" class="required" maxlength="100" />
-                            
-                            <label for="last-name"><?php echo $this->lang->line('last_name'); ?> *</label>
-                            <input type="text" id="last-name" class="required" maxlength="250" />
-
-                            <label for="email"><?php echo $this->lang->line('email'); ?> *</label>
-                            <input type="text" id="email" class="required" maxlength="250" />
-
-                            <label for="password"><?php echo $this->lang->line('password'); ?> *</label>
-                            <input type="text" id="password" class="required" maxlength="12" />
-
-                            <br/><br/>
-                            <em id="form-message" class="text-error"><?php echo $this->lang->line('fields_are_required'); ?></em>
-                        </div>
-
-                        <div class="span3">
-                            <label for="address"><?php echo $this->lang->line('address'); ?></label>
-                            <input type="text" id="address" maxlength="250" />
-
-                            <label for="city"><?php echo $this->lang->line('city'); ?></label>
-                            <input type="text" id="city" maxlength="120" />
-
-                            <label for="zip-code"><?php echo $this->lang->line('zip_code'); ?></label>
-                            <input type="text" id="zip-code" maxlength="120" />
-
-                            <label for="notes"><?php echo $this->lang->line('notes'); ?></label>
-                            <textarea id="notes" maxlength="500" rows="3"></textarea>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="command-buttons">
                     <button type="button" id="button-back-3" class="btn button-back" 
-                            data-step_index="3"><i class="icon-backward"></i> 
+                            data-step_index="2"><i class="icon-backward"></i> 
                         <?php echo $this->lang->line('back'); ?>
                     </button>
                     <button type="button" id="button-next-3" class="btn button-next btn-primary" 
@@ -363,6 +376,7 @@
                     </button>
                 </div>
             </div>
+            
 
             <?php 
                 // ------------------------------------------------------
@@ -376,6 +390,13 @@
                         <div id="customer-details" class="span3"></div>
                     </div>
                 </div>
+
+                <!--TO DO: Put in confirm page -->
+            <!--div class="footer">
+                <p>The eStudio is located in Room 108 RGAN.</p>
+                <p>eStudio hours are Monday - Thursday, 10 AM - 6 PM.</p>
+                <p>For more information, go to <a href="https://www.engr.uky.edu/students/estudio/">https://www.engr.uky.edu/students/estudio/</a>
+            </div-->
                 
                 <div class="command-buttons">
                     <button type="button" id="button-back-4" class="btn button-back" 

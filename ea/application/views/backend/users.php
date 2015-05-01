@@ -124,21 +124,6 @@
                     <label for="admin-mobile-number"><?php echo $this->lang->line('mobile_number'); ?></label>
                     <input type="text" id="admin-mobile-number" class="span11" />
 
-                    <label for="admin-phone-number"><?php echo $this->lang->line('phone_number'); ?> *</label>
-                    <input type="text" id="admin-phone-number" class="span11 required" />
-
-                    <label for="admin-address"><?php echo $this->lang->line('address'); ?></label>
-                    <input type="text" id="admin-address" class="span11" />
-
-                    <label for="admin-city"><?php echo $this->lang->line('city'); ?></label>
-                    <input type="text" id="admin-city" class="span11" />
-
-                    <label for="admin-state"><?php echo $this->lang->line('state'); ?></label>
-                    <input type="text" id="admin-state" class="span11" />
-
-                    <label for="admin-zip-code"><?php echo $this->lang->line('zip_code'); ?></label>
-                    <input type="text" id="admin-zip-code" class="span11" />
-
                     <label for="admin-notes"><?php echo $this->lang->line('notes'); ?></label>
                     <textarea id="admin-notes" class="span11" rows="3"></textarea>
                 </div>
@@ -243,21 +228,6 @@
 
                         <label for="provider-mobile-number"><?php echo $this->lang->line('mobile_number'); ?></label>
                         <input type="text" id="provider-mobile-number" class="span11" />
-
-                        <label for="provider-phone-number"><?php echo $this->lang->line('phone_number'); ?> *</label>
-                        <input type="text" id="provider-phone-number" class="span11 required" />
-
-                        <label for="provider-address"><?php echo $this->lang->line('address'); ?></label>
-                        <input type="text" id="provider-address" class="span11" />
-
-                        <label for="provider-city"><?php echo $this->lang->line('city'); ?></label>
-                        <input type="text" id="provider-city" class="span11" />
-
-                        <label for="provider-state"><?php echo $this->lang->line('state'); ?></label>
-                        <input type="text" id="provider-state" class="span11" />
-
-                        <label for="provider-zip-code"><?php echo $this->lang->line('zip_code'); ?></label>
-                        <input type="text" id="provider-zip-code" class="span11" />
 
                         <label for="provider-notes"><?php echo $this->lang->line('notes'); ?></label>
                         <textarea id="provider-notes" class="span11" rows="3"></textarea>

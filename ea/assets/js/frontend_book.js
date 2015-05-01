@@ -143,7 +143,7 @@ var FrontendBook = {
         $('.button-next').click(function() {
             // If we are on the 2nd tab then the user should have an appointment hour 
             // selected.
-            if ($(this).attr('data-step_index') === '2') {
+            if ($(this).attr('data-step_index') === '3') {
                 if ($('.selected-hour').length == 0) {
                     if ($('#select-hour-prompt').length == 0) {
                         $('#available-hours').append('<br><br>'
@@ -157,7 +157,7 @@ var FrontendBook = {
             
             // If we are on the 3rd tab then we will need to validate the user's 
             // input before proceeding to the next step.
-            if ($(this).attr('data-step_index') === '3') {
+            if ($(this).attr('data-step_index') === '1') {
                 if (!FrontendBook.validateCustomerForm()) {
                     return; // Validation failed, do not continue.
                 } else {
@@ -376,7 +376,7 @@ var FrontendBook = {
      * @return {bool} Returns the validation result.
      */
     validateCustomerForm: function() {
-        $('#wizard-frame-3 input').css('border', '');
+        $('#wizard-frame-1 input').css('border', '');
         
         try {
             // Validate required fields.
@@ -441,8 +441,8 @@ var FrontendBook = {
         $('#customer-details').html(
             '<h4>' + $('#first-name').val() + ' ' + $('#last-name').val() + '</h4>' + 
             '<p>' + 
-            	EALang['password'] + ': ' + $('#password').val() + 
-            	'<br/>' + 
+ //           	EALang['password'] + ': ' + $('#password').val() + 
+ //           	'<br/>' + 
             	EALang['email'] + ': ' + $('#email').val() + 
             	'<br/>' + 
             	EALang['address'] + ': ' + $('#address').val() + 
@@ -461,16 +461,16 @@ var FrontendBook = {
             'last_name': $('#last-name').val(),
             'first_name': $('#first-name').val(),
             'email': $('#email').val(),
-            'address': $('#address').val(),
-            'city': $('#city').val(),
-            'zip_code': $('#zip-code').val(),
+            'major': $('#major').val(),
+            'year': $('#year').val(),
+            'esl': $('#esl').val(),
             'settings': {
                 'password': $('#password').val()
             }
         };
 
 //        console.log(('#password').val());
-        console.log(postData['customer']['password']);
+//        console.log(postData['customer']['password']);
         
         postData['appointment'] = {
             'start_datetime': $('#select-date').datepicker('getDate').toString('yyyy-MM-dd') 
@@ -555,9 +555,9 @@ var FrontendBook = {
             $('#first-name').val(customer['first_name']);
             $('#email').val(customer['email']);
             $('#password').val(customer['settings']['password']);
-            $('#address').val(customer['address']);
-            $('#city').val(customer['city']);
-            $('#zip-code').val(customer['zip_code']);
+            $('#major').val(customer['major']);
+            $('#year').val(customer['year']);
+            $('#esl').val(customer['esl']);
             var appointmentNotes = (appointment['notes'] !== null) 
                     ? appointment['notes'] : '';
             $('#notes').val(appointmentNotes);
