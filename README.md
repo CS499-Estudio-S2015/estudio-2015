@@ -29,6 +29,7 @@ To prevent recoding, we should probably create a list of To-Do's and individuall
 * ~~[Matt] Add client details (major and year) into client details registration form~~
 * [] Fix page 4 of wizard (confirmation page) to redirect to front page or give login option (we'll decide on this) 
 * [] Login page needs to look like an eStudio page
+* [] Need to do password validation on customer registration form
 
 
 ####For Backend:
@@ -39,7 +40,7 @@ To prevent recoding, we should probably create a list of To-Do's and individuall
 * ~~[Matt] Adjust book_time of ea_appointments to write at proper time (currently 6 hours ahead)~~
 * ~~[Matt] Remove unnecessary fields like phone number, address, etc. (may be best just to remove view code for now and keep js and database fields. can check up on this after other core improvements are complete)~~
 * ~~[] Give admin ability to extend appointment times~~ (already a feature of ea, admin can do in calendar)
-* Give admin ability to turn off appointment wizard
+* [] Give admin ability to turn off appointment wizard
 
 
 ####For Reporting Interface:
