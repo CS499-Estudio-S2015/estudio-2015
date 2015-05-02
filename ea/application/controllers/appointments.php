@@ -98,7 +98,7 @@ class Appointments extends CI_Controller {
             try {
                 $post_data = json_decode($_POST['post_data'], true);
                 $appointment = $post_data['appointment'];
-                $customer = $post_data['customer'];\
+                $customer = $post_data['customer'];
 
                 if ($this->customers_model->exists($customer)) 
                         $customer['id'] = $this->customers_model->find_record_id($customer);

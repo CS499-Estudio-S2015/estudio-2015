@@ -126,11 +126,11 @@ ProvidersHelper.prototype.bindEventHandlers = function() {
             'last_name': $('#provider-last-name').val(),
             'email': $('#provider-email').val(),
             'mobile_number': $('#provider-mobile-number').val(),
-            'phone_number': $('#provider-phone-number').val(),
-            'address': $('#provider-address').val(),
-            'city': $('#provider-city').val(),
-            'state': $('#provider-state').val(),
-            'zip_code': $('#provider-zip-code').val(),
+//            'phone_number': $('#provider-phone-number').val(),
+//            'address': $('#provider-address').val(),
+//            'city': $('#provider-city').val(),
+//            'state': $('#provider-state').val(),
+//            'zip_code': $('#provider-zip-code').val(),
             'notes': $('#provider-notes').val(),
             'settings': {
                 'username': $('#provider-username').val(),  
@@ -351,11 +351,11 @@ ProvidersHelper.prototype.display = function(provider) {
     $('#provider-last-name').val(provider.last_name);
     $('#provider-email').val(provider.email);
     $('#provider-mobile-number').val(provider.mobile_number);
-    $('#provider-phone-number').val(provider.phone_number);
-    $('#provider-address').val(provider.address);
-    $('#provider-city').val(provider.city);
-    $('#provider-state').val(provider.state);
-    $('#provider-zip-code').val(provider.zip_code);
+//    $('#provider-phone-number').val(provider.phone_number);
+//    $('#provider-address').val(provider.address);
+//    $('#provider-city').val(provider.city);
+//    $('#provider-state').val(provider.state);
+//    $('#provider-zip-code').val(provider.zip_code);
     $('#provider-notes').val(provider.notes);
     
     $('#provider-username').val(provider.settings.username);
@@ -435,8 +435,8 @@ ProvidersHelper.prototype.getFilterHtml = function(provider) {
     var info = provider.email;
     info = (provider.mobile_number != '' && provider.mobile_number != null)
             ? info + ', ' + provider.mobile_number : info;
-    info = (provider.phone_number != '' && provider.phone_number != null)
-            ? info + ', ' + provider.phone_number : info;        
+//    info = (provider.phone_number != '' && provider.phone_number != null)
+//            ? info + ', ' + provider.phone_number : info;        
     
     var html =
             '<div class="provider-row" data-id="' + provider.id + '">' + 

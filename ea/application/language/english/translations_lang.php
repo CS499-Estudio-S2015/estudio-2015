@@ -279,7 +279,7 @@ $lang['esl'] = 'English as a Second Language?';
 $lang['major'] = 'Major';
 $lang['year'] = 'Academic Year';
 $lang['verify'] = 'Verify Password';
-$lang['char'] = '(8-16 Characters)';
+$lang['char'] = '   (8-16 Characters)';
 
 // Reporting Interface
 $lang['reports'] = 'Reports';

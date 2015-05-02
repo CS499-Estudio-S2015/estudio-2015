@@ -11,6 +11,13 @@ body {
     background-size: 100%; */
 }
 
+.logo {
+    width: 130px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 /* BOOK APPOINTMENT WIZARD
  ------------------------------------------------------------------------------ */

@@ -93,7 +93,7 @@
 
 <body>
     <div id="main" class="container">
-        
+        <img class="logo" src="<?php echo $this->config->base_url(); ?>assets/images/estudioLogo.png">
         <div id="book-appointment-wizard">
             
             <?php 
