@@ -644,7 +644,7 @@ class Backend_api extends CI_Controller {
             $key = mysql_real_escape_string($_POST['key']);  
             $where = 
                     '(name LIKE "%' . $key . '%" OR duration LIKE "%' . $key . '%" OR ' . 
-                    'price LIKE "%' . $key . '%" OR currency LIKE "%' . $key . '%" OR ' .
+//                    'price LIKE "%' . $key . '%" OR currency LIKE "%' . $key . '%" OR ' .
                     'description LIKE "%' . $key . '%")';
             $services = $this->services_model->get_batch($where);
             echo json_encode($services);
