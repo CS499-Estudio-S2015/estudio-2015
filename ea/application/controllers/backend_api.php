@@ -383,11 +383,11 @@ class Backend_api extends CI_Controller {
 	    	$where_clause = 
 	    			'(first_name LIKE "%' . $key . '%" OR ' . 
 	    			'last_name LIKE "%' . $key . '%" OR ' . 
-	    			'email LIKE "%' . $key . '%" OR ' .	
-	    			'phone_number LIKE "%' . $key . '%" OR ' .
-	    			'address LIKE "%' . $key . '%" OR ' .
-	    			'city LIKE "%' . $key . '%" OR ' .
-	    			'zip_code LIKE "%' . $key . '%")';		
+	    			'email LIKE "%' . $key . '%")'; // OR ' .	
+	    			// 'phone_number LIKE "%' . $key . '%" OR ' .
+	    			// 'address LIKE "%' . $key . '%" OR ' .
+	    			// 'city LIKE "%' . $key . '%" OR ' .
+	    			// 'zip_code LIKE "%' . $key . '%")';		
             
             $customers = $this->customers_model->get_batch($where_clause);
             
@@ -833,9 +833,9 @@ class Backend_api extends CI_Controller {
             $where = 
                 '(first_name LIKE "%' . $key . '%" OR last_name LIKE "%' . $key . '%" ' . 
                 'OR email LIKE "%' . $key . '%" OR mobile_number LIKE "%' . $key . '%" ' . 
-                'OR phone_number LIKE "%' . $key . '%" OR address LIKE "%' . $key . '%" ' .
-                'OR city LIKE "%' . $key . '%" OR state LIKE "%' . $key . '%" ' .
-                'OR zip_code LIKE "%' . $key . '%" OR notes LIKE "%' . $key . '%")';
+//                'OR phone_number LIKE "%' . $key . '%" OR address LIKE "%' . $key . '%" ' .
+//                'OR city LIKE "%' . $key . '%" OR state LIKE "%' . $key . '%" ' .
+/*                'OR zip_code LIKE "%' . $key . '%" */ 'OR notes LIKE "%' . $key . '%")';
             $providers = $this->providers_model->get_batch($where);
             echo json_encode($providers);
         } catch(Exception $exc) {
@@ -924,9 +924,9 @@ class Backend_api extends CI_Controller {
             $where = 
                 '(first_name LIKE "%' . $key . '%" OR last_name LIKE "%' . $key . '%" ' . 
                 'OR email LIKE "%' . $key . '%" OR mobile_number LIKE "%' . $key . '%" ' . 
-                'OR phone_number LIKE "%' . $key . '%" OR address LIKE "%' . $key . '%" ' .
-                'OR city LIKE "%' . $key . '%" OR state LIKE "%' . $key . '%" ' .
-                'OR zip_code LIKE "%' . $key . '%" OR notes LIKE "%' . $key . '%")';
+//                'OR phone_number LIKE "%' . $key . '%" OR address LIKE "%' . $key . '%" ' .
+//                'OR city LIKE "%' . $key . '%" OR state LIKE "%' . $key . '%" ' .
+/*                'OR zip_code LIKE "%' . $key . '%" */ 'OR notes LIKE "%' . $key . '%")';
             $secretaries = $this->secretaries_model->get_batch($where);
             echo json_encode($secretaries);
         } catch(Exception $exc) {

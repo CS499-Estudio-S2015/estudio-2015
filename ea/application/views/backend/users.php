@@ -124,6 +124,18 @@
                     <label for="admin-mobile-number"><?php echo $this->lang->line('mobile_number'); ?></label>
                     <input type="text" id="admin-mobile-number" class="span11" />
 
+                    <label for="admin-address"><?php echo $this->lang->line('address');?></label>
+                    <input type="text" id="secretary-address" class="span11" />
+
+                    <label for="admin-city"><?php echo $this->lang->line('city');?></label>
+                    <input type="text" id="secretary-city" class="span11" />
+
+                    <label for="admin-state"><?php echo $this->lang->line('state');?></label>
+                    <input type="text" id="secretary-state" class="span11" />
+
+                    <label for="admin-zip-code"><?php echo $this->lang->line('zip_code');?></label>
+                    <input type="text" id="secretary-zip-code" class="span11" />
+
                     <label for="admin-notes"><?php echo $this->lang->line('notes'); ?></label>
                     <textarea id="admin-notes" class="span11" rows="3"></textarea>
                 </div>
