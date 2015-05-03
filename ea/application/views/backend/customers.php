@@ -78,7 +78,7 @@
         
         <input id="customer-id" type="hidden" />
         
-        <div class="span6" style="margin-left: 0;">
+        <div class="span6" style="margin-left: 0; height: 650px;">
             <h2><?php echo $this->lang->line('details'); ?></h2>
             <div id="form-message" class="alert" style="display:none;"></div>
             
@@ -91,17 +91,11 @@
             <label for="email"><?php echo $this->lang->line('email'); ?> *</label>
             <input type="text" id="email" class="span11 required" />
 
-            <label for="phone-number"><?php echo $this->lang->line('phone_number'); ?> *</label>
-            <input type="text" id="phone-number" class="span11 required" />
-            
-            <label for="address"><?php echo $this->lang->line('address'); ?></label>
-            <input type="text" id="address" class="span11" />
+            <label for="password"><?php echo $this->lang->line('password'); ?> *</label>
+            <input type="text" id="password" class="span11 required" />
 
-            <label for="city"><?php echo $this->lang->line('city'); ?></label>
-            <input type="text" id="city" class="span11" />
-
-            <label for="zip-code"><?php echo $this->lang->line('zip_code'); ?></label>
-            <input type="text" id="zip-code" class="span11" />
+            <label for="verify"><?php echo $this->lang->line('verify'); ?> *</label>
+            <input type="text" id="verify" class="span11 required" />
 
             <label for="notes"><?php echo $this->lang->line('notes'); ?></label>
             <textarea id="notes" rows="4" class="span11"></textarea>

@@ -173,10 +173,12 @@ CustomersHelper.prototype.bindEventHandlers = function() {
             'first_name': $('#first-name').val(),
             'last_name': $('#last-name').val(),
             'email': $('#email').val(),
-            'phone_number': $('#phone-number').val(),
-            'address': $('#address').val(),
-            'city': $('#city').val(),
-            'zip_code': $('#zip-code').val(),
+            // 'phone_number': $('#phone-number').val(),
+            // 'address': $('#address').val(),
+            // 'city': $('#city').val(),
+            // 'zip_code': $('#zip-code').val(),
+            'password': $('#password').val(),
+            'verify': $('#verify').val(),
             'notes': $('#notes').val()
         };
 
@@ -321,10 +323,12 @@ CustomersHelper.prototype.display = function(customer) {
     $('#first-name').val(customer.first_name);
     $('#last-name').val(customer.last_name);
     $('#email').val(customer.email);
-    $('#phone-number').val(customer.phone_number);
-    $('#address').val(customer.address);
-    $('#city').val(customer.city);
-    $('#zip-code').val(customer.zip_code);
+    // $('#phone-number').val(customer.phone_number);
+    // $('#address').val(customer.address);
+    // $('#city').val(customer.city);
+    // $('#zip-code').val(customer.zip_code);
+    $('#password').val(customer.password);
+    $('#verify').val(customer.verify);
     $('#notes').val(customer.notes);
 
     $('#customer-appointments').data('jsp').destroy();
@@ -397,8 +401,8 @@ CustomersHelper.prototype.filter = function(key, selectId, display) {
 CustomersHelper.prototype.getFilterHtml = function(customer) {
     var name = customer.first_name + ' ' + customer.last_name;
     var info = customer.email; 
-    info = (customer.phone_number != '' && customer.phone_number != null) 
-            ? info + ', ' + customer.phone_number : info;
+    // info = (customer.phone_number != '' && customer.phone_number != null) 
+    //         ? info + ', ' + customer.phone_number : info;
     
     var html = 
             '<div class="customer-row" data-id="' + customer.id + '">' +
