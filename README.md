@@ -28,6 +28,7 @@ To prevent recoding, we should probably create a list of To-Do's and individuall
 * ~~[Matt] move page 3 (customer details panel) of the wizard to the front, add login for all users to this page~~
 * ~~[Matt] Add client details (major and year) into client details registration form~~
 * [] Fix page 4 of wizard (confirmation page) to redirect to front page or give login option (we'll decide on this) 
+* [] Modify page 4 of wizard for proper fields (remove address, insert major)
 * [] Login page needs to look like an eStudio page
 * [] Need to do password validation on customer registration form
 
