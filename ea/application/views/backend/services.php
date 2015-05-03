@@ -49,7 +49,7 @@
             <div class="results"></div>
         </div>
 
-        <div class="details column span7">
+        <div class="details column span7" style="height: 650px;">
             <div class="btn-toolbar">
                 <div class="add-edit-delete-group btn-group">
                     <button id="add-service" class="btn btn-primary">
