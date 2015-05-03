@@ -41,6 +41,10 @@ To prevent recoding, we should probably create a list of To-Do's and individuall
 * ~~[Matt] Remove unnecessary fields like phone number, address, etc. (may be best just to remove view code for now and keep js and database fields. can check up on this after other core improvements are complete)~~
 * ~~[] Give admin ability to extend appointment times~~ (already a feature of ea, admin can do in calendar)
 * [] Give admin ability to turn off appointment wizard
+* [] Need password validation for customer add from admins
+* [] Double check edit for customer ability to edit password
+* [] Fix form for making appointment from calendar view in backend
+* [Matt] Make customer specific page to view their previous appointments and make appointment
 
 
 ####For Reporting Interface:
