@@ -188,20 +188,36 @@
                         </div>
 
                         <div class="span3">
-                            <label for="major"><?php echo $this->lang->line('major'); ?></label>
-                            <select id="major">
-                                <option value="0">Computer Science</option>
-                                <option value="1">Computer Engineering</option>
+                            <label for="major"><?php echo $this->lang->line('major'); ?> *</label>
+                            <select id="major" class="required">
+                                <option value="Biosystems and Agricultural Engineering">Biosystems and Agricultural Engineering</option>
+                                <option value="Chemical Engineering">Chemical Engineering</option>
+                                <option value="Civil Engineering">Civil Engineering</option>
+                                <option value="Computer Engineering">Computer Engineering</option>
+                                <option value="Computer Science">Computer Science</option>
+                                <option value="Electrical Engineering">Electrical Engineering</option>
+                                <option value="Masters in Engineering">Masters in Engineering</option>
+                                <option value="Manufacturing Systems Engineering">Manufacturing Systems Engineering</option>
+                                <option value="Materials Science and Engineering">Materials Science and Engineering</option>
+                                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                <option value="Mining Engineering">Mining Engineering</option>
+                                <option value="Undeclared">Undeclared</option>
+                                <option value="Other">Other</option>
                             </select>
 
-                            <label for="year"><?php echo $this->lang->line('year'); ?></label>
-                            <select id="year">
-                                <option value="0">Freshman</option>
-                                <option value="1">Sophmore</option>
+                            <label for="year"><?php echo $this->lang->line('year'); ?> *</label>
+                            <select id="year" class="required">
+                                <option value="Freshmen">Freshman</option>
+                                <option value="Sophomore">Sophomore</option>
+                                <option value="Junior">Junior</option>
+                                <option value="Senior">Senior</option>
+                                <option value="Graduate Student">Graduate Student</option>
+                                <option value="Faculty">Faculty</option>
+                                <option value="other">Other</option>
                             </select>
 
-                            <label for="esl"><?php echo $this->lang->line('esl'); ?></label>
-                            <select id="esl">
+                            <label for="esl"><?php echo $this->lang->line('esl'); ?> *</label>
+                            <select id="esl" class="required">
                                 <option value="0">No</option>
                                 <option value="1">Yes</option>
                             </select>

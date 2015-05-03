@@ -181,6 +181,9 @@ CustomersHelper.prototype.bindEventHandlers = function() {
             // 'address': $('#address').val(),
             // 'city': $('#city').val(),
             // 'zip_code': $('#zip-code').val(),
+            'major': $('#major').val(),
+            'year': $('#year').val(),
+            'esl': $('#esl').val(),
             'notes': $('#notes').val(),
             'settings': {
                 'password': $('#password').val()
@@ -341,6 +344,9 @@ CustomersHelper.prototype.display = function(customer) {
     // $('#address').val(customer.address);
     // $('#city').val(customer.city);
     // $('#zip-code').val(customer.zip_code);
+    $('#major').val(customer.major);
+    $('#year').val(customer.year);
+    $('#esl').val(customer.esl);
     $('#notes').val(customer.notes);
 
     $('#customer-appointments').data('jsp').destroy();

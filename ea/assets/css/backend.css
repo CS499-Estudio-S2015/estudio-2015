@@ -345,6 +345,10 @@ body .form-horizontal .controls {
     cursor: default; 
 }
 
+#customers-page .details select {
+    width: 316px;
+}
+
 #customers-page .selected-row { 
     background-color: #CBFFD8; 
 }
@@ -674,6 +678,10 @@ padding: 4px 7px;
 
 #settings-page #update-ea {
     margin-left: 12px;
+}
+
+#settings-page .personal-info-wrapper select {
+    width: 297px;
 }
 
 /*  REPORTING INTERFACE 

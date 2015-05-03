@@ -252,9 +252,45 @@
                 <label for="mobile-number"><?php echo $this->lang->line('mobile_number'); ?></label>
                 <input type="text" id="mobile-number" class="span9" />
                 
-                <label for="phone-number"><?php echo $this->lang->line('phone_number'); ?> *</label>
-                <input type="text" id="phone-number" class="span9 required" />
-                
+                <!--label for="phone-number"><?php echo $this->lang->line('phone_number'); ?> *</label>
+                <input type="text" id="phone-number" class="span9 required" /-->
+
+                <?php if ($role_slug == DB_SLUG_CUSTOMER) { ?>
+                <label for="major"><?php echo $this->lang->line('major'); ?></label>
+                <select id="major">
+                    <option value="Biosystems and Agricultural Engineering">Biosystems and Agricultural Engineering</option>
+                    <option value="Chemical Engineering">Chemical Engineering</option>
+                    <option value="Civil Engineering">Civil Engineering</option>
+                    <option value="Computer Engineering">Computer Engineering</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Electrical Engineering">Electrical Engineering</option>
+                    <option value="Masters in Engineering">Masters in Engineering</option>
+                    <option value="Manufacturing Systems Engineering">Manufacturing Systems Engineering</option>
+                    <option value="Materials Science and Engineering">Materials Science and Engineering</option>
+                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                    <option value="Mining Engineering">Mining Engineering</option>
+                    <option value="Undeclared">Undeclared</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label for="year"><?php echo $this->lang->line('year'); ?></label>
+                <select id="year">
+                    <option value="Freshmen">Freshman</option>
+                    <option value="Sophomore">Sophomore</option>
+                    <option value="Junior">Junior</option>
+                    <option value="Senior">Senior</option>
+                    <option value="Graduate Student">Graduate Student</option>
+                    <option value="Faculty">Faculty</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <label for="esl"><?php echo $this->lang->line('esl'); ?></label>
+                <select id="esl">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+
+                <?php } else if($role_slug == DB_SLUG_ADMIN) { ?>
                 <label for="address"><?php echo $this->lang->line('address'); ?></label>
                 <input type="text" id="address" class="span9" />
                 
@@ -266,6 +302,8 @@
                 
                 <label for="zip-code"><?php echo $this->lang->line('zip_code'); ?></label>
                 <input type="text" id="zip-code" class="span9" />
+
+                <?php } ?>
                 
                 <label for="notes"><?php echo $this->lang->line('notes'); ?></label>
                 <textarea id="notes" class="span9" rows="3"></textarea>
