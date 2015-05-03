@@ -140,6 +140,8 @@ CustomersHelper.prototype.bindEventHandlers = function() {
 
         $('#filter-customers button').prop('disabled', true);
         $('#filter-customers .results').css('color', '#AAA');
+
+        $('#password, #verify').addClass('required');
     });
 
     /**
@@ -152,6 +154,8 @@ CustomersHelper.prototype.bindEventHandlers = function() {
 
         $('#filter-customers button').prop('disabled', true);
         $('#filter-customers .results').css('color', '#AAA');
+
+        $('#password, #verify').removeClass('required');
     });
 
     /**
@@ -177,14 +181,20 @@ CustomersHelper.prototype.bindEventHandlers = function() {
             // 'address': $('#address').val(),
             // 'city': $('#city').val(),
             // 'zip_code': $('#zip-code').val(),
-            'password': $('#password').val(),
-            'verify': $('#verify').val(),
-            'notes': $('#notes').val()
+            'notes': $('#notes').val(),
+            'settings': {
+                'password': $('#password').val()
+            }
         };
 
         if ($('#customer-id').val() != '') {
             customer.id = $('#customer-id').val();
         }
+
+        // Include password if changed.
+        // if ($('password').val() !== '') {
+        //     customer.settings.
+        // }
         
         if (!BackendCustomers.helper.validate(customer)) return;
             
@@ -219,6 +229,8 @@ CustomersHelper.prototype.bindEventHandlers = function() {
 CustomersHelper.prototype.save = function(customer) {
     var postUrl = GlobalVariables.baseUrl + 'backend_api/ajax_save_customer';
     var postData = { 'customer': JSON.stringify(customer) };
+
+    console.log("To Here");
     
     $.post(postUrl, postData, function(response) {
         ///////////////////////////////////////////////////////////
@@ -284,6 +296,8 @@ CustomersHelper.prototype.validate = function(customer) {
             throw EALang['invalid_email'];
         }
 
+        // TO-DO: Validate password
+
         return true;
 
     } catch(exc) {
@@ -327,8 +341,6 @@ CustomersHelper.prototype.display = function(customer) {
     // $('#address').val(customer.address);
     // $('#city').val(customer.city);
     // $('#zip-code').val(customer.zip_code);
-    $('#password').val(customer.password);
-    $('#verify').val(customer.verify);
     $('#notes').val(customer.notes);
 
     $('#customer-appointments').data('jsp').destroy();
