@@ -3,7 +3,7 @@ To prevent recoding, we should probably create a list of To-Do's and individuall
 
 ##DATABASE UPDATES:
 * [5/01]
-  * ALTER TABLE ea_users ADD major varchar(32);
+  * ALTER TABLE ea_users ADD major varchar(64);
   * ALTER TABLE ea_users ADD year varchar(32);
   * ALTER TABLE ea_users ADD esl tinyint(1);
 * [4/16] 
