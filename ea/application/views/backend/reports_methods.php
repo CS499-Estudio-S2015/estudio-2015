@@ -2,7 +2,7 @@
 /*******************************************************************
  *                     Current Data Reporting                      *
  *******************************************************************/
-// This files provides info for each report by reading from 
+// These files provide info for each report by reading from 
 // the database and formatting a table for output.  This region
 // defines only the methods for the Current Reporting Section
 
@@ -145,13 +145,13 @@ function getCurrentYear() {
 			list($month, $year) = explode(" ", $date);
 
 			// Query String 
-			$query = "SELECT COUNT(A.apptID) AS Ctr
-					  FROM Appointment AS A
-					  		INNER JOIN Client AS C
-					  		ON A.clientID = C.id
-					  WHERE MONTH(A.startTime) = " . $month . " AND
-					        YEAR(A.startTime) = " . $year . " AND
-					        C.year = '" . $table[$row][0] . "'";
+			$query = "SELECT COUNT(A.id) AS Ctr
+					  FROM ea_appointments AS A
+					  	   INNER JOIN ea_users AS C
+					  	   ON A.id_users_customer = C.id
+					  WHERE MONTH(A.start_datetime) = " . $month . " AND
+					  		YEAR(A.start_datetime) = " . $year . " AND
+					  		C.year = '" . $table[$row][0] . "'";
 
 			// Try to execute query in database; print exception if failure		        
 			$stmt = prepareQuery($query, 'Could not retrieve Current - Academic Year data');
@@ -196,13 +196,13 @@ function getCurrentMajor() {
 			list($month, $year) = explode(" ", $date);
 
 			// Query String 
-			$query = "SELECT COUNT(A.apptID) AS Ctr
-					  FROM Appointment AS A
-					  		INNER JOIN Client AS C
-					  		ON A.clientID = C.id
-					  WHERE MONTH(A.startTime) = " . $month . " AND
-					        YEAR(A.startTime) = " . $year . " AND
-					        C.major = '" . $table[$row][0] . "'";
+			$query = "SELECT COUNT(A.id) AS Ctr
+					  FROM ea_appointments AS A
+					  	   INNER JOIN ea_users AS C
+					  	   ON A.id_users_customer = C.id
+					  WHERE MONTH(A.start_datetime) = " . $month . " AND
+					  		YEAR(A.start_datetime) = " . $year . " AND
+					  		C.major = '" . $table[$row][0] . "'";
 
 			// Try to execute query in database; print exception if failure		        
 			$stmt = prepareQuery($query, 'Could not retrieve Current - Major Year data');
@@ -356,9 +356,9 @@ function getCurrentEnglish() {
 		// Convert category string to number for DB read 
 		// (Yes = 1, No = 0)
 		if ($row == 0) {
-			$bit = 0;
-		} else {
 			$bit = 1;
+		} else {
+			$bit = 0;
 		}
 
 		// Loop to get current and previous month data
@@ -370,13 +370,13 @@ function getCurrentEnglish() {
 			list($month, $year) = explode(" ", $date);
 
 			// Query String 
-			$query = "SELECT COUNT(A.apptID) AS Ctr
-					  FROM Appointment AS A
-					  	   INNER JOIN Client AS C
-					  	   ON A.clientID = C.id
-					  WHERE MONTH(A.startTime) = " . $month . " AND
-					        YEAR(A.startTime) = " . $year . " AND
-					        C.english = " . $bit;
+			$query = "SELECT COUNT(A.id) AS Ctr
+					  FROM ea_appointments AS A
+					  	   INNER JOIN ea_users AS C
+					  	   ON A.id_users_customer = C.id
+					  WHERE MONTH(A.start_datetime) = " . $month . " AND
+					  		YEAR(A.start_datetime) = " . $year . " AND
+					  		C.esl = " . $bit;
 
 			// Try to execute query in database; print exception if failure		        
 			$stmt = prepareQuery($query, 'Count not retrieve Current - English data');
@@ -460,7 +460,7 @@ function getCurrentTutors() {
 /*******************************************************************
  *                     Historic Data Reporting                     *
  *******************************************************************/
-// This files provides info for each report by reading from 
+// These files provide info for each report by reading from 
 // the database and formatting a table for output.  This region
 // defines only the methods for the Historic Reporting Section
 
@@ -593,12 +593,12 @@ function getHistoricYear($type) {
 		// Loop to get category data across each date
 		foreach($dates as $date) {
 			// Query String
-			$query = "SELECT COUNT(A.apptID) AS Ctr
-					  FROM Appointment AS A
-					  	   INNER JOIN Client AS C
-					  	   ON A.clientID = C.id
-					  WHERE A.startTime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "' AND
-					        C.year = '" . $table[$row][0] . "'";
+			$query = "SELECT COUNT(A.id) AS Ctr
+					  FROM ea_appointments AS A
+					  	   INNER JOIN ea_users AS C
+					  	   ON A.id_users_customer = C.id
+					  WHERE A.start_datetime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "' AND
+					  		C.year = '" . $table[$row][0] . "'";
 
 			// Try to execute query in database; print exception if failure		        
 			$stmt = prepareQuery($query, 'Could not retrieve Historic - Year data');
@@ -639,11 +639,11 @@ function getHistoricMajor($type) {
 		// Loop to get category data across each date
 		foreach($dates as $date) {
 			// Query String
-			$query = "SELECT COUNT(A.apptID) AS Ctr
-					  FROM Appointment AS A
-					  	   INNER JOIN Client AS C
-					  	   ON A.clientID = C.id
-					  WHERE A.startTime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "' AND
+			$query = "SELECT COUNT(A.id) AS Ctr
+					  FROM ea_appointments AS A
+					  	   INNER JOIN ea_users AS C
+					  	   ON A.id_users_customer = C.id
+					  WHERE A.start_datetime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "' AND
 					        C.major = '" . $table[$row][0] . "'";
 
 			// Try to execute query in database; print exception if failure		        
@@ -796,13 +796,13 @@ function getHistoricEnglish($type) {
 		// Loop to get category data across each date
 		foreach($dates as $date) {
 			// Query String
-			$query = "SELECT COUNT(A.apptID) AS Ctr
-					  FROM Appointment AS A
-					  		INNER JOIN Client AS C
-					  		ON A.clientID = C.id
-					  WHERE A.startTime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "' AND
-					        C.english = " . $bit;
-
+			$query = "SELECT COUNT(A.id) AS Ctr
+					  FROM ea_appointments AS A
+					  		INNER JOIN ea_users AS C
+					  		ON A.id_users_customer = C.id
+					  WHERE A.start_datetime BETWEEN '" . $date[0] . "' AND '" . $date[1] . "' AND
+					        C.esl = " . $bit;
+					        
 			// Try to execute query in database; print exception if failure		        
 			$stmt = prepareQuery($query, 'Could not retrieve Historic - English data');
 

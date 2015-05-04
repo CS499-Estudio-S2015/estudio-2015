@@ -213,7 +213,7 @@
                                 <option value="Senior">Senior</option>
                                 <option value="Graduate Student">Graduate Student</option>
                                 <option value="Faculty">Faculty</option>
-                                <option value="other">Other</option>
+                                <option value="Other">Other</option>
                             </select>
 
                             <label for="esl"><?php echo $this->lang->line('esl'); ?> *</label>
