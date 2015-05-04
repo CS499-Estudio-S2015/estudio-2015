@@ -53,8 +53,8 @@ To prevent recoding, we should probably create a list of To-Do's and individuall
 * [Matt] Make customer specific page to view their previous appointments and make appointment
 
 
-####For Reporting Interface:
-* [Matt] Adjust reporting queries for new EA database (need major, year, esl)
+####~~For Reporting Interface:~~
+* ~~[Matt] Adjust reporting queries for new EA database (need major, year, esl)~~
 * ~~[Matt] Divide reportQueries file into different sections so it's not 1000 lines long~~
 * ~~[Matt] Refactor reporting methods to eliminate repetitive statements~~
 * ~~[Matt] Highlight % change in current reporting (red for - change, green for +)~~
