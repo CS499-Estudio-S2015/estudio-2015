@@ -129,7 +129,7 @@
               // ------------------------------------------------------ ?>
         <?php $hidden = ($privileges[PRIV_MAKE]['view'] ==  TRUE) ? '' : 'hidden'; ?>
         <?php $active = ($active_menu == PRIV_MAKE) ? 'active' : ''; ?>
-        <a href="<?php echo $base_url; ?>backend/make" class="menu-item <?php echo $hidden; ?><?php echo $active; ?>"
+        <a href="<?php echo $base_url; ?>backend/profile" class="menu-item <?php echo $hidden; ?><?php echo $active; ?>"
                 title="<?php echo $this->lang->line('make_hint'); ?>">
             <?php echo $this->lang->line('make'); ?>
         </a>

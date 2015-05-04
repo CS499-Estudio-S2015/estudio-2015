@@ -219,21 +219,25 @@ class Backend extends CI_Controller {
     /**
      * Displays interface for logged in customers to make an appointment.
      */
-    public function make() {
-        $this->session->set_userdata('dest_url', $this->config->item('base_url') . 'backend/make');
+    public function profile() {
+        $this->session->set_userdata('dest_url', $this->config->item('base_url') . 'backend/profile');
         if (!$this->hasPrivileges(PRIV_MAKE)) return;
 
         $this->load->model('settings_model');
         $this->load->model('user_model');
+        // $this->load->model('appointments_model');
+        $this->load->model('customers_model');
 
         $view['base_url'] = $this->config->item('base_url');
         $view['active_menu'] = PRIV_MAKE;
         $view['company_name'] = $this->settings_model->get_setting('company_name');
         $view['user_display_name'] = $this->user_model->get_user_display_name($this->session->userdata('user_id'));
+        // $view['appointments'] = $this->appointments_model->get_profile_appt($this->session->userdata('user_id'));
+        $view['customer'] = $this->customers_model->get_batch('id = ' . $this->session->userdata('user_id'));
         $this->setUserData($view);
 
         $this->load->view('backend/header', $view);
-        $this->load->view('backend/make', $view);
+        $this->load->view('backend/profile', $view);
         $this->load->view('backend/footer', $view);
     }
     
@@ -272,7 +276,7 @@ class Backend extends CI_Controller {
         if ($role_priv[$page] < PRIV_VIEW) { // User does not have the permission to view the page.
              if ($redirect) {
                 if ($role_slug == DB_SLUG_CUSTOMER) {
-                    header('Location: ' . $this->config->item('base_url') . 'backend/make');
+                    header('Location: ' . $this->config->item('base_url') . 'backend/profile');
                 } else {
                     header('Location: ' . $this->config->item('base_url') . 'user/no_privileges');
                 }

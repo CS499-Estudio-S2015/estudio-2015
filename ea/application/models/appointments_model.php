@@ -384,6 +384,17 @@ class Appointments_Model extends CI_Model {
         $this->db->update('ea_appointments', array('id_google_calendar' => NULL), 
                 array('id_users_provider' => $provider_id));
     }
+
+    /**
+     * 
+     */
+    public function get_profile_appt($customer_id) {
+        return $this->db
+                ->select('ea_appointments.*, ea_services.name AS name')
+                ->from('ea_appointments')
+                ->join('ea_services', 'ea_appointments.id_services = ea_services.id', 'inner')
+                ->get()->result_array();
+    }
 }
 
 /* End of file appointments_model.php */
