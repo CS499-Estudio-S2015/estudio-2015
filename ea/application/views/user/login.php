@@ -42,7 +42,7 @@
         
         #login-frame {
             width: 630px;
-            margin: 150px auto 0 auto;
+            margin: 50px auto 0 auto;
             background: #FFF;
             border: 1px solid #DDDADA;
             padding: 70px;
@@ -113,8 +113,10 @@
 </head>
 <body>
     <div id="login-frame" class="frame-container">
+        <img class="logo" style="width:200px; display:block; margin-left:auto; margin-right:auto;"
+            src="<?php echo $this->config->base_url(); ?>assets/images/estudioLogo.png">
         <h2><?php echo $this->lang->line('client_login'); ?></h2>
-        <p><?php echo $this->lang->line('you_need_to_login_client'); ?></p>  
+        <p><?php echo $this->lang->line('you_need_to_login_client'); ?></p> 
         <hr>
         <div class="alert hidden"></div>  
         <form id="login-form">
