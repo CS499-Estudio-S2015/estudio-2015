@@ -2,6 +2,11 @@
 To prevent recoding, we should probably create a list of To-Do's and individually mark what they are doing.  We can populate this list as needed.  Hopefully this can keep us organized over the next month.  Please feel free to add to this list. 
 
 ##DATABASE UPDATES:
+* [5/04]
+  * ALTER TABLE ea_roles ADD make int;
+  * UPDATE ea_roles SET make = 0 WHERE id != 3;
+  * UPDATE ea_roles SET make = 15 WHERE id = 3;
+
 * [5/01]
   * ALTER TABLE ea_users ADD major varchar(64);
   * ALTER TABLE ea_users ADD year varchar(32);
@@ -27,9 +32,9 @@ To prevent recoding, we should probably create a list of To-Do's and individuall
 * ~~[Matt] Fix formatting issues caused by additional form inputs in customer details registration panel~~
 * ~~[Matt] move page 3 (customer details panel) of the wizard to the front, add login for all users to this page~~
 * ~~[Matt] Add client details (major and year) into client details registration form~~
-* [] Fix page 4 of wizard (confirmation page) to redirect to front page or give login option (we'll decide on this) 
-* [] Modify page 4 of wizard for proper fields (remove address, insert major)
-* [] Login page needs to look like an eStudio page
+* ~~[David] Fix page 4 of wizard (confirmation page) to redirect to front page or give login option (we'll decide on this)~~
+* ~~[David] Modify page 4 of wizard for proper fields (remove address, insert major)~~
+* ~~[David] Login page needs to look like an eStudio page (just removed silly colors, updated text)~~
 * [] Need to do password validation on customer registration form
 
 
@@ -48,8 +53,8 @@ To prevent recoding, we should probably create a list of To-Do's and individuall
 * [Matt] Make customer specific page to view their previous appointments and make appointment
 
 
-####For Reporting Interface:
-* [Matt] Adjust reporting queries for new EA database (need major, year, esl)
+####~~For Reporting Interface:~~
+* ~~[Matt] Adjust reporting queries for new EA database (need major, year, esl)~~
 * ~~[Matt] Divide reportQueries file into different sections so it's not 1000 lines long~~
 * ~~[Matt] Refactor reporting methods to eliminate repetitive statements~~
 * ~~[Matt] Highlight % change in current reporting (red for - change, green for +)~~

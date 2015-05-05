@@ -445,11 +445,6 @@ var FrontendBook = {
  //           	'<br/>' + 
             	EALang['email'] + ': ' + $('#email').val() + 
             	'<br/>' + 
-            	EALang['address'] + ': ' + $('#address').val() + 
-            	'<br/>' + 
-            	EALang['city'] + ': ' + $('#city').val() + 
-            	'<br/>' + 
-            	EALang['zip_code'] + ': ' + $('#zip-code').val() + 
         	'</p>'
         );
             
