@@ -207,5 +207,6 @@
     <script 
         type="text/javascript" 
         src="<?php echo $this->config->base_url(); ?>assets/js/general_functions.js"></script>
+    <meta http-equiv="refresh" content="10;url=./" />        
 </body>
 </html>

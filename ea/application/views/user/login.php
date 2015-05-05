@@ -37,7 +37,7 @@
     
     <style>
         body {
-            background-color: #CAEDF3;
+            background-color: #F0F0F0;
         }
         
         #login-frame {
@@ -113,12 +113,12 @@
 </head>
 <body>
     <div id="login-frame" class="frame-container">
-        <h2><?php echo $this->lang->line('backend_section'); ?></h2>
-        <p><?php echo $this->lang->line('you_need_to_login'); ?></p>  
+        <h2><?php echo $this->lang->line('client_login'); ?></h2>
+        <p><?php echo $this->lang->line('you_need_to_login_client'); ?></p>  
         <hr>
         <div class="alert hidden"></div>  
         <form id="login-form">
-            <label for="username"><?php echo $this->lang->line('username'); ?></label>
+            <label for="username"><?php echo $this->lang->line('username_client_login'); ?></label>
             <input type="text" id="username" 
             		placeholder="<?php echo $this->lang->line('enter_username_here'); ?>"  
             		class="span3" />

@@ -179,10 +179,10 @@
                             <input type="text" id="email" class="required" maxlength="250" />
 
                             <label for="password"><?php echo $this->lang->line('password'); ?> * <?php echo $this->lang->line('char'); ?></label>
-                            <input type="text" id="password" class="required" maxlength="16" />
+                            <input type="password" id="password" class="required" maxlength="16" />
 
                             <label for="verify"><?php echo $this->lang->line('verify'); ?> *</label>
-                            <input type="text" id="verify" class="required" maxlength="16" />
+                            <input type="password" id="verify" class="required" maxlength="16" />
                             <br/>
                             <em id="form-message" class="text-error"><?php echo $this->lang->line('fields_are_required'); ?></em>
                         </div>
