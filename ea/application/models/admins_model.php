@@ -384,6 +384,18 @@ class Admins_Model extends CI_Model {
                 array('username' => $username, 'id_users <> ' => $user_id))->num_rows();
         return ($num_rows > 0) ? FALSE : TRUE;
     }
+
+    /**
+     * Validate Records Email 
+     * 
+     * @param string $username The customer records email.
+     * @return bool Returns the validation result.
+     */
+    public function validate_email($email) {
+        $num_rows = $this->db->get_where('ea_users', 
+                array('email' => $email))->num_rows();
+        return ($num_rows > 0) ? FALSE : TRUE;
+    }
 }
 
 /* End of file admins_model.php */

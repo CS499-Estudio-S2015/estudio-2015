@@ -1045,6 +1045,26 @@ class Backend_api extends CI_Controller {
             ));
         }
     }
+
+    /**
+     * [AJAX] This method checks whether the customer email already exists in the database. 
+     * 
+     * @param string $_POST['username'] Record's email to validate.
+     * @param bool $_POST['record_exists'] Whether the record already exists in database.
+     */
+    public function ajax_validate_email() {
+        try {            
+            // We will only use the function in the admins_model because it is sufficient 
+            // for the rest user types for now (providers, secretaries).
+            $this->load->model('admins_model');
+            $is_valid = $this->admins_model->validate_email($_POST['username']);
+            echo json_encode($is_valid);
+        } catch(Exception $exc) {
+            echo json_encode(array(
+                'exceptions' => array(exceptionToJavaScript($exc))
+            ));
+        }
+    }
     
     /**
      * [AJAX] Change system language for current user.

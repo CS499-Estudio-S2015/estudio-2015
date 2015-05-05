@@ -244,6 +244,7 @@ $lang['filter'] = 'Filter';
 $lang['clear'] = 'Clear';
 $lang['uncategorized'] = 'Uncategorized';
 $lang['username_already_exists'] = 'Username already exists.';
+$lang['email_already_exists'] = 'Email already exists.';
 $lang['password_length_notice']  = 'Password must be at least $number characters long.';
 $lang['general_settings'] = 'General Settings';
 $lang['personal_information'] = 'Personal Information';

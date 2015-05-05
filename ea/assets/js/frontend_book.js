@@ -287,6 +287,47 @@ var FrontendBook = {
                 }
             }, 'json');
         });
+
+        /**
+         * Event: Admin, Provider, Secretary Username "Focusout" 
+         * 
+         * When the user leaves the username input field we will need to check if the username 
+         * is not taken by another record in the system. Usernames must be unique.
+         */
+        $('#email').focusout(function() {
+            var $input = $(this);
+            
+            if ($input.prop('readonly') == true || $input.val() == '') {
+                return;
+            }
+            
+            var postUrl = GlobalVariables.baseUrl + 'backend_api/ajax_validate_email';
+            var postData = { 
+                'username': $input.val()
+            };
+            
+            $.post(postUrl, postData, function(response) {
+                ///////////////////////////////////////////////////////
+                console.log('Validate Username Response:', response);
+                ///////////////////////////////////////////////////////
+                if (!GeneralFunctions.handleAjaxExceptions(response)) return;
+                if (response == false) {
+                    $input.css('border', '2px solid red');
+                    $input.attr('already-exists', 'true');
+                    $input.parents().eq(3).find('.form-message').text(EALang['email_already_exists']);
+                    $input.parents().eq(3).find('.form-message').show();
+                    throw EALang['email_already_exists'];
+                } else {
+                    $input.css('border', '');
+                    $input.attr('already-exists', 'false');
+                    if ($input.parents().eq(3).find('.form-message').text() == EALang['email_already_exists']) {
+                        $input.parents().eq(3).find('.form-message').hide();
+                    }
+                }
+            }, 'json');
+
+            
+        });
     },
     
     /**
@@ -400,6 +441,12 @@ var FrontendBook = {
                 throw EALang['invalid_email'];
             }
 
+            // Check if username exists
+            if ($('#email').attr('already-exists') ==  'true') {
+                $('#email').css('border', '2px solid red');
+                throw EALang['email_already_exists'];
+            } 
+
             // Validate passwords.
             if ($('#password').val() != $('#verify').val()) {
                 $('#password, #verify').css('border', '2px solid red');
@@ -411,7 +458,7 @@ var FrontendBook = {
                 $('#password, #verify').css('border', '2px solid red');
                 throw EALang['password_length_notice'].replace('$number', FrontendBook.MIN_PASSWORD_LENGTH);
             }
-            
+
             return true;
         } catch(exc) {
             $('#form-message').text(exc);

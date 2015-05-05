@@ -10,7 +10,7 @@ root {
    -------------------------------------------------------------------- */
 #header {
     height: 70px;
-    background-color: #8535B6;/* #35B66F */
+    background-color: #662e8f;/* #35B66F */
     border-bottom: 4px solid #06255D; /* #247A4B */
 }
 
@@ -57,12 +57,12 @@ root {
 }
 
 #header #header-menu .menu-item:hover:not(.active) { 
-    background-color: #682A8F; /* #2A8F57 */
+    background-color: #521A7E; /* #2A8F57 */
     border-bottom: 2px solid #06255D; /* #2E7244 */
 }
 
 #header #header-menu .active { 
-    background:  #7229A0; /* #29A067 */
+    background:  #3f007f; /* #29A067 */
     border-bottom: 2px solid #06255D; /* #2A7751 */
 }
 
@@ -137,7 +137,7 @@ body .jspTrack {
    -------------------------------------------------------------------- */
 #calendar-page #calendar-toolbar { 
     border-bottom: 1px solid #D6D6D6;
-    background: #3A3A3A;
+    background: #0E662E;
     /*background: #FAFAFA;*/
     padding: 10px;
     height: 39px;
