@@ -6,7 +6,6 @@ To prevent recoding, we should probably create a list of To-Do's and individuall
   * ALTER TABLE ea_roles ADD make int;
   * UPDATE ea_roles SET make = 0 WHERE id != 3;
   * UPDATE ea_roles SET make = 15 WHERE id = 3;
-
 * [5/01]
   * ALTER TABLE ea_users ADD major varchar(64);
   * ALTER TABLE ea_users ADD year varchar(32);
@@ -35,7 +34,7 @@ To prevent recoding, we should probably create a list of To-Do's and individuall
 * ~~[David] Fix page 4 of wizard (confirmation page) to redirect to front page or give login option (we'll decide on this)~~
 * ~~[David] Modify page 4 of wizard for proper fields (remove address, insert major)~~
 * ~~[David] Login page needs to look like an eStudio page (just removed silly colors, updated text)~~
-* [] Need to do password validation on customer registration form
+* ~~[Matt] Need to do password validation on customer registration form~~
 
 
 ####For Backend:
@@ -47,10 +46,10 @@ To prevent recoding, we should probably create a list of To-Do's and individuall
 * ~~[Matt] Remove unnecessary fields like phone number, address, etc. (may be best just to remove view code for now and keep js and database fields. can check up on this after other core improvements are complete)~~
 * ~~[] Give admin ability to extend appointment times~~ (already a feature of ea, admin can do in calendar)
 * [] Give admin ability to turn off appointment wizard
-* [] Need password validation for customer add from admins
-* [] Double check edit for customer ability to edit password
+* ~~[Matt] Need password validation for customer add from admins~~
+* ~~[Matt] Double check edit for customer ability to edit password~~
 * [] Fix form for making appointment from calendar view in backend
-* [Matt] Make customer specific page to view their previous appointments and make appointment
+* ~~[Matt] Make customer specific page to view their previous appointments and make appointment~~
 
 
 ####~~For Reporting Interface:~~
