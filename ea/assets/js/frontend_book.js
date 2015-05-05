@@ -6,6 +6,8 @@
  * @namespace FrontendBook
  */
 var FrontendBook = {
+    MIN_PASSWORD_LENGTH: 8,
+    
     /**
      * Determines the functionality of the page.
      * 
@@ -377,6 +379,7 @@ var FrontendBook = {
      */
     validateCustomerForm: function() {
         $('#wizard-frame-1 input').css('border', '');
+        $('#password, #verify').css('border', '');
         
         try {
             // Validate required fields.
@@ -395,6 +398,18 @@ var FrontendBook = {
             if (!GeneralFunctions.validateEmail($('#email').val())) {
                 $('#email').css('border', '2px solid red');
                 throw EALang['invalid_email'];
+            }
+
+            // Validate passwords.
+            if ($('#password').val() != $('#verify').val()) {
+                $('#password, #verify').css('border', '2px solid red');
+                throw EALang['passwords_mismatch'];
+            }
+            
+            if ($('#password').val().length < FrontendBook.MIN_PASSWORD_LENGTH
+                    && $('#password').val() != '') {
+                $('#password, #verify').css('border', '2px solid red');
+                throw EALang['password_length_notice'].replace('$number', FrontendBook.MIN_PASSWORD_LENGTH);
             }
             
             return true;

@@ -92,10 +92,10 @@
             <input type="text" id="email" class="span11 required" />
 
             <label for="password"><?php echo $this->lang->line('password'); ?> *</label>
-            <input type="text" id="password" class="span11 required" />
+            <input type="password" id="password" class="span11 required" />
 
             <label for="verify"><?php echo $this->lang->line('verify'); ?> *</label>
-            <input type="text" id="verify" class="span11 required" />
+            <input type="password" id="verify" class="span11 required" />
 
             <label for="major"><?php echo $this->lang->line('major'); ?></label>
             <select id="major">

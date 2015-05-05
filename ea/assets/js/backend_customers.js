@@ -6,6 +6,8 @@
  * @namespace BackendCustomers
  */
 var BackendCustomers = {
+    MIN_PASSWORD_LENGTH: 8,
+
     /**
      * The page helper contains methods that implement each record type functionality 
      * (for now there is only the CustomersHelper).
@@ -232,8 +234,6 @@ CustomersHelper.prototype.bindEventHandlers = function() {
 CustomersHelper.prototype.save = function(customer) {
     var postUrl = GlobalVariables.baseUrl + 'backend_api/ajax_save_customer';
     var postData = { 'customer': JSON.stringify(customer) };
-
-    console.log("To Here");
     
     $.post(postUrl, postData, function(response) {
         ///////////////////////////////////////////////////////////
@@ -279,6 +279,7 @@ CustomersHelper.prototype.delete = function(id) {
 CustomersHelper.prototype.validate = function(customer) {
     $('#form-message').hide();
     $('.required').css('border', '');
+    $('#password, #verify').css('border', '');
     
     try {
         // Validate required fields.
@@ -299,7 +300,17 @@ CustomersHelper.prototype.validate = function(customer) {
             throw EALang['invalid_email'];
         }
 
-        // TO-DO: Validate password
+        // Validate passwords.
+        if ($('#password').val() != $('#verify').val()) {
+            $('#password, #verify').css('border', '2px solid red');
+            throw EALang['passwords_mismatch'];
+        }
+        
+        if ($('#password').val().length < BackendCustomers.MIN_PASSWORD_LENGTH
+                && $('#password').val() != '') {
+            $('#password, #verify').css('border', '2px solid red');
+            throw EALang['password_length_notice'].replace('$number', BackendCustomers.MIN_PASSWORD_LENGTH);
+        }
 
         return true;
 

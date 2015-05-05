@@ -137,7 +137,7 @@
                 <div id="select-date"></div>
                 <?php // Available hours are going to be fetched via ajax call. ?>
                 <div id="available-hours"></div>
-                <form id="book-appointment-form" style="display:inline-block" method="post">
+                <form id="book-appointment-form" style="display:inline-block;" method="post">
                     <button id="book-appointment-submit" type="button" class="btn btn-success">
                         <i class="icon-ok icon-white"></i>
                         <?php

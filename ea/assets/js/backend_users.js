@@ -5,7 +5,7 @@
  * @namespace BackendUsers
  */
 var BackendUsers = {
-    MIN_PASSWORD_LENGTH: 7, 
+    MIN_PASSWORD_LENGTH: 8, 
     
     /**
      * Contains the current tab record methods for the page.

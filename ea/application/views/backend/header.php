@@ -146,7 +146,7 @@
         
         <?php // LOGOUT MENU ITEM 
               // ------------------------------------------------------ ?>
-        <a href="<?php echo $base_url; ?>user/logout" class="menu-item"
+        <a href="<?php echo $base_url; ?>user/login" class="menu-item"
                 title="<?php echo $this->lang->line('log_out_hint'); ?>">
             <?php echo $this->lang->line('log_out'); ?>
         </a>
