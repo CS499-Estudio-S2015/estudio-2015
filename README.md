@@ -2,6 +2,8 @@
 To prevent recoding, we should probably create a list of To-Do's and individually mark what they are doing.  We can populate this list as needed.  Hopefully this can keep us organized over the next month.  Please feel free to add to this list. 
 
 ##DATABASE UPDATES:
+* [5/05]
+  * UPDATE ea_roles SET user_settings =15 WHERE id = 3;
 * [5/04]
   * ALTER TABLE ea_roles ADD make int;
   * UPDATE ea_roles SET make = 0 WHERE id != 3;
