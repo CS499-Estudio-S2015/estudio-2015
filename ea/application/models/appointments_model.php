@@ -390,9 +390,14 @@ class Appointments_Model extends CI_Model {
      */
     public function get_profile_appt($customer_id) {
         return $this->db
-                ->select('ea_appointments.*, ea_services.name AS name')
+                ->select('ea_appointments.*, 
+                          ea_services.name AS service_name,
+                          ea_users.first_name AS provider_first_name,
+                          ea_users.last_name AS provider_last_name')
                 ->from('ea_appointments')
                 ->join('ea_services', 'ea_appointments.id_services = ea_services.id', 'inner')
+                ->join('ea_users', 'ea_appointments.id_users_provider = ea_users.id', 'inner')
+                ->where('ea_appointments.id_users_customer', $customer_id)
                 ->get()->result_array();
     }
 }

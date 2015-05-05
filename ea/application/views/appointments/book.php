@@ -343,10 +343,9 @@
                             </select>
                         </div>
 
-                    </div>
-                    
+                    </div>  
                 </div>
-                <!--div id="service-description" style="display:none;"></div-->
+                
                 <div class="command-buttons">
                     <button type="button" id="button-back-2" class="btn button-back" 
                             data-step_index="2"><i class="icon-backward"></i> 
