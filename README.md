@@ -1,6 +1,8 @@
 # estudio-2015
 To prevent recoding, we should probably create a list of To-Do's and individually mark what they are doing.  We can populate this list as needed.  Hopefully this can keep us organized over the next month.  Please feel free to add to this list. 
 
+I want to add to this file
+`
 ##DATABASE UPDATES:
 * [5/05]
   * UPDATE ea_roles SET user_settings =15 WHERE id = 3;
