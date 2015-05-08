@@ -4,7 +4,6 @@ To prevent recoding, we should probably create a list of To-Do's and individuall
 I want to add to this file
 Master made a change
 
->>>>>>> master
 ##DATABASE UPDATES:
 * [5/05]
   * UPDATE ea_roles SET user_settings =15 WHERE id = 3;
