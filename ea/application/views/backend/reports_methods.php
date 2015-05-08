@@ -17,6 +17,8 @@ include('reports_helpers.php');
 //	A formatted and statistically accurate table is written 
 //  to the webpage from this method providing Overall data
 function getCurrentOverall() {
+	date_default_timezone_set('America/Louisville');
+
 	// Set up two-dimensional array to hold data for output
 	$table = getCategories('Overall');
 	
@@ -79,6 +81,8 @@ function getCurrentOverall() {
 //	A formatted and statistically accurate table is written 
 //  to the webpage from this method providing Service data
 function getCurrentService() {
+	date_default_timezone_set('America/Louisville');
+
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
 	$table = getCategories('Service');
@@ -129,6 +133,8 @@ function getCurrentService() {
 //	A formatted and statistically accurate table is written 
 //  to the webpage from this method providing Academic Year data
 function getCurrentYear() {
+	date_default_timezone_set('America/Louisville');
+
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
 	$table = getCategories('Year');
@@ -180,6 +186,8 @@ function getCurrentYear() {
 //	A formatted and statistically accurate table is written 
 //  to the webpage from this method providing Major data
 function getCurrentMajor() {
+	date_default_timezone_set('America/Louisville');
+
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
 	$table = getCategories('Major');
@@ -231,6 +239,8 @@ function getCurrentMajor() {
 //	A formatted and statistically accurate table is written 
 //  to the webpage from this method providing Required Visit data
 function getCurrentRequired() {
+	date_default_timezone_set('America/Louisville');
+
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
 	$table = getCategories('Required');
@@ -289,6 +299,8 @@ function getCurrentRequired() {
 //	A formatted and statistically accurate table is written 
 //  to the webpage from this method providing First Visit data
 function getCurrentFirstVisit() {
+	date_default_timezone_set('America/Louisville');
+
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
 	$table = getCategories('First');
@@ -346,6 +358,8 @@ function getCurrentFirstVisit() {
 //	A formatted and statistically accurate table is written 
 //  to the webpage from this method providing ESL data
 function getCurrentEnglish() {
+	date_default_timezone_set('America/Louisville');
+
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
 	$table = getCategories('English');
@@ -405,6 +419,8 @@ function getCurrentEnglish() {
 //	A formatted and statistically accurate table is written 
 //  to the webpage from this method providing Tutor data
 function getCurrentTutors() {
+	date_default_timezone_set('America/Louisville');
+
 	// Set up two-dimensional array to hold data for output
 	// Makes secondary array for each category
 	$table = getCategories('Tutors');

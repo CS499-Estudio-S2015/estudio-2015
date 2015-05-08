@@ -113,7 +113,7 @@
 </head>
 <body>
     <div id="login-frame" class="frame-container">
-        <img class="logo" style="width:200px; display:block; margin-left:auto; margin-right:auto;"
+        <img class="logo" style="width:300px; display:block; margin-left:auto; margin-right:auto;"
             src="<?php echo $this->config->base_url(); ?>assets/images/estudioLogo.png">
         <h2><?php echo $this->lang->line('client_login'); ?></h2>
         <p><?php echo $this->lang->line('you_need_to_login_client'); ?></p> 

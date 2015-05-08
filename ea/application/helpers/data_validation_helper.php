@@ -10,6 +10,7 @@
  * @link http://stackoverflow.com/a/8105844/1718162 [SOURCE]
  */
 function validate_mysql_datetime($datetime) {
+	date_default_timezone_set('America/Louisville');
     $dt = DateTime::createFromFormat('Y-m-d H:i:s', $datetime);
     return ($dt) ? TRUE : FALSE;
 }

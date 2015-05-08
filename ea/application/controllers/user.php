@@ -27,6 +27,8 @@ class User extends CI_Controller {
         if (!$view['dest_url']) {
             $view['dest_url'] = $view['base_url'] . 'backend';
         }
+
+        // Need to set up some validation for entrance
         
         $view['company_name'] = $this->settings_model->get_setting('company_name');
         $this->load->view('user/login', $view);

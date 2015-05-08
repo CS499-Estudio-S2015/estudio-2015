@@ -2,8 +2,8 @@
 // English
 $lang['page_title'] = 'Book Appointment With';
 $lang['client_login'] = "Client Login";
-$lang['you_need_to_login_client'] = 'Welcome! Please login with your email address and password';
-$lang['username_client_login'] = 'Email Address';
+$lang['you_need_to_login_client'] = 'Welcome! Please login with your username/email and password';
+$lang['username_client_login'] = 'Username/Email Address';
 $lang['step_one_title'] = 'Select Service & Tutor';
 $lang['select_service'] = 'Select Service';
 $lang['select_provider'] = 'Select Tutor';

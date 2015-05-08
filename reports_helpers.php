@@ -112,8 +112,6 @@ function printHistoricTable($table, $header) {
 //	
 // Notes:  
 function getHistoricHeader($type, $dates) {
-	date_default_timezone_set('America/Louisville');
-	
 	$header = array();
 	array_push($header, '');
 
@@ -266,7 +264,7 @@ function getCategories($type) {
 			break;
 
 		case 'Year':
-
+/*
 			array_push($table, array('Freshman'));
 			array_push($table, array('Sophmore'));
 			array_push($table, array('Junior'));
@@ -274,11 +272,9 @@ function getCategories($type) {
 			array_push($table, array('Graduate Student'));
 			array_push($table, array('Faculty'));
 			array_push($table, array('Other'));
-			$stmt = false;
-/*
-			$query = "SELECT DISTINCT year FROM ea_users WHERE year IS NOT NULL";
-			$stmt = prepareQuery($query, "Could not prepare Year Category");
 */
+			$query = "SELECT DISTINCT year FROM Client";
+			$stmt = prepareQuery($query, "Could not prepare Year Category");
 			break;
 
 		case 'Major':
@@ -297,7 +293,7 @@ function getCategories($type) {
 			array_push($table, array('Undeclared'));
 			array_push($table, array('Other'));
 */
-			$query = "SELECT DISTINCT major FROM ea_users WHERE major IS NOT NULL ORDER BY major ASC";
+			$query = "SELECT DISTINCT major FROM Client";
 			$stmt = prepareQuery($query, "Could not prepare Major Category");
 			break;
 

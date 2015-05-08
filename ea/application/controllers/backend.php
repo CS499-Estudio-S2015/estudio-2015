@@ -242,7 +242,6 @@ class Backend extends CI_Controller {
         if (strtoupper($_SERVER['REQUEST_METHOD']) === 'POST') {
             try {
                 $post_data = json_decode($_POST['post_data'], true);
-                var_dump($post_data);
                 $appointment = $post_data['appointment'];
                 $customer = $post_data['customer'];
 

@@ -74,6 +74,7 @@ class Appointments_Model extends CI_Model {
      * @return int Returns the id of the new record.
      */
     private function insert($appointment) {
+        date_default_timezone_set('America/Louisville');
         $appointment['book_datetime'] = date('Y-m-d H:i:s');
         $appointment['hash'] = $this->generate_hash();
         
@@ -336,6 +337,7 @@ class Appointments_Model extends CI_Model {
         
         // Add record to database (insert or update).
         if (!isset($unavailable['id'])) {
+            date_default_timezone_set('America/Louisville');
             $unavailable['book_datetime'] = date('Y-m-d H:i:s');
             $unavailable['is_unavailable'] = true;
             

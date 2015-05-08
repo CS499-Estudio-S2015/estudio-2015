@@ -375,6 +375,7 @@ class Appointments extends CI_Controller {
             // the system. Normally we might want the customer to book an appointment
             // that is at least half or one hour from now. The setting is stored in 
             // minutes.
+            date_default_timezone_set('America/Louisville');
             if (date('m/d/Y', strtotime($_POST['selected_date'])) == date('m/d/Y')) {
                 if ($_POST['manage_mode'] === 'true') {
                     $book_advance_timeout = 0;
@@ -439,6 +440,7 @@ class Appointments extends CI_Controller {
                 $appt_end->add(new DateInterval('PT' . $service_duration . 'M'));
                 $appt_end = $appt_end->format('H:i');
                 
+                date_default_timezone_set('America/Louisville');
                 $period_start = date('H:i', strtotime($period['start']));
                 $period_end = date('H:i', strtotime($period['end']));
 
@@ -499,6 +501,7 @@ class Appointments extends CI_Controller {
         // Find the empty spaces on the plan. The first split between the plan is due to 
         // a break (if exist). After that every reserved appointment is considered to be 
         // a taken space in the plan.
+        date_default_timezone_set('America/Louisville');
         $selected_date_working_plan = $working_plan[strtolower(date('l', strtotime($selected_date)))];
         $available_periods_with_breaks = array();
         
